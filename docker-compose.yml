@@ -53,7 +53,7 @@ services:
       - '3000:3000' # In production comment this
     volumes:
       - "./frontend/src:/app/src" # In production comment this 
-      - "./frontend/static:/app/static" # In production comment this
+      - "./frontend/public:/app/public" # In production comment this
       - "./frontend/index.html:/app/index.html" # In production comment this
     depends_on:
       - pixelated_pipeline
