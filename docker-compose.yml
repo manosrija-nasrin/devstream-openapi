@@ -58,13 +58,13 @@ services:
     depends_on:
       - pixelated_pipeline
 
-  nginx:
+  reverse_proxy_nginx_server:
     image: nginx:1.25.5-alpine
     restart: always
     container_name: reverse_proxy
     ports:
       # port mappings do not work with host network driver
-      - '8080:80'
+      - '6969:80'
     networks:
       - proxy_network
     volumes:
