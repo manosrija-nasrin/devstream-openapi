@@ -6,7 +6,7 @@
   "scripts": {
     "openapi:lint": "redocly lint --format=codeframe ./build/devstream.yml",
     "openapi:build": "redocly bundle ./openapi.yml -o ./build/devstream.yml",
-    "openapi:preview": "redocly preview-docs devstream.yml",
+    "openapi:preview": "redocly preview-docs ./build/devstream.yml",
     "openapi:validate": "openapi-generator-cli validate --recommend -i ./build/devstream.yml",
     "openapi:mint": "npm run openapi:build && npm run openapi:lint && npm run openapi:validate",
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml",
