@@ -1,0 +1,15 @@
+inputSpec: "./build/devstream.yml"
+outputDir: "./build/server/spring"
+apiPackage: in.devstream.api
+modelPackage: in.devstream.model
+modelNameSuffix: Dto
+config:
+  openApiNullable: false
+  disallowAdditionalPropertiesIfNotPresent: false
+  hateoas: false
+  interfaceOnly: true
+  licenseName: Unlicense
+  singleContentTypes: true
+  unhandledException: true
+  useTags: true
+  useOptional: true

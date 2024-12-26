@@ -1,5 +1,7 @@
 get:
   summary: Retrieve details for a specific piece of content.
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: "../components/parameters/path/ContentIDParam.yml"
   responses:
@@ -22,6 +24,8 @@ get:
 
 delete:
   summary: Delete a specific piece of content.
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: "../components/parameters/path/ContentIDParam.yml"
   responses:

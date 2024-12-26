@@ -1,5 +1,7 @@
 get:
   summary: Retrieve the current user's profile information.
+  security: 
+    - BearerAuth: []
   responses:
     200:
       description: User profile retrieved successfully.
@@ -18,6 +20,8 @@ get:
 
 patch:
   summary: Update user profile details.
+  security:
+    - BearerAuth: []
   requestBody:
     required: true
     content:

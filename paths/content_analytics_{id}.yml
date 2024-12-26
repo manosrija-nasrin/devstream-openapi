@@ -1,5 +1,8 @@
 get:
   summary: View analytics for a specific piece of content.
+  operationId: getAnalyticsWithContentID
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: "../components/parameters/path/ContentIDParam.yml"
   responses:

@@ -1,5 +1,7 @@
 get:
   summary: Retrieve user-specific settings.
+  security:
+    - BearerAuth: []
   responses:
     200:
       description: Settings retrieved successfully.
@@ -18,6 +20,8 @@ get:
 
 patch:
   summary: Update user-specific settings.
+  security:
+    - BearerAuth: []
   requestBody:
     required: true
     content:

@@ -1,5 +1,7 @@
 delete:
   summary: Deletes user profile.
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: '../components/parameters/path/UserIDParam.yml'
   responses:

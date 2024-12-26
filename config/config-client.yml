@@ -1,0 +1,2 @@
+inputSpec: "./build/devstream.yml"
+outputDir: "./build/client/typescript"

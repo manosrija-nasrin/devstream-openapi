@@ -1,5 +1,7 @@
 get:
   summary: View overall analytics for the user.
+  security:
+    - BearerAuth: []
   responses:
     200:
       description: User analytics retrieved successfully.

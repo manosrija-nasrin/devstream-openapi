@@ -1,5 +1,8 @@
 post:
   summary: Sync content from external platforms.
+  security:
+    - BearerAuth: []
+  operationId: syncPlatform
   requestBody:
     required: true
     content:

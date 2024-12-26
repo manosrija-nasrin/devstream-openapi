@@ -1,5 +1,8 @@
 get:
   summary: Check the status of a specific piece of content.
+  operationId: getContentStatusByID
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: "../components/parameters/path/ContentIDParam.yml"
   responses:

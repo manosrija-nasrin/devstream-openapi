@@ -2,4 +2,5 @@
 *.exe
 *.exe~
 frontend
-backend 
+backend
+**/build/*

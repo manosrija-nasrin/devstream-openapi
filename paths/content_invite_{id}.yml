@@ -1,5 +1,8 @@
 get:
   summary: View pending collaboration invitations.
+  operationId: getPendingCollaborationInvitationsWithContentID
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: '../components/parameters/path/ContentIDParam.yml'
   responses:
@@ -16,6 +19,9 @@ get:
 
 post:
   summary: Invite users to collaborate on content.
+  operationId: sendCollaborationInvitationsForContentID
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: '../components/parameters/path/ContentIDParam.yml'
   requestBody:
@@ -35,7 +41,11 @@ post:
       description: Conflict. Invitation already exists for the user.
 
 patch:
-  summary: Accept or decline invitations.
+  summary: Accept or decline invitations. 
+  description: The user can accept or decline content request invitation. Need to consider whether to make a new endpoint for accept/decline invitations and use this endpoint for modifying access control instead. Reference of Google Zanziber can be used for access control.
+  operationId: updatePendingCollaborationInvitationsWithContentID
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: '../components/parameters/path/ContentIDParam.yml'
   requestBody:

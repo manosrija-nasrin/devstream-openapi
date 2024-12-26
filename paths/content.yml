@@ -1,5 +1,7 @@
 get:
   summary: List all user content with optional filters.
+  security:
+    - BearerAuth: []
   parameters:
     - name: filter
       in: query

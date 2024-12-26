@@ -1,5 +1,8 @@
 post:
   summary: Connect a new platform.
+  security:
+    - BearerAuth: []
+  operationId: connectPlatform
   parameters:
     - $ref: "../components/parameters/path/PlatformIDParam.yml"
   # requestBody:
@@ -22,6 +25,9 @@ post:
 
 delete:
   summary: Disconnect an existing platform.
+  operationId: disconnectPlatform
+  security:
+    - BearerAuth: []
   parameters:
     - $ref: "../components/parameters/path/PlatformIDParam.yml"
   responses:
