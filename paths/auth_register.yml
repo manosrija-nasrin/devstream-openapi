@@ -1,0 +1,15 @@
+post:
+  summary: Registers a new user.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../requests/RegisterRequest.yml"
+  responses:
+    201:
+      description: Registration successful.
+      content:
+        application/json:
+          schema:
+            $ref: "../responses/RegisterResponse.yml"

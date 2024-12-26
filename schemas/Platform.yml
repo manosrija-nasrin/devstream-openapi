@@ -1,0 +1,11 @@
+type: string
+description: Currently used device
+enum: 
+  - Facebook
+  - LinkedIn
+  - Twitter
+  - Instagram
+  - TikTok
+  - Reddit
+  - SnapChat
+  - YouTube

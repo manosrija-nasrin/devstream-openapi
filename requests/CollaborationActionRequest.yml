@@ -1,0 +1,10 @@
+type: object
+properties:
+  invitationId:
+    type: string
+  action:
+    type: string
+    enum:
+      - Accept
+      - Decline
+

@@ -1,0 +1,566 @@
+openapi: 3.0.0
+info:
+  title: Devstream Omnistream Specification
+  version: 0.3.0
+  description: API Specification for Omnistream with Spring Boot
+servers:
+  - url: https://devstream.in/api/v1
+paths:
+  /health:
+    get:
+      description: Health check for the API.
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+  /user/profile:
+    get:
+      summary: Retrieve the current user's profile information.
+      responses:
+        '200':
+          description: User profile retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+    patch:
+      summary: Update user profile details.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+      responses:
+        '200':
+          description: User profile updated successfully.
+  /user/settings:
+    get:
+      summary: Retrieve user-specific settings.
+      responses:
+        '200':
+          description: Settings retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+    patch:
+      summary: Update user-specific settings.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserSettingsRequest'
+      responses:
+        '200':
+          description: Settings updated successfully.
+  /user/analytics:
+    get:
+      summary: View overall analytics for the user.
+      responses:
+        '200':
+          description: User analytics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAnalytics'
+  /user/{userID}:
+    delete:
+      summary: Deletes user profile.
+      parameters:
+        - $ref: '#/components/parameters/UserIDParam'
+      responses:
+        '200':
+          description: User deleted successfully.
+        '404':
+          description: User with given ID not found.
+  /auth/login:
+    post:
+      summary: Log in to the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /auth/register:
+    post:
+      summary: Registers a new user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Registration successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+  /auth/refresh-token:
+    post:
+      summary: Refresh the authentication token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: Token refreshed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshTokenResponse'
+  /auth/forgot-password:
+    post:
+      summary: Request a password reset link.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordRequest'
+      responses:
+        '200':
+          description: Password reset request processed successfully.
+  /auth/reset-password:
+    post:
+      summary: Reset the user's password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+      responses:
+        '200':
+          description: Password reset successfully.
+  /content:
+    get:
+      summary: List all user content with optional filters.
+      parameters:
+        - name: filter
+          in: query
+          schema:
+            type: string
+          description: Filter content (e.g., by date or platform).
+      responses:
+        '200':
+          description: List of content retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentListResponse'
+  /content/{contentID}:
+    get:
+      summary: Retrieve details for a specific piece of content.
+      parameters:
+        - $ref: '#/components/parameters/ContentIDParam'
+      responses:
+        '200':
+          description: Content details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentDetails'
+    delete:
+      summary: Delete a specific piece of content.
+      parameters:
+        - $ref: '#/components/parameters/ContentIDParam'
+      responses:
+        '200':
+          description: Content deleted successfully.
+        '404':
+          description: Content not found.
+  /content/status/{contentID}:
+    get:
+      summary: Check the status of a specific piece of content.
+      parameters:
+        - $ref: '#/components/parameters/ContentIDParam'
+      responses:
+        '200':
+          description: Content status retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentStatusResponse'
+  /content/invite/{contentID}:
+    get:
+      summary: View pending collaboration invitations.
+      parameters:
+        - $ref: '#/components/parameters/ContentIDParam'
+      responses:
+        '200':
+          description: List of pending invitations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollaborationActionResponse'
+    post:
+      summary: Invite users to collaborate on content.
+      parameters:
+        - $ref: '#/components/parameters/ContentIDParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollaborationRequest'
+      responses:
+        '200':
+          description: Invitation sent successfully.
+    patch:
+      summary: Accept or decline invitations.
+      parameters:
+        - $ref: '#/components/parameters/ContentIDParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollaborationActionResponse'
+      responses:
+        '200':
+          description: Invitation status updated.
+  /content/analytics/{contentID}:
+    get:
+      summary: View analytics for a specific piece of content.
+      parameters:
+        - $ref: '#/components/parameters/ContentIDParam'
+      responses:
+        '200':
+          description: Analytics data retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentAnalytics'
+  /platforms/connect:
+    post:
+      summary: Connect a new platform.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformConnectRequest'
+      responses:
+        '200':
+          description: Platform connected successfully.
+  /platforms/{platformID}:
+    delete:
+      summary: Disconnect an existing platform.
+      parameters:
+        - $ref: '#/components/parameters/PlatformIDParam'
+      responses:
+        '200':
+          description: Platform disconnected successfully.
+  /platforms/sync:
+    post:
+      summary: Sync content from external platforms.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformSyncRequest'
+      responses:
+        '200':
+          description: Platform sync initiated successfully.
+components:
+  schemas:
+    Health:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        uptime:
+          type: number
+          description: Server uptime in milliseconds
+        status:
+          type: string
+          description: Status message, e.g. for describing errors
+    UserProfile:
+      type: object
+      required:
+        - userID
+        - username
+        - email
+        - avatarURL
+      properties:
+        userID:
+          type: string
+          format: uuid
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        avatarURL:
+          type: string
+          format: uri
+    UserSettings:
+      type: object
+      properties:
+        notifications:
+          type: boolean
+        privacy:
+          type: string
+          enum:
+            - Public
+            - Private
+    UpdateUserSettingsRequest:
+      type: object
+      properties:
+        notifications:
+          type: boolean
+        visibility:
+          type: string
+          enum:
+            - Public
+            - Private
+    UserAnalytics:
+      type: object
+      properties:
+        totalContent:
+          type: integer
+        totalViews:
+          type: integer
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    LoginResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+    RegisterRequest:
+      type: object
+      properties:
+        firstname:
+          type: string
+          minLength: 1
+        middlename:
+          type: string
+          nullable: true
+        lastname:
+          type: string
+          minLength: 1
+        gender:
+          type: string
+          enum:
+            - Male
+            - Female
+            - Transgender
+        username:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 24
+          writeOnly: true
+      required:
+        - firstname
+        - lastname
+        - gender
+        - username
+        - email
+        - password
+    Status:
+      type: string
+      enum:
+        - Success
+        - Error
+    RegisterResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+    RefreshTokenRequest:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+    RefreshTokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+    ForgotPasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+    ResetPasswordRequest:
+      type: object
+      required:
+        - oldPassword
+        - newPassword
+      properties:
+        oldPassword:
+          type: string
+          format: password
+        newPassword:
+          type: string
+          format: password
+    ContentID:
+      type: string
+      description: ID of the uploaded content
+      nullable: false
+      example: acde070d-8c4c-4f0d-9d8a-162843c10333
+    Platform:
+      type: string
+      description: Currently used device
+      enum:
+        - Facebook
+        - LinkedIn
+        - Twitter
+        - Instagram
+        - TikTok
+        - Reddit
+        - SnapChat
+        - YouTube
+    ContentDetails:
+      type: object
+      properties:
+        contentID:
+          $ref: '#/components/schemas/ContentID'
+        title:
+          type: string
+        description:
+          type: string
+        platforms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+    ContentListResponse:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentDetails'
+    ContentStatus:
+      type: string
+      description: Current status of the uploaded content
+      enum:
+        - Pending
+        - Published
+        - Error
+        - Deleted
+        - UnderReview
+    ContentStatusResponse:
+      type: object
+      properties:
+        contentID:
+          $ref: '#/components/schemas/ContentID'
+        status:
+          $ref: '#/components/schemas/ContentStatus'
+      required:
+        - contentID
+        - status
+    CollaborationActionResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        message:
+          type: string
+    AccessType:
+      type: string
+      description: Access type for the corresponding content
+      enum:
+        - Viewer
+        - Commenter
+        - Editor
+        - Owner
+    CollaborationRequest:
+      type: object
+      properties:
+        contentID:
+          $ref: '#/components/schemas/ContentID'
+        users:
+          type: array
+          items:
+            type: object
+            properties:
+              userID:
+                type: string
+              accessType:
+                $ref: '#/components/schemas/AccessType'
+          required:
+            - userID
+            - accessType
+      required:
+        - contentID
+        - users
+    ContentAnalytics:
+      type: object
+      properties:
+        views:
+          type: integer
+        engagement:
+          type: integer
+    PlatformConnectRequest:
+      type: object
+      properties:
+        platformName:
+          type: string
+        credentials:
+          type: object
+    PlatformSyncRequest:
+      type: object
+      properties:
+        platform:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+  parameters:
+    UserIDParam:
+      name: userID
+      in: path
+      required: true
+      schema:
+        type: string
+    ContentIDParam:
+      name: contentID
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ContentID'
+    PlatformIDParam:
+      name: platformID
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Platform'

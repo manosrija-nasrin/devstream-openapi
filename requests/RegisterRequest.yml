@@ -1,0 +1,36 @@
+type: object
+properties:
+  firstname:
+    type: string
+    minLength: 1
+  middlename:
+    type: string
+    nullable: true
+  lastname:
+    type: string
+    minLength: 1
+  gender:
+    type: string
+    enum:
+      - Male
+      - Female
+      - Transgender
+  username:
+    type: string
+    readOnly: true
+  email:
+    type: string
+    format: email
+  password:
+    type: string
+    format: password
+    minLength: 8
+    maxLength: 24
+    writeOnly: true
+required:
+  - firstname
+  - lastname
+  - gender
+  - username
+  - email
+  - password

@@ -1,0 +1,7 @@
+type: string
+description: Access type for the corresponding content
+enum:
+  - Viewer
+  - Commenter
+  - Editor
+  - Owner

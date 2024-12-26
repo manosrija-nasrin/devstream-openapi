@@ -1,0 +1,5 @@
+name: contentID
+in: path
+required: true
+schema:
+  $ref: '../../schemas/ContentID.yml'

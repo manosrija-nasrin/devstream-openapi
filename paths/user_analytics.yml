@@ -1,0 +1,9 @@
+get:
+  summary: View overall analytics for the user.
+  responses:
+    200:
+      description: User analytics retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/UserAnalytics.yml"

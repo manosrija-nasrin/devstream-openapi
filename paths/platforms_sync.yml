@@ -1,0 +1,11 @@
+post:
+  summary: Sync content from external platforms.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../requests/PlatformSyncRequest.yml"
+  responses:
+    200:
+      description: Platform sync initiated successfully.

@@ -1,0 +1,18 @@
+type: object
+required:
+  - userID
+  - username
+  - email
+  - avatarURL
+properties:
+  userID:
+    type: string
+    format: uuid
+  username:
+    type: string
+  email:
+    type: string
+    format: email
+  avatarURL:
+    type: string
+    format: uri

@@ -1,0 +1,8 @@
+type: string
+description: Current status of the uploaded content
+enum:
+  - Pending
+  - Published
+  - Error
+  - Deleted
+  - UnderReview

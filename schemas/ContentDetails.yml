@@ -1,0 +1,12 @@
+type: object
+properties:
+  contentID:
+    $ref: "./ContentID.yml"
+  title:
+    type: string
+  description:
+    type: string
+  platforms:
+    type: array
+    items:
+      $ref: "./Platform.yml"

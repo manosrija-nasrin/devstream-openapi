@@ -1,0 +1,9 @@
+delete:
+  summary: Deletes user profile.
+  parameters:
+    - $ref: '../parameters/path/UserIDParam.yml'
+  responses:
+    200:
+      description: User deleted successfully.
+    404:
+      description: User with given ID not found.

@@ -1,0 +1,11 @@
+type: object
+properties:
+  timestamp:
+    type: string
+    format: date-time
+  uptime:
+    type: number
+    description: Server uptime in milliseconds
+  status:
+    type: string
+    description: Status message, e.g. for describing errors

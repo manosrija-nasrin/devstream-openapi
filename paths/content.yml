@@ -1,0 +1,15 @@
+get:
+  summary: List all user content with optional filters.
+  parameters:
+    - name: filter
+      in: query
+      schema:
+        type: string
+      description: Filter content (e.g., by date or platform).
+  responses:
+    200:
+      description: List of content retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: "../responses/ContentListResponse.yml"

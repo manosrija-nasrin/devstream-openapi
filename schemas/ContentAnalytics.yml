@@ -1,0 +1,6 @@
+type: object
+properties:
+  views:
+    type: integer
+  engagement:
+    type: integer

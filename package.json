@@ -1,0 +1,30 @@
+{
+  "name": "devstream-openapi-spec",
+  "version": "1.0.0",
+  "description": "Devstream OpenAPI Specifications",
+  "main": "index.js",
+  "scripts": {
+    "openapi:lint": "redocly lint --format=codeframe devstream.yml",
+    "openapi:bundle": "redocly bundle ./openapi.yml -o devstream.yml",
+    "openapi:preview": "redocly preview-docs devstream.yml",
+    "openapi:validate": "validate-api devstream.yml",
+    "openapi:mint": "npm run openapi:bundle && npm run openapi:lint && npm run openapi:validate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdityaMayukhSom/devstream-core.git"
+  },
+  "keywords": [
+    "openapi"
+  ],
+  "author": "Aditya Mayukh Som",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdityaMayukhSom/devstream-core/issues"
+  },
+  "homepage": "https://github.com/AdityaMayukhSom/devstream-core#readme",
+  "dependencies": {
+    "@redocly/cli": "^1.26.1",
+    "@seriousme/openapi-schema-validator": "^2.3.0"
+  }
+}

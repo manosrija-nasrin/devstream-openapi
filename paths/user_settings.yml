@@ -1,0 +1,22 @@
+get:
+  summary: Retrieve user-specific settings.
+  responses:
+    200:
+      description: Settings retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/UserSettings.yml"
+patch:
+  summary: Update user-specific settings.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../requests/UpdateUserSettingsRequest.yml"
+  responses:
+    200:
+      description: Settings updated successfully.
+
+

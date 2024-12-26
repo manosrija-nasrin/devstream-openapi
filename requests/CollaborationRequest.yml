@@ -1,0 +1,19 @@
+type: object
+properties:
+  contentID:
+    $ref: '../schemas/ContentID.yml'
+  users:
+    type: array
+    items:
+      type: object
+      properties:
+        userID:
+          type: string
+        accessType:
+          $ref: "../schemas/AccessType.yml"
+    required:
+      - userID
+      - accessType
+required:
+  - contentID
+  - users

@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Devstream Omnistream Specification
+  version: 0.3.0
+  description: API Specification for Omnistream with Spring Boot
+servers:
+  - url: https://devstream.in/api/v1
+paths:
+  /health:
+    $ref: "./paths/health.yml"
+  /user/profile:
+    $ref: "./paths/user_profile.yml"
+  /user/settings:
+    $ref: "./paths/user_settings.yml"
+  /user/analytics:
+    $ref: "./paths/user_analytics.yml"
+  /user/{userID}:
+    $ref: "./paths/user_(id).yml"
+  /auth/login:
+    $ref: "./paths/auth_login.yml"
+  /auth/register:
+    $ref: "./paths/auth_register.yml"
+  /auth/refresh-token:
+    $ref: "./paths/auth_refresh-token.yml"
+  /auth/forgot-password:
+    $ref: "./paths/auth_forgot-password.yml"
+  /auth/reset-password:
+    $ref: "./paths/auth_reset-password.yml"
+  /content:
+    $ref: "./paths/content.yml"
+  /content/{contentID}:
+    $ref: "./paths/content_(id).yml"
+  /content/status/{contentID}:
+    $ref: "./paths/content_status_(id).yml"
+  /content/invite/{contentID}:
+    $ref: "./paths/content_invite_(id).yml"
+  /content/analytics/{contentID}:
+    $ref: "./paths/content_analytics_(id).yml"
+  /platforms/connect:
+    $ref: "./paths/platforms_connect.yml"
+  /platforms/{platformID}:
+    $ref: "./paths/platforms_(id).yml"
+  /platforms/sync:
+    $ref: "./paths/platforms_sync.yml"

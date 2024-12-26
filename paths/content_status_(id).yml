@@ -1,0 +1,11 @@
+get:
+  summary: Check the status of a specific piece of content.
+  parameters:
+    - $ref: "../parameters/path/ContentIDParam.yml"
+  responses:
+    200:
+      description: Content status retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: "../responses/ContentStatusResponse.yml"

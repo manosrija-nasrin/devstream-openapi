@@ -1,0 +1,6 @@
+type: object
+properties:
+  platformName:
+    type: string
+  credentials:
+    type: object

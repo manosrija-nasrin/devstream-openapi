@@ -1,0 +1,15 @@
+post:
+  summary: Log in to the system.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../requests/LoginRequest.yml"
+  responses:
+    200:
+      description: Login successful.
+      content:
+        application/json:
+          schema:
+            $ref: "../responses/LoginResponse.yml"
