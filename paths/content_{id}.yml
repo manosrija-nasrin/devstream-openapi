@@ -1,0 +1,39 @@
+get:
+  summary: Retrieve details for a specific piece of content.
+  parameters:
+    - $ref: "../components/parameters/path/ContentIDParam.yml"
+  responses:
+    200:
+      description: Content details retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/ContentDetails.yml"
+    400:
+      description: Bad request. Invalid or missing parameters.
+    401:
+      description: Unauthorized. Invalid authentication provided.
+    403:
+      description: Forbidden. Access to the content is denied.
+    404:
+      description: Content not found.
+    429:
+      description: Too many requests. Rate limit exceeded.
+
+delete:
+  summary: Delete a specific piece of content.
+  parameters:
+    - $ref: "../components/parameters/path/ContentIDParam.yml"
+  responses:
+    200:
+      description: Content deleted successfully.
+    400:
+      description: Bad request. Invalid or missing parameters.
+    401:
+      description: Unauthorized. Invalid authentication provided.
+    403:
+      description: Forbidden. Access to delete the content is denied.
+    404:
+      description: Content not found.
+    429:
+      description: Too many requests. Rate limit exceeded.

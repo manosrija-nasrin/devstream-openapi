@@ -12,4 +12,12 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../responses/ContentListResponse.yml"
+            $ref: "../components/responses/ContentListResponse.yml"
+    400:
+      description: Bad request. Invalid filter parameters.
+    404:
+      description: No content found for the given filters.
+    429:
+      description: Too many requests. Rate limit exceeded.
+    503:
+      description: Service unavailable. The system is under maintenance or overloaded.

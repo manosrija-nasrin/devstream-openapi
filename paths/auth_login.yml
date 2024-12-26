@@ -1,15 +1,24 @@
 post:
   summary: Log in to the system.
+  security: []
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: "../requests/LoginRequest.yml"
+          $ref: "../components/requestBodies/LoginRequest.yml"
   responses:
     200:
       description: Login successful.
       content:
         application/json:
           schema:
-            $ref: "../responses/LoginResponse.yml"
+            $ref: "../components/responses/LoginResponse.yml"
+    400:
+      description: Bad request. The input is invalid or missing required fields.
+    401:
+      description: Unauthorized. Invalid credentials provided.
+    403:
+      description: Forbidden. Access to the resource is denied.
+    429:
+      description: Too many requests. Rate limit exceeded.

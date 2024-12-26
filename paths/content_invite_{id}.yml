@@ -1,0 +1,55 @@
+get:
+  summary: View pending collaboration invitations.
+  parameters:
+    - $ref: '../components/parameters/path/ContentIDParam.yml'
+  responses:
+    200:
+      description: List of pending invitations.
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/CollaborationActionResponse.yml"
+    404:
+      description: Content not found. The specified content ID does not exist.
+    429:
+      description: Too many requests. Rate limit exceeded.
+
+post:
+  summary: Invite users to collaborate on content.
+  parameters:
+    - $ref: '../components/parameters/path/ContentIDParam.yml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/CollaborationRequest.yml"
+  responses:
+    200:
+      description: Invitation sent successfully.
+    400:
+      description: Bad request. The input is invalid or missing required fields.
+    404:
+      description: Content not found. The specified content ID does not exist.
+    409:
+      description: Conflict. Invitation already exists for the user.
+
+patch:
+  summary: Accept or decline invitations.
+  parameters:
+    - $ref: '../components/parameters/path/ContentIDParam.yml'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/responses/CollaborationActionResponse.yml"
+  responses:
+    200:
+      description: Invitation status updated.
+    400:
+      description: Bad request. The action is invalid or the request is malformed.
+    404:
+      description: Invitation not found. No invitation for the specified content ID.
+    409:
+      description: Conflict. The action cannot be performed due to a conflict in the invitation status.

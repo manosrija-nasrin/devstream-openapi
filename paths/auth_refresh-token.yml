@@ -1,15 +1,17 @@
 post:
   summary: Refresh the authentication token.
+  security:
+    - auth: []
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: "../requests/RefreshTokenRequest.yml"
+          $ref: "../components/requestBodies/RefreshTokenRequest.yml"
   responses:
     200:
       description: Token refreshed successfully.
       content:
         application/json:
           schema:
-            $ref: "../responses/RefreshTokenResponse.yml"
+            $ref: "../components/responses/RefreshTokenResponse.yml"

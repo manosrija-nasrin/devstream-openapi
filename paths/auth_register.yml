@@ -5,11 +5,17 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../requests/RegisterRequest.yml"
+          $ref: "../components/requestBodies/RegisterRequest.yml"
   responses:
     201:
       description: Registration successful.
       content:
         application/json:
           schema:
-            $ref: "../responses/RegisterResponse.yml"
+            $ref: "../components/responses/RegisterResponse.yml"
+    400:
+      description: Bad request. The input is invalid or missing required fields.
+    409:
+      description: Conflict. A user with the provided details already exists.
+    429:
+      description: Too many requests. Rate limit exceeded.

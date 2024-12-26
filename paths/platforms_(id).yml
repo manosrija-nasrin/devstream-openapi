@@ -1,7 +1,0 @@
-delete:
-  summary: Disconnect an existing platform.
-  parameters:
-    - $ref: "../parameters/path/PlatformIDParam.yml"
-  responses:
-    200:
-      description: Platform disconnected successfully.

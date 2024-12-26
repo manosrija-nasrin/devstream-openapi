@@ -1,7 +1,7 @@
 delete:
   summary: Deletes user profile.
   parameters:
-    - $ref: '../parameters/path/UserIDParam.yml'
+    - $ref: '../components/parameters/path/UserIDParam.yml'
   responses:
     200:
       description: User deleted successfully.

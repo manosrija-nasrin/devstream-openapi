@@ -6,7 +6,16 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/UserProfile.yml"
+            $ref: "../components/schemas/UserProfile.yml"
+    400:
+      description: Bad request. Invalid request format or parameters.
+    401:
+      description: Unauthorized. Authentication required to view the profile.
+    404:
+      description: Not found. User profile does not exist.
+    500:
+      description: Internal server error. Something went wrong on the server.
+
 patch:
   summary: Update user profile details.
   requestBody:
@@ -14,7 +23,15 @@ patch:
     content:
       application/json:
         schema:
-          $ref: "../schemas/UserProfile.yml"
+          $ref: "../components/schemas/UserProfile.yml"
   responses:
     200:
       description: User profile updated successfully.
+    400:
+      description: Bad request. Invalid request format or missing required fields.
+    401:
+      description: Unauthorized. Authentication required to update the profile.
+    404:
+      description: Not found. User profile does not exist.
+    500:
+      description: Internal server error. Something went wrong on the server.

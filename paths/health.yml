@@ -1,4 +1,5 @@
 get:
+  summary: Health check for the API.
   description: Health check for the API.
   responses:
     200:
@@ -6,4 +7,8 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/Health.yml"
+            $ref: "../components/schemas/Health.yml"
+    400:
+      description: Bad request. Invalid input or parameters provided.
+    503:
+      description: Service unavailable. The system is under maintenance or overloaded.

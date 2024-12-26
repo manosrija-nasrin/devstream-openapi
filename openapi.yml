@@ -15,7 +15,7 @@ paths:
   /user/analytics:
     $ref: "./paths/user_analytics.yml"
   /user/{userID}:
-    $ref: "./paths/user_(id).yml"
+    $ref: "./paths/user_{id}.yml"
   /auth/login:
     $ref: "./paths/auth_login.yml"
   /auth/register:
@@ -29,16 +29,25 @@ paths:
   /content:
     $ref: "./paths/content.yml"
   /content/{contentID}:
-    $ref: "./paths/content_(id).yml"
+    $ref: "./paths/content_{id}.yml"
   /content/status/{contentID}:
-    $ref: "./paths/content_status_(id).yml"
+    $ref: "./paths/content_status_{id}.yml"
   /content/invite/{contentID}:
-    $ref: "./paths/content_invite_(id).yml"
+    $ref: "./paths/content_invite_{id}.yml"
   /content/analytics/{contentID}:
-    $ref: "./paths/content_analytics_(id).yml"
-  /platforms/connect:
-    $ref: "./paths/platforms_connect.yml"
+    $ref: "./paths/content_analytics_{id}.yml"
   /platforms/{platformID}:
-    $ref: "./paths/platforms_(id).yml"
+    $ref: "./paths/platforms_{id}.yml"
   /platforms/sync:
     $ref: "./paths/platforms_sync.yml"
+
+components:
+  securitySchemas:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormet: JWT
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header

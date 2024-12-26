@@ -8,6 +8,7 @@ servers:
 paths:
   /health:
     get:
+      summary: Health check for the API.
       description: Health check for the API.
       responses:
         '200':
@@ -16,6 +17,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Health'
+        '400':
+          description: Bad request. Invalid input or parameters provided.
+        '503':
+          description: Service unavailable. The system is under maintenance or overloaded.
   /user/profile:
     get:
       summary: Retrieve the current user's profile information.
@@ -26,6 +31,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: Bad request. Invalid request format or parameters.
+        '401':
+          description: Unauthorized. Authentication required to view the profile.
+        '404':
+          description: Not found. User profile does not exist.
+        '500':
+          description: Internal server error. Something went wrong on the server.
     patch:
       summary: Update user profile details.
       requestBody:
@@ -37,6 +50,14 @@ paths:
       responses:
         '200':
           description: User profile updated successfully.
+        '400':
+          description: Bad request. Invalid request format or missing required fields.
+        '401':
+          description: Unauthorized. Authentication required to update the profile.
+        '404':
+          description: Not found. User profile does not exist.
+        '500':
+          description: Internal server error. Something went wrong on the server.
   /user/settings:
     get:
       summary: Retrieve user-specific settings.
@@ -47,6 +68,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserSettings'
+        '400':
+          description: Bad request. Invalid request format or parameters.
+        '401':
+          description: Unauthorized. Authentication required to view settings.
+        '404':
+          description: Not found. User settings do not exist.
+        '500':
+          description: Internal server error. Something went wrong on the server.
     patch:
       summary: Update user-specific settings.
       requestBody:
@@ -58,6 +87,14 @@ paths:
       responses:
         '200':
           description: Settings updated successfully.
+        '400':
+          description: Bad request. Invalid request format or missing required fields.
+        '401':
+          description: Unauthorized. Authentication required to update settings.
+        '404':
+          description: Not found. User settings do not exist.
+        '500':
+          description: Internal server error. Something went wrong on the server.
   /user/analytics:
     get:
       summary: View overall analytics for the user.
@@ -68,6 +105,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserAnalytics'
+        '400':
+          description: Bad request. Invalid request format or parameters.
+        '401':
+          description: Unauthorized. Authentication required to view analytics.
+        '404':
+          description: Not found. User analytics data does not exist.
+        '500':
+          description: Internal server error. Something went wrong on the server.
   /user/{userID}:
     delete:
       summary: Deletes user profile.
@@ -81,6 +126,7 @@ paths:
   /auth/login:
     post:
       summary: Log in to the system.
+      security: []
       requestBody:
         required: true
         content:
@@ -94,6 +140,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Bad request. The input is invalid or missing required fields.
+        '401':
+          description: Unauthorized. Invalid credentials provided.
+        '403':
+          description: Forbidden. Access to the resource is denied.
+        '429':
+          description: Too many requests. Rate limit exceeded.
   /auth/register:
     post:
       summary: Registers a new user.
@@ -110,9 +164,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          description: Bad request. The input is invalid or missing required fields.
+        '409':
+          description: Conflict. A user with the provided details already exists.
+        '429':
+          description: Too many requests. Rate limit exceeded.
   /auth/refresh-token:
     post:
       summary: Refresh the authentication token.
+      security:
+        - auth: []
       requestBody:
         required: true
         content:
@@ -129,6 +191,9 @@ paths:
   /auth/forgot-password:
     post:
       summary: Request a password reset link.
+      operationId: requestPasswordReset
+      security:
+        - auth: []
       requestBody:
         required: true
         content:
@@ -138,6 +203,28 @@ paths:
       responses:
         '200':
           description: Password reset request processed successfully.
+        '302':
+          description: Found. User is already authenticated and redirected.
+          headers:
+            Location:
+              description: URL where the user is redirected.
+              schema:
+                type: string
+                format: uri
+        '400':
+          description: Bad request. The input is invalid or missing required fields.
+        '401':
+          description: Unauthorized. Invalid authentication provided.
+        '403':
+          description: Forbidden. The user does not have permission to perform this action.
+        '404':
+          description: Not found. The user does not exist in the system.
+        '429':
+          description: Too many requests. Rate limit exceeded.
+        '500':
+          description: Internal server error. Something went wrong on the server.
+        '503':
+          description: Service unavailable. System is under maintenance or overloaded.
   /auth/reset-password:
     post:
       summary: Reset the user's password.
@@ -150,6 +237,16 @@ paths:
       responses:
         '200':
           description: Password reset successfully.
+        '400':
+          description: Bad request. The input is invalid or missing required fields.
+        '401':
+          description: Unauthorized. Invalid authentication provided.
+        '403':
+          description: Forbidden. The user does not have permission to reset the password.
+        '404':
+          description: Not found. The user does not exist in the system.
+        '429':
+          description: Too many requests. Rate limit exceeded.
   /content:
     get:
       summary: List all user content with optional filters.
@@ -166,6 +263,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContentListResponse'
+        '400':
+          description: Bad request. Invalid filter parameters.
+        '404':
+          description: No content found for the given filters.
+        '429':
+          description: Too many requests. Rate limit exceeded.
+        '503':
+          description: Service unavailable. The system is under maintenance or overloaded.
   /content/{contentID}:
     get:
       summary: Retrieve details for a specific piece of content.
@@ -178,6 +283,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContentDetails'
+        '400':
+          description: Bad request. Invalid or missing parameters.
+        '401':
+          description: Unauthorized. Invalid authentication provided.
+        '403':
+          description: Forbidden. Access to the content is denied.
+        '404':
+          description: Content not found.
+        '429':
+          description: Too many requests. Rate limit exceeded.
     delete:
       summary: Delete a specific piece of content.
       parameters:
@@ -185,8 +300,16 @@ paths:
       responses:
         '200':
           description: Content deleted successfully.
+        '400':
+          description: Bad request. Invalid or missing parameters.
+        '401':
+          description: Unauthorized. Invalid authentication provided.
+        '403':
+          description: Forbidden. Access to delete the content is denied.
         '404':
           description: Content not found.
+        '429':
+          description: Too many requests. Rate limit exceeded.
   /content/status/{contentID}:
     get:
       summary: Check the status of a specific piece of content.
@@ -199,6 +322,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContentStatusResponse'
+        '400':
+          description: Bad request. Invalid or missing parameters.
+        '404':
+          description: Content not found. The specified content ID does not exist.
+        '429':
+          description: Too many requests. Rate limit exceeded.
+        '503':
+          description: Service unavailable. The system is under maintenance or overloaded.
   /content/invite/{contentID}:
     get:
       summary: View pending collaboration invitations.
@@ -211,6 +342,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CollaborationActionResponse'
+        '404':
+          description: Content not found. The specified content ID does not exist.
+        '429':
+          description: Too many requests. Rate limit exceeded.
     post:
       summary: Invite users to collaborate on content.
       parameters:
@@ -224,6 +359,12 @@ paths:
       responses:
         '200':
           description: Invitation sent successfully.
+        '400':
+          description: Bad request. The input is invalid or missing required fields.
+        '404':
+          description: Content not found. The specified content ID does not exist.
+        '409':
+          description: Conflict. Invitation already exists for the user.
     patch:
       summary: Accept or decline invitations.
       parameters:
@@ -237,6 +378,12 @@ paths:
       responses:
         '200':
           description: Invitation status updated.
+        '400':
+          description: Bad request. The action is invalid or the request is malformed.
+        '404':
+          description: Invitation not found. No invitation for the specified content ID.
+        '409':
+          description: Conflict. The action cannot be performed due to a conflict in the invitation status.
   /content/analytics/{contentID}:
     get:
       summary: View analytics for a specific piece of content.
@@ -249,19 +396,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContentAnalytics'
-  /platforms/connect:
+        '400':
+          description: Bad request. Invalid or missing parameters.
+        '401':
+          description: Unauthorized. Invalid authentication provided.
+        '403':
+          description: Forbidden. Access to the content's analytics is denied.
+        '404':
+          description: Content not found.
+        '429':
+          description: Too many requests. Rate limit exceeded.
+  /platforms/{platformID}:
     post:
       summary: Connect a new platform.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlatformConnectRequest'
+      parameters:
+        - $ref: '#/components/parameters/PlatformIDParam'
       responses:
         '200':
           description: Platform connected successfully.
-  /platforms/{platformID}:
+        '400':
+          description: Bad request. Invalid platform ID or missing parameters.
+        '403':
+          description: Forbidden. The user does not have permission to connect the platform.
+        '404':
+          description: Not found. The platform does not exist.
+        '500':
+          description: Internal server error. Something went wrong on the server.
     delete:
       summary: Disconnect an existing platform.
       parameters:
@@ -269,6 +429,14 @@ paths:
       responses:
         '200':
           description: Platform disconnected successfully.
+        '400':
+          description: Bad request. Invalid platform ID or missing parameters.
+        '403':
+          description: Forbidden. The user does not have permission to disconnect the platform.
+        '404':
+          description: Not found. The platform does not exist.
+        '500':
+          description: Internal server error. Something went wrong on the server.
   /platforms/sync:
     post:
       summary: Sync content from external platforms.
@@ -281,7 +449,26 @@ paths:
       responses:
         '200':
           description: Platform sync initiated successfully.
+        '400':
+          description: Bad request. Invalid sync request or missing parameters.
+        '401':
+          description: Unauthorized. Authentication required to sync content.
+        '403':
+          description: Forbidden. The user does not have permission to sync content.
+        '404':
+          description: Not found. The specified platform could not be found.
+        '500':
+          description: Internal server error. Something went wrong on the server.
 components:
+  securitySchemas:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormet: JWT
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
   schemas:
     Health:
       type: object
@@ -531,13 +718,6 @@ components:
           type: integer
         engagement:
           type: integer
-    PlatformConnectRequest:
-      type: object
-      properties:
-        platformName:
-          type: string
-        credentials:
-          type: object
     PlatformSyncRequest:
       type: object
       properties:

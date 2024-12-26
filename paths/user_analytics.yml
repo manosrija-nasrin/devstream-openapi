@@ -6,4 +6,12 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schemas/UserAnalytics.yml"
+            $ref: "../components/schemas/UserAnalytics.yml"
+    400:
+      description: Bad request. Invalid request format or parameters.
+    401:
+      description: Unauthorized. Authentication required to view analytics.
+    404:
+      description: Not found. User analytics data does not exist.
+    500:
+      description: Internal server error. Something went wrong on the server.

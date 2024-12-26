@@ -5,7 +5,17 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../requests/PlatformSyncRequest.yml"
+          $ref: "../components/requestBodies/PlatformSyncRequest.yml"
   responses:
     200:
       description: Platform sync initiated successfully.
+    400:
+      description: Bad request. Invalid sync request or missing parameters.
+    401:
+      description: Unauthorized. Authentication required to sync content.
+    403:
+      description: Forbidden. The user does not have permission to sync content.
+    404:
+      description: Not found. The specified platform could not be found.
+    500:
+      description: Internal server error. Something went wrong on the server.
