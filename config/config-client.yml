@@ -1,2 +1,14 @@
 inputSpec: "./build/devstream.yml"
 outputDir: "./build/client/typescript"
+additionalProperties:
+  # dateLibrary: java8
+  serializableModel: true
+  # openApiNullable: false
+  # disallowAdditionalPropertiesIfNotPresent: false
+  # hateoas: false
+  interfaceOnly: true
+  # licenseName: Unlicense
+  # singleContentTypes: true
+  unhandledException: true
+  # useTags: true
+  # useOptional: true

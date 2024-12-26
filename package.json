@@ -10,7 +10,9 @@
     "openapi:validate": "openapi-generator-cli validate --recommend -i ./build/devstream.yml",
     "openapi:mint": "npm run openapi:build && npm run openapi:lint && npm run openapi:validate",
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml",
-    "openapi:generate-client": "openapi-generator-cli generate -g typescript-axios -c ./config/config-client.yml"
+    "openapi:generate-client": "openapi-generator-cli generate -g typescript-fetch -c ./config/config-client.yml",
+    "openapi:stubs": "npm run openapi:generate-server && npm run openapi:generate-client",
+    "openapi:rebuild-stubs": "npm run openapi:mint && npm run openapi:stubs"
   },
   "repository": {
     "type": "git",
