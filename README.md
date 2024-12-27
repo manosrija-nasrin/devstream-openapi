@@ -2,7 +2,11 @@
 
 This project uses Redocly and OpenAPI Generator to manage API documentation and generate client (TypeScript using fetch API) / server (Spring Boot) code with the help of [OpenAPI Generator CLI](https://openapi-generator.tech/docs/generators).
 
-## OpenAPI Workflow
+
+Prior to codegen using node as a backend, stub generation was a part within the Gradle build system for the [`devstream-core`](https://github.com/AdityaMayukhSom/devstream-core) repository. For a detailed guide about code generation using Gradle, consider referencing [Sam's Programming Notes](https://blog.samzhu.dev/2021/05/26/How-to-automatically-generate-interface-and-Data-Transfer-Object-from-OpenAPI-yaml-file/), which explores how to integrate codegen with Gradle.
+
+
+## Workflow Scripts
 
 The following npm scripts are available for working with the OpenAPI specification after istallinng required packages with `npm ci`:
 
