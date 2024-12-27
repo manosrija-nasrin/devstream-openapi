@@ -11,8 +11,10 @@
     "openapi:mint": "npm run openapi:build && npm run openapi:lint && npm run openapi:validate",
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml",
     "openapi:generate-client": "openapi-generator-cli generate -g typescript-fetch -c ./config/config-client.yml",
+    "openapi:docs": "openapi-generator-cli generate -g openapi -i ./build/devstream.yml -o ./docs",
     "openapi:stubs": "npm run openapi:generate-server && npm run openapi:generate-client",
-    "openapi:rebuild-stubs": "npm run openapi:mint && npm run openapi:stubs"
+    "openapi:rebuild-stubs": "npm run openapi:mint && npm run openapi:stubs",
+    "openapi:rebuild-docs": "npm run openapi:mint && npm run openapi:docs"
   },
   "repository": {
     "type": "git",

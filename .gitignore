@@ -4,3 +4,6 @@
 frontend
 backend
 **/build/*
+docs/openapi
+docs/**/openapi.json
+docs/.openapi-generator
