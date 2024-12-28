@@ -3,7 +3,7 @@ name: Publish Stub to GitHub Packages
 on:
   push:
     branches:
-      - main
+      - release
   workflow_dispatch:
 
 jobs:
