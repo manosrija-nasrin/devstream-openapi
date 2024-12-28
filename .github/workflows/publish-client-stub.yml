@@ -10,6 +10,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    # Run GitHub Actions locally using Act
+    # https://nektosact.com/introduction.html
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,10 +23,15 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@devstream'
 
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+
       - name: Install and Generate Client
-        run: |
-          npm ci
-          npm run openapi:generate-client
+        run: npm ci
+        run: npm run openapi:generate-client
 
       # Auto-increment version in package.json
       - name: Auto-increment package version
