@@ -56,6 +56,6 @@ jobs:
 
       - name: Publish to GitHub Packages
         working-directory: ./build/server/spring
-        run: mvn --batch-mode deploy
+        run: mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
