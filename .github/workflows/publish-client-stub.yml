@@ -1,4 +1,4 @@
-name: Publish Client Stub
+name: Publish TypeScript Client Stub to GitHub Packages
 
 on:
   push:
@@ -10,8 +10,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    # Run GitHub Actions locally using Act
-    # https://nektosact.com/introduction.html
+    # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,13 +37,9 @@ jobs:
       - name: Generate Client Stubs
         run: npm run openapi:generate-client
 
-      - name: Install TypeScript as devDependency
+      - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
         working-directory: ./build/client/typescript
-        run: npm ci
-
-      - name: Convert typescript stub into javascript
-        working-directory: ./build/client/typescript
-        run: npm run prepare
+        run: npm install
 
       # Publish the package to GitHub Packages
       - name: Publish to GitHub Packages
