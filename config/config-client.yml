@@ -9,7 +9,7 @@ supportsES6: true
 validationAttributes: true
 withInterfaces: true
 
-npmName: "@devstream/client-typescript"
+npmName: "@adityamayukhsom/client-typescript"
 npmVersion: 0.0.1
 npmRepository: https://npm.pkg.github.com
 repositoryURL: https://www.github.com/AdityaMayukhSom/devstream-openapi
