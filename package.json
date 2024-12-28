@@ -10,7 +10,7 @@
     "openapi:validate": "openapi-generator-cli validate --recommend -i ./build/devstream.yml",
     "openapi:mint": "npm run openapi:build && npm run openapi:lint && npm run openapi:validate",
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml",
-    "openapi:generate-client": "openapi-generator-cli generate -g typescript-fetch -c ./config/config-client.yml -t ./templates/client",
+    "openapi:generate-client": "openapi-generator-cli generate -g typescript-fetch -c ./config/config-client.yml",
     "openapi:docs": "openapi-generator-cli generate -g openapi -i ./build/devstream.yml -o ./docs",
     "openapi:go": "openapi-generator-cli generate -g go-server -i ./build/devstream.yml -o ./build/server/go",
     "openapi:python": "openapi-generator-cli generate -g python-fastapi -i ./build/devstream.yml -o ./build/server/python",

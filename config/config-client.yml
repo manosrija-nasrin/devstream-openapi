@@ -1,5 +1,6 @@
 inputSpec: "./build/devstream.yml"
 outputDir: "./build/client/typescript"
+
 withoutRuntimeChecks: false
 enumPropertyNaming: PascalCase
 fileNaming: kebab-case
@@ -7,8 +8,20 @@ nullSafeAdditionalProps: true
 supportsES6: true
 validationAttributes: true
 withInterfaces: true
+
 npmName: "@devstream/client-typescript"
 npmVersion: 0.0.1
 npmRepository: https://npm.pkg.github.com
 repositoryURL: https://www.github.com/AdityaMayukhSom/devstream-openapi
-authorName: AdityaMayukhSom
+
+main: ./dist/index.js
+types: ./dist/index.d.ts
+module: ./dist/esm/index.js
+authorName: Aditya Mayukh Som
+description: TypeScript Client Stubs for Devstream
+
+templateDir: ./templates/client
+files:
+  package.json.mustache:
+    destinationFilename: package.json
+    templateType: SupportingFiles
