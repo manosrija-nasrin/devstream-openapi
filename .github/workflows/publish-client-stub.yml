@@ -1,0 +1,67 @@
+name: Publish Client Stub
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@devstream'
+
+      - name: Install and Generate Client
+        run: |
+          npm ci
+          npm run openapi:generate-client
+
+      # Auto-increment version in package.json
+      - name: Auto-increment package version
+        working-directory: ./build/client/typescript
+        run: |
+          if [ -f package.json ]; then
+            CURRENT_VERSION=$(jq -r '.version' package.json)
+            NEW_VERSION=$(echo "$CURRENT_VERSION" | awk -F. '{printf("%d.%d.%d", $1, $2, $3+1)}')
+            jq --arg v "$NEW_VERSION" '.version = $v' package.json > package.tmp.json
+            mv package.tmp.json package.json
+          else
+            echo '{
+              "name": "@${{ github.repository_owner }}/typescript-client",
+              "version": "0.1.0",
+              "main": "index.js",
+              "license": "GPL-2.0-only",
+              "description": "Client stub generated from OpenAPI",
+              "repository": {
+                "type": "git",
+                "url": "https://github.com/${{ github.repository }}.git"
+              },
+              "publishConfig": {
+                "registry": "https://npm.pkg.github.com"
+              }
+            }' > package.json
+          fi
+
+      # - name: Compile TypeScript
+      #   working-directory: ./build/client/typescript
+      #   run: |
+      #     npm install typescript
+      #     npx tsc --init
+      #     npx tsc
+
+      # Publish the package to GitHub Packages
+      - name: Publish to GitHub Packages
+        working-directory: ./build/client/typescript
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
