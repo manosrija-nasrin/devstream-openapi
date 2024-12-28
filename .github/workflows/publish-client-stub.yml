@@ -30,8 +30,9 @@ jobs:
           java-version: '21'
 
       - name: Install and Generate Client
-        run: npm ci
-        run: npm run openapi:generate-client
+        run: |
+          npm ci
+          npm run openapi:generate-client
 
       # Auto-increment version in package.json
       - name: Auto-increment package version
