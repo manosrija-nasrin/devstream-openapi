@@ -18,12 +18,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Cache Node.js dependencies
+      - name: Cache Node.js dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@devstream'
+
+      # Cache Maven dependencies
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Setup JDK
         uses: actions/setup-java@v4
@@ -42,6 +60,15 @@ jobs:
 
       - name: Generate Server Stub
         run: npm run openapi:generate-server
+
+      # Cache TypeScript client dependencies
+      - name: Cache TypeScript Client Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ./build/client/typescript/node_modules
+          key: ${{ runner.os }}-tsclient-${{ hashFiles('./build/client/typescript/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-tsclient-
 
       - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
         working-directory: ./build/client/typescript
