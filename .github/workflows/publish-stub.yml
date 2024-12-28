@@ -40,6 +40,9 @@ jobs:
       - name: Generate Client Stub
         run: npm run openapi:generate-client
 
+      - name: Generate Server Stub
+        run: npm run openapi:generate-server
+
       - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
         working-directory: ./build/client/typescript
         run: npm install
@@ -47,16 +50,12 @@ jobs:
       # Publish the package to GitHub Packages
       - name: Publish to GitHub Packages
         working-directory: ./build/client/typescript
-        run: npm publish
+        run: npm publish --force
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate Server Stub
-        run: npm run openapi:generate-server
-
-      # Publish the package to GitHub Packages
-      - name: Publish to GitHub Packages
-        working-directory: ./build/server/spring
-        run: mvn --batch-mode deploy
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Publish to GitHub Packages
+      #   working-directory: ./build/server/spring
+      #   run: mvn --batch-mode deploy
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
