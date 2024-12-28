@@ -38,38 +38,13 @@ jobs:
       - name: Generate Client Stubs
         run: npm run openapi:generate-client
 
-      # Auto-increment version in package.json
-      - name: Auto-increment package version
+      - name: Install TypeScript as devDependency
         working-directory: ./build/client/typescript
-        run: |
-          if [ -f package.json ]; then
-            CURRENT_VERSION=$(jq -r '.version' package.json)
-            NEW_VERSION=$(echo "$CURRENT_VERSION" | awk -F. '{printf("%d.%d.%d", $1, $2, $3+1)}')
-            jq --arg v "$NEW_VERSION" '.version = $v' package.json > package.tmp.json
-            mv package.tmp.json package.json
-          else
-            echo '{
-              "name": "@${{ github.repository_owner }}/typescript-client",
-              "version": "0.1.0",
-              "main": "index.js",
-              "license": "GPL-2.0-only",
-              "description": "Client stub generated from OpenAPI",
-              "repository": {
-                "type": "git",
-                "url": "https://github.com/${{ github.repository }}.git"
-              },
-              "publishConfig": {
-                "registry": "https://npm.pkg.github.com"
-              }
-            }' > package.json
-          fi
+        run: npm ci
 
-      # - name: Compile TypeScript
-      #   working-directory: ./build/client/typescript
-      #   run: |
-      #     npm install typescript
-      #     npx tsc --init
-      #     npx tsc
+      - name: Convert typescript stub into javascript
+        working-directory: ./build/client/typescript
+        run: npm run prepare
 
       # Publish the package to GitHub Packages
       - name: Publish to GitHub Packages
