@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@devstream'
 
@@ -29,10 +29,14 @@ jobs:
           distribution: 'corretto'
           java-version: '21'
 
-      - name: Install and Generate Client
-        run: |
-          npm ci
-          npm run openapi:generate-client
+      - name: Install Dependencies
+        run: npm ci
+          
+      - name: Bundle OpenAPI Specification
+        run: npm run openapi:mint
+      
+      - name: Generate Client Stubs
+        run: npm run openapi:generate-client
 
       # Auto-increment version in package.json
       - name: Auto-increment package version
