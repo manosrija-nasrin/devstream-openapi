@@ -1,0 +1,21 @@
+{
+  "name": "{{npmName}}",
+  "version": "{{npmVersion}}",
+  "description": "{{description}}",
+  "author": "{{authorName}}",
+  "repository": "{{repositoryURL}}",
+  "main": "{{{main}}}",
+  "typings": "{{{types}}}",
+  "module": "{{{module}}}",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^4.0 || ^5.0"
+  },
+  "publishConfig": {
+    "registry": "{{{npmRepository}}}"
+  }
+}

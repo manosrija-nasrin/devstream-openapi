@@ -9,4 +9,6 @@ validationAttributes: true
 withInterfaces: true
 npmName: "@devstream/client-typescript"
 npmVersion: 0.0.1
-npmRepository: "https://npm.pkg.github.com"
+npmRepository: https://npm.pkg.github.com
+repositoryURL: https://www.github.com/AdityaMayukhSom/devstream-openapi
+authorName: AdityaMayukhSom
