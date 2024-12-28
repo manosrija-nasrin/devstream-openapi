@@ -7,7 +7,7 @@ groupId: in.devstream
 artifactId: openapi
 dateLibrary: java8
 serializableModel: true
-artifactVersion: 0.0.2
+artifactVersion: 0.0.3
 # openApiNullable: false
 # disallowAdditionalPropertiesIfNotPresent: false
 # hateoas: false
