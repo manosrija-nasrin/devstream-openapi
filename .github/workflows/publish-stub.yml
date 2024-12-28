@@ -1,4 +1,4 @@
-name: Publish TypeScript Client Stub to GitHub Packages
+name: Publish Stub to GitHub Packages
 
 on:
   push:
@@ -9,6 +9,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
@@ -34,7 +37,7 @@ jobs:
       - name: Bundle OpenAPI Specification
         run: npm run openapi:mint
       
-      - name: Generate Client Stubs
+      - name: Generate Client Stub
         run: npm run openapi:generate-client
 
       - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
@@ -45,5 +48,15 @@ jobs:
       - name: Publish to GitHub Packages
         working-directory: ./build/client/typescript
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Server Stub
+        run: npm run openapi:generate-server
+
+      # Publish the package to GitHub Packages
+      - name: Publish to GitHub Packages
+        working-directory: ./build/server/spring
+        run: mvn --batch-mode deploy
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,17 +1,20 @@
 inputSpec: "./build/devstream.yml"
 outputDir: "./build/server/spring"
-apiPackage: in.devstream.api
-modelPackage: in.devstream.model
+apiPackage: in.devstream.openapi.api
+modelPackage: in.devstream.openapi.model
 modelNameSuffix: Dto
-additionalProperties:
-  # dateLibrary: java8
-  serializableModel: true
-  # openApiNullable: false
-  # disallowAdditionalPropertiesIfNotPresent: false
-  # hateoas: false
-  interfaceOnly: true
-  # licenseName: Unlicense
-  # singleContentTypes: true
-  unhandledException: true
-  # useTags: true
-  useOptional: true
+groupId: in.devstream
+artifactId: openapi
+dateLibrary: java8
+serializableModel: true
+artifactVersion: 0.0.1
+# openApiNullable: false
+# disallowAdditionalPropertiesIfNotPresent: false
+# hateoas: false
+interfaceOnly: true
+# licenseName: Unlicense
+# singleContentTypes: true
+unhandledException: true
+# useTags: true
+useOptional: true
+  
