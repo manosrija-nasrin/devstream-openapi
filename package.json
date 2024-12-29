@@ -34,6 +34,7 @@
   "homepage": "https://github.com/AdityaMayukhSom/devstream-openapi#readme",
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.15.3",
-    "@redocly/cli": "^1.26.1"
+    "@redocly/cli": "^1.26.1",
+    "fast-xml-parser": "^4.5.1"
   }
 }
