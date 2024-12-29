@@ -1,4 +1,4 @@
-name: Publish Docs to GitHub Pages
+name: Publish SwaggerUI  Docs to GitHub Pages
 
 on:
   push:
@@ -27,40 +27,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Cache Node.js dependencies
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-
-      # Cache Maven dependencies
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'corretto'
-          java-version: '21'
-
-      - name: Install Dependencies
-        run: npm ci
-          
-      - name: Bundle OpenAPI Specification
-        run: npm run openapi:mint
+      - name: Generate OpenAPI Specification
+        uses: AdityaMayukhSom/devstream-openapi/.github/workflows/generate-openapi.yml@release
 
       - name: Generate OpenAPI Docs
         run: npm run openapi:docs

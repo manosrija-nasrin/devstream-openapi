@@ -1,0 +1,31 @@
+name: Publish Server Stub (Spring) to GitHub Packages
+
+on:
+  push:
+    branches:
+      - release
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
+
+    # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate OpenAPI Specification
+        uses: AdityaMayukhSom/devstream-openapi/.github/workflows/generate-openapi.yml@release
+
+      - name: Generate Server Stub
+        run: npm run openapi:generate-server
+
+      - name: Publish to GitHub Packages
+        working-directory: ./build/server/spring
+        run: mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

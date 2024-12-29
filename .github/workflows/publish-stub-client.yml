@@ -1,0 +1,45 @@
+name: Publish Client Stub (TypeScript Fetch) to GitHub Packages
+
+on:
+  push:
+    branches:
+      - release
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
+
+    # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate OpenAPI Specification
+        uses: AdityaMayukhSom/devstream-openapi/.github/workflows/generate-openapi.yml@release
+      
+      - name: Generate Client Stub
+        run: npm run openapi:generate-client
+
+      # Cache TypeScript client dependencies
+      - name: Cache TypeScript Client Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ./build/client/typescript/node_modules
+          key: ${{ runner.os }}-tsclient-${{ hashFiles('./build/client/typescript/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-tsclient-
+
+      - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
+        working-directory: ./build/client/typescript
+        run: npm install
+
+      # Publish the package to GitHub Packages
+      - name: Publish to GitHub Packages
+        working-directory: ./build/client/typescript
+        run: npm publish --force
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

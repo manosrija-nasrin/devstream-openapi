@@ -1,4 +1,4 @@
-name: Publish Stub to GitHub Packages
+name: Compile OpenAPI Specification
 
 on:
   push:
@@ -54,35 +54,3 @@ jobs:
           
       - name: Bundle OpenAPI Specification
         run: npm run openapi:mint
-      
-      - name: Generate Client Stub
-        run: npm run openapi:generate-client
-
-      - name: Generate Server Stub
-        run: npm run openapi:generate-server
-
-      # Cache TypeScript client dependencies
-      - name: Cache TypeScript Client Dependencies
-        uses: actions/cache@v3
-        with:
-          path: ./build/client/typescript/node_modules
-          key: ${{ runner.os }}-tsclient-${{ hashFiles('./build/client/typescript/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-tsclient-
-
-      - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
-        working-directory: ./build/client/typescript
-        run: npm install
-
-      # Publish the package to GitHub Packages
-      - name: Publish to GitHub Packages
-        working-directory: ./build/client/typescript
-        run: npm publish --force
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to GitHub Packages
-        working-directory: ./build/server/spring
-        run: mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
