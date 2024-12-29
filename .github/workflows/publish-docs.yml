@@ -23,12 +23,11 @@ jobs:
 
     runs-on: windows-latest
 
+    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/generate-openapi.yml@release
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Generate OpenAPI Specification
-        uses: AdityaMayukhSom/devstream-openapi/.github/workflows/generate-openapi.yml@release
 
       - name: Generate OpenAPI Docs
         run: npm run openapi:docs
