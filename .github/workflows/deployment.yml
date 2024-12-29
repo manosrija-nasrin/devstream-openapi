@@ -8,16 +8,17 @@ on:
 
 jobs:
   version-bump:
-    - name:  'Automated Version Bump'
-      uses:  'phips28/gh-action-bump-version@master'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        rc-wording:     'release:,alpha:'
-        major-wording:  'major:,break:'
-        minor-wording:  'minor:,feat:,enhance:'
-        patch-wording:  'patch:,chore:'     # Providing patch-wording will override commits defaulting to a patch bump.
-        commit-message: 'CI: bumps version to {{version}} [skip ci]'
+    steps:
+      - name: 'Automated Version Bump'
+        uses: 'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          rc-wording:     'release:,alpha:'
+          major-wording:  'major:,break:'
+          minor-wording:  'minor:,feat:,enhance:'
+          patch-wording:  'patch:,chore:'     # Providing patch-wording will override commits defaulting to a patch bump.
+          commit-message: 'CI: bumps version to {{version}} [skip ci]'
 
   publish-docs:
     needs: [ version-bump ]

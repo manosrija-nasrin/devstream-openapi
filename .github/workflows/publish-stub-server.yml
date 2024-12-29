@@ -2,6 +2,7 @@ name: Publish Server Stub (Spring) to GitHub Packages
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   publish-server-stub:

@@ -2,6 +2,7 @@ name: Publish Client Stub (TypeScript Fetch) to GitHub Packages
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   publish-client-stub:
