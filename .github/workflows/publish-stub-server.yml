@@ -1,13 +1,11 @@
 name: Publish Server Stub (Spring) to GitHub Packages
 
 on:
-  push:
-    branches:
-      - release
+  workflow_call:
   workflow_dispatch:
 
 jobs:
-  publish:
+  publish-server-stub:
     runs-on: windows-latest
     permissions:
       contents: read

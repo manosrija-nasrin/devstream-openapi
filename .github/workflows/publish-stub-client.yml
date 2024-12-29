@@ -1,13 +1,11 @@
 name: Publish Client Stub (TypeScript Fetch) to GitHub Packages
 
 on:
-  push:
-    branches:
-      - release
+  workflow_call:
   workflow_dispatch:
 
 jobs:
-  publish:
+  publish-client-stub:
     runs-on: windows-latest
     permissions:
       contents: read
