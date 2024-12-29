@@ -10,6 +10,9 @@ jobs:
   version-bump:
     runs-on: windows-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: 'Automated Version Bump'
         uses: 'phips28/gh-action-bump-version@master'
         env:
@@ -18,7 +21,7 @@ jobs:
           rc-wording:     'release:,alpha:'
           major-wording:  'major:,break:'
           minor-wording:  'minor:,feat:,enhance:'
-          patch-wording:  'patch:,chore:'     # Providing patch-wording will override commits defaulting to a patch bump.
+          patch-wording:  'patch:,chore:,fixed:'     # Providing patch-wording will override commits defaulting to a patch bump.
           commit-message: 'CI: bumps version to {{version}} [skip ci]'
 
   publish-docs:
