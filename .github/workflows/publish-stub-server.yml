@@ -16,7 +16,7 @@ jobs:
     # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
       - name: Setup OpenAPI
-        uses: AdityaMayukhSom/devstream-openapi/.github/actions/openapi-compile@release
+        uses: ./.github/actions/openapi-compile
 
       - name: Generate Server Stub
         run: npm run openapi:generate-server
