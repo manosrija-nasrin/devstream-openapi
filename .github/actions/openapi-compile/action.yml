@@ -4,50 +4,45 @@ description: Sets up OpenAPI by caching dependencies and running initial command
 inputs:
   node-version:
     description: Node.js version
-    default: '22.x'
+    default: "22.x"
   java-version:
     description: Java version
-    default: '21'
+    default: "21"
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # Cache Node.js dependencies
-    - name: Cache Node.js dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: ${{ runner.os }}-node-
+    - name: Hash Dependencies
+      run: |
+        echo "ROOT_DEPS_HASH=$(node ./scripts/hash-root-node-deps.js ./package.json)" >> $GITHUB_ENV
 
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version: '22.x'
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@devstream'
-
-    # Cache Maven dependencies
-    - name: Cache Maven dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-maven-
+        node-version: "22.x"
+        registry-url: "https://npm.pkg.github.com"
+        scope: "@devstream"
 
     - name: Setup JDK
       uses: actions/setup-java@v4
       with:
-        distribution: 'corretto'
-        java-version: '21'
+        distribution: "corretto"
+        java-version: "21"
+
+    - name: Cache Node.js Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ env.ROOT_DEPS_HASH }}
+        restore-keys: ${{ runner.os }}-node-
 
     - name: Install Dependencies
       shell: pwsh
       run: npm ci
-        
+
     - name: Bundle OpenAPI Specification
       shell: pwsh
       run: npm run openapi:mint

@@ -15,12 +15,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
 
       - name: Generate Server Stub
         run: npm run openapi:generate-server
+
+      - name: Hash Dependencies
+        run: |
+          echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> $GITHUB_ENV
+
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ env.SERVER_MAVEN_DEPS_HASH }}
+          restore-keys: ${{ runner.os }}-maven-
 
       - name: Publish to GitHub Packages
         working-directory: ./build/server/spring
