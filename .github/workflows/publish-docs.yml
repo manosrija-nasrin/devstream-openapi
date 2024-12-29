@@ -23,11 +23,10 @@ jobs:
 
     runs-on: windows-latest
 
-    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/generate-openapi.yml@release
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
+      - name: Setup OpenAPI
+        uses: AdityaMayukhSom/devstream-openapi/.github/actions/openapi-compile
 
       - name: Generate OpenAPI Docs
         run: npm run openapi:docs

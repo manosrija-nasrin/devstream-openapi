@@ -13,12 +13,10 @@ jobs:
       contents: read
       packages: write
 
-    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/generate-openapi.yml@release
-
     # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Setup OpenAPI
+        uses: AdityaMayukhSom/devstream-openapi/.github/actions/openapi-compile
       
       - name: Generate Client Stub
         run: npm run openapi:generate-client
