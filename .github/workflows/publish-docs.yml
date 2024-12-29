@@ -26,7 +26,7 @@ jobs:
     steps:
       # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
       - name: Setup OpenAPI
-        uses: AdityaMayukhSom/devstream-openapi/.github/actions/openapi-compile
+        uses: AdityaMayukhSom/devstream-openapi/.github/actions/openapi-compile@release
 
       - name: Generate OpenAPI Docs
         run: npm run openapi:docs
