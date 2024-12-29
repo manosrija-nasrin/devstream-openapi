@@ -8,6 +8,7 @@ on:
 
 jobs:
   version-bump:
+    runs-on: windows-latest
     steps:
       - name: 'Automated Version Bump'
         uses: 'phips28/gh-action-bump-version@master'
@@ -22,13 +23,13 @@ jobs:
 
   publish-docs:
     needs: [ version-bump ]
-    use: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
+    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
   
   publish-stub-client:
     needs: [ version-bump ]
-    use: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
+    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
 
   publish-stub-server:
     needs: [ version-bump ]
-    use: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
+    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
 
