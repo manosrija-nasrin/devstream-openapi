@@ -24,6 +24,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile

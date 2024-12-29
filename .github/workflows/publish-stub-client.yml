@@ -15,6 +15,9 @@ jobs:
 
     # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
       
