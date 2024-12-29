@@ -17,7 +17,7 @@ runs:
 
     - name: Hash Dependencies
       shell: pwsh
-      run: echo "ROOT_DEPS_HASH=$(node ./scripts/hash-root-node-deps.js ./package.json)" >> $GITHUB_ENV
+      run: echo "ROOT_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./package.json)" >> $GITHUB_ENV
 
     - name: Setup Node
       uses: actions/setup-node@v4
@@ -37,7 +37,6 @@ runs:
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ env.ROOT_DEPS_HASH }}
-        restore-keys: ${{ runner.os }}-node-
 
     - name: Install Dependencies
       shell: pwsh

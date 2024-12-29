@@ -15,21 +15,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
-      
+
       - name: Generate Client Stub
         run: npm run openapi:generate-client
 
-      # Cache TypeScript client dependencies
+      - name: Hash Dependencies
+        run: |
+          echo "CLIENT_NODE_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./build/client/typescript/package.json)" >> $GITHUB_ENV
+
       - name: Cache TypeScript Client Dependencies
         uses: actions/cache@v3
         with:
           path: ./build/client/typescript/node_modules
-          key: ${{ runner.os }}-tsclient-${{ hashFiles('./build/client/typescript/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-tsclient-
+          key: ${{ runner.os }}-tsclient-${{ env.CLIENT_NODE_DEPS_HASH }}
 
       - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
         working-directory: ./build/client/typescript

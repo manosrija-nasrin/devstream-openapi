@@ -9,7 +9,9 @@ if(!FILEPATH) {
 const crypto = require("crypto");
 const fs = require("fs");
 const packageJSON = JSON.parse(fs.readFileSync(FILEPATH, "utf8"));
+const {dependencies = {}, devDependencies = {}} = packageJSON;
 const hash = crypto.createHash("sha256");
-hash.update(JSON.stringify(packageJSON?.dependencies || {}));
+hash.update(JSON.stringify(dependencies));
+hash.update(JSON.stringify(devDependencies));
 const digest = hash.digest("hex");
 console.log(digest);

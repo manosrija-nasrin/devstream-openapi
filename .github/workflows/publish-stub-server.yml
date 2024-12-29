@@ -31,7 +31,6 @@ jobs:
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ env.SERVER_MAVEN_DEPS_HASH }}
-          restore-keys: ${{ runner.os }}-maven-
 
       - name: Publish to GitHub Packages
         working-directory: ./build/server/spring
