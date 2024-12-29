@@ -1,5 +1,8 @@
 name: Publish Server Stub (Spring) to GitHub Packages
 
+on:
+  workflow_call:
+
 jobs:
   publish-server-stub:
     runs-on: windows-latest

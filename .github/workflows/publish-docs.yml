@@ -1,5 +1,8 @@
 name: Publish SwaggerUI  Docs to GitHub Pages
 
+on:
+  workflow_call:
+
 permissions:
   contents: read
   pages: write

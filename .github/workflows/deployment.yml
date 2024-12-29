@@ -27,7 +27,7 @@ jobs:
     needs: [ version-bump ]
     use: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
 
-  publish-stub-client:
+  publish-stub-server:
     needs: [ version-bump ]
     use: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
 
