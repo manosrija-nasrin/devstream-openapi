@@ -1,11 +1,5 @@
 name: Publish SwaggerUI  Docs to GitHub Pages
 
-on:
-  push:
-    branches:
-      - release
-  workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
@@ -16,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  publish:
+  publish-docs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
