@@ -13,26 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 'Automated Version Bump'
-        uses: 'phips28/gh-action-bump-version@master'
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          rc-wording:     'release:,alpha:'
-          major-wording:  'major:,break:'
-          minor-wording:  'minor:,feat:,enhance:'
-          patch-wording:  'patch:,chore:,fixed:'     # Providing patch-wording will override commits defaulting to a patch bump.
-          commit-message: 'CI: bumps version to {{version}} [skip ci]'
+          rc-wording: "release:,alpha:"
+          major-wording: "major:,break:"
+          minor-wording: "minor:,feat:,enhance:"
+          patch-wording: "patch:,chore:,fixed:" # Providing patch-wording will override commits defaulting to a patch bump.
+          commit-message: "CI: bumps version to {{version}} [skip ci]"
 
   publish-docs:
-    needs: [ version-bump ]
+    needs: [version-bump]
     uses: ./.github/workflows/publish-docs.yml
-  
+
   publish-stub-client:
-    needs: [ version-bump ]
+    needs: [version-bump]
     uses: ./.github/workflows/publish-stub-client.yml
 
   publish-stub-server:
-    needs: [ version-bump ]
+    needs: [version-bump]
     uses: ./.github/workflows/publish-stub-server.yml
-

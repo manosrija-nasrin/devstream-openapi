@@ -16,15 +16,15 @@ runs:
       uses: actions/checkout@v4
 
     - name: Hash Dependencies
-      run: |
-        echo "ROOT_DEPS_HASH=$(node ./scripts/hash-root-node-deps.js ./package.json)" >> $GITHUB_ENV
+      shell: pwsh
+      run: echo "ROOT_DEPS_HASH=$(node ./scripts/hash-root-node-deps.js ./package.json)" >> $GITHUB_ENV
 
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
         node-version: "22.x"
         registry-url: "https://npm.pkg.github.com"
-        scope: "@devstream"
+        scope: "@adityamayukhsom"
 
     - name: Setup JDK
       uses: actions/setup-java@v4
