@@ -9,8 +9,6 @@ on:
 jobs:
   version-bump:
     runs-on: ubuntu-latest
-    # permissions:
-    #   contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,13 +26,13 @@ jobs:
 
   publish-docs:
     needs: [ version-bump ]
-    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
+    uses: ./.github/workflows/publish-docs.yml
   
   publish-stub-client:
     needs: [ version-bump ]
-    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
+    uses: ./.github/workflows/publish-stub-client.yml
 
   publish-stub-server:
     needs: [ version-bump ]
-    uses: AdityaMayukhSom/devstream-openapi/.github/workflows/publish-docs.yml@release
+    uses: ./.github/workflows/publish-stub-server.yml
 
