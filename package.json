@@ -21,7 +21,8 @@
     "openapi:node-express": "openapi-generator-cli generate -g nodejs-express-server -i ./build/devstream.yml -o ./build/server/express",
     "openapi:stubs": "npm run openapi:generate-server && npm run openapi:generate-client",
     "openapi:rebuild-stubs": "npm run openapi:mint && npm run openapi:stubs",
-    "openapi:rebuild-docs": "npm run openapi:mint && npm run openapi:docs"
+    "openapi:rebuild-docs": "npm run openapi:mint && npm run openapi:docs",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -43,5 +44,8 @@
     "@openapitools/openapi-generator-cli": "^2.15.3",
     "@redocly/cli": "^1.26.1",
     "fast-xml-parser": "^4.5.1"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }
