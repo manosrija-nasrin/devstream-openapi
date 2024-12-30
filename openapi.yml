@@ -1,14 +1,42 @@
 openapi: 3.1.0
 info:
-  title: Devstream Omnistream Specification
+  title: Devstream OpenAPI Specification
+  # For dynamically update the API version in future
+  # https://redocly.com/docs/cli/guides/replace-servers-url
   version: 0.3.0
-  description: API Specification for Omnistream with Spring Boot
+  description: API reference for Devstream platform built with Spring Boot.
   termsOfService: https://www.devstream.in/terms-and-conditions
-  license: 
+  license:
     name: GPL-2.0-only
     url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html#SEC1
+
+tags:
+  - name: Auth
+    description: Endpoints related to user authentication (login, register, refresh token, forgot password, reset password).
+  - name: Content
+    description: Endpoints for managing content (creating, retrieving, updating, deleting content, analytics).
+  - name: Health
+    description: Endpoint for checking the health of the API service.
+  - name: Platforms
+    description: Endpoints for interacting with external platforms (syncing data, retrieving platform information).
+  - name: User
+    description: Endpoints for managing user information (profile, settings, analytics).
+
 servers:
-  - url: https://devstream.in/api/v1
+  - url: "{protocol}://{environment}.devstream.in/v1"
+    variables:
+      protocol:
+        default: https
+        enum:
+          - http
+          - https
+      environment:
+        default: api
+        enum:
+          - api # Production server
+          - api.dev # Development server
+          - api.staging # Staging server
+          - api.test # Test server
 paths:
   /health:
     $ref: "./paths/health.yml"
@@ -18,7 +46,7 @@ paths:
     $ref: "./paths/user_settings.yml"
   /user/analytics:
     $ref: "./paths/user_analytics.yml"
-  /user/{userID}:
+  /user/{user_id}:
     $ref: "./paths/user_{id}.yml"
   /auth/login:
     $ref: "./paths/auth_login.yml"
@@ -32,15 +60,15 @@ paths:
     $ref: "./paths/auth_reset-password.yml"
   /content:
     $ref: "./paths/content.yml"
-  /content/{contentID}:
+  /content/{content_id}:
     $ref: "./paths/content_{id}.yml"
-  /content/status/{contentID}:
+  /content/status/{content_id}:
     $ref: "./paths/content_status_{id}.yml"
-  /content/invite/{contentID}:
+  /content/invite/{content_id}:
     $ref: "./paths/content_invite_{id}.yml"
-  /content/analytics/{contentID}:
+  /content/analytics/{content_id}:
     $ref: "./paths/content_analytics_{id}.yml"
-  /platforms/{platformID}:
+  /platforms/{platform_id}:
     $ref: "./paths/platforms_{id}.yml"
   /platforms/sync:
     $ref: "./paths/platforms_sync.yml"

@@ -1,6 +1,6 @@
 type: object
 properties:
-  contentID:
+  content_id:
     $ref: "./ContentID.yml"
   title:
     type: string

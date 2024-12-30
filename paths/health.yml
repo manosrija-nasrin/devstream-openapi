@@ -1,5 +1,8 @@
 get:
   summary: Health check for the API.
+  operationId: health-check
+  tags:
+    - Health
   security: []
   description: Health check for the API.
   responses:

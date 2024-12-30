@@ -4,8 +4,8 @@ properties:
     type: string
     format: date-time
   uptime:
-    type: number
-    description: Server uptime in milliseconds
+    type: integer
+    description: Server uptime in milliseconds in UNIX format
   status:
     type: string
     description: Status message, e.g. for describing errors

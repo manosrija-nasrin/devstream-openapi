@@ -1,5 +1,8 @@
 post:
   summary: Refresh the authentication token.
+  operationId: refresh-auth-token
+  tags:
+    - Auth
   security:
     - BearerAuth: []
   requestBody:
@@ -15,3 +18,27 @@ post:
         application/json:
           schema:
             $ref: "../components/responses/RefreshTokenResponse.yml"
+    400:
+      description: Bad Request. The refresh token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/errors/ErrorResponse.yml"
+    401:
+      description: Unauthorized. The provided refresh token is expired or revoked.
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/errors/ErrorResponse.yml"
+    403:
+      description: Forbidden. The request is not authorized (e.g., due to account restrictions).
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/errors/ErrorResponse.yml"
+    404:
+      description: Not Found. The resource associated with the refresh token could not be found (unlikely, but possible).
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/errors/ErrorResponse.yml"

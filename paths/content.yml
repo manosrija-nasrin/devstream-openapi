@@ -1,5 +1,8 @@
 get:
   summary: List all user content with optional filters.
+  operationId: get-all-content-by-user-id
+  tags:
+    - Content
   security:
     - BearerAuth: []
   parameters:

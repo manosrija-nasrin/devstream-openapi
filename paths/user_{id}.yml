@@ -1,9 +1,12 @@
 delete:
   summary: Deletes user profile.
+  operationId: delete-user-profile
+  tags:
+    - User
   security:
     - BearerAuth: []
   parameters:
-    - $ref: '../components/parameters/path/UserIDParam.yml'
+    - $ref: "../components/parameters/path/UserIDParam.yml"
   responses:
     200:
       description: User deleted successfully.

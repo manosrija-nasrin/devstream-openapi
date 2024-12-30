@@ -1,5 +1,8 @@
 get:
   summary: Retrieve user-specific settings.
+  operationId: get-user-settings
+  tags:
+    - User
   security:
     - BearerAuth: []
   responses:
@@ -20,6 +23,9 @@ get:
 
 patch:
   summary: Update user-specific settings.
+  operationId: update-user-settings
+  tags:
+    - User
   security:
     - BearerAuth: []
   requestBody:

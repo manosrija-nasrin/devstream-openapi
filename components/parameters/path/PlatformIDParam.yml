@@ -1,5 +1,5 @@
-name: platformID
+name: platform_id
 in: path
 required: true
 schema:
-  $ref: '../../schemas/Platform.yml'
+  $ref: "../../schemas/Platform.yml"

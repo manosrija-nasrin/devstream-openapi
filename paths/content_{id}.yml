@@ -1,5 +1,8 @@
 get:
   summary: Retrieve details for a specific piece of content.
+  operationId: get-content-details
+  tags:
+    - Content
   security:
     - BearerAuth: []
   parameters:
@@ -24,6 +27,9 @@ get:
 
 delete:
   summary: Delete a specific piece of content.
+  operationId: delete-content
+  tags:
+    - Content
   security:
     - BearerAuth: []
   parameters:

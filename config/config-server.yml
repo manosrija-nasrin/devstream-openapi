@@ -13,17 +13,21 @@ skipDefaultInterface: true
 useSpringBoot3: true
 licenseName: GPL-2.0-only
 generateBuilders: true
+generateConstructorWithAllArgs: true
+hideGenerationTimestamp: true
 # artifactVersion: 0.0.4
 # openApiNullable: false
 # disallowAdditionalPropertiesIfNotPresent: false
 # hateoas: false
 interfaceOnly: true
 # singleContentTypes: true
+useSpringBoot3: true
+useSpringController: true
 unhandledException: false
 useOptional: true
 developerEmail: "aditya.mayukh.som@devstream.in"
 developerOrganization: "devstream"
 developerOrganizationUrl: "https://www.devstream.in"
+useTags: true
 # apiFirst: true
-# useTags: true
 # delegatePattern: true

@@ -1,8 +1,10 @@
 post:
   summary: Sync content from external platforms.
+  operationId: sync-all-external-platforms
+  tags:
+    - Platforms
   security:
     - BearerAuth: []
-  operationId: syncPlatform
   requestBody:
     required: true
     content:

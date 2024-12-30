@@ -1,5 +1,8 @@
 post:
   summary: Registers a new user.
+  operationId: register-user
+  tags:
+    - Auth
   security: []
   requestBody:
     required: true

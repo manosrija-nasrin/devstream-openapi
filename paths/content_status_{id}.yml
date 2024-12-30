@@ -1,6 +1,8 @@
 get:
   summary: Check the status of a specific piece of content.
-  operationId: getContentStatusByID
+  operationId: get-content-status
+  tags:
+    - Content
   security:
     - BearerAuth: []
   parameters:

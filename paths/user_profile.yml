@@ -1,6 +1,9 @@
 get:
   summary: Retrieve the current user's profile information.
-  security: 
+  operationId: get-user-profile-information
+  tags:
+    - User
+  security:
     - BearerAuth: []
   responses:
     200:
@@ -20,6 +23,9 @@ get:
 
 patch:
   summary: Update user profile details.
+  operationId: update-user-profile-information
+  tags:
+    - User
   security:
     - BearerAuth: []
   requestBody:

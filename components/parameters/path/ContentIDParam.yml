@@ -1,5 +1,5 @@
-name: contentID
+name: content_id
 in: path
 required: true
 schema:
-  $ref: '../../schemas/ContentID.yml'
+  $ref: "../../schemas/ContentID.yml"

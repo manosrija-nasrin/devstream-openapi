@@ -1,0 +1,47 @@
+# ../components/responses/ErrorResponse.yml
+type: object
+properties:
+  code:
+    type: integer
+    description: HTTP status code or a custom error code.
+    example: 400
+  message:
+    type: string
+    description: A human-readable error message.
+    example: "Bad Request"
+  details:
+    oneOf: # Use oneOf to allow either a string or null
+      - type: string
+        description: Optional, more specific details about the error.
+        example: "The request body is missing the 'refresh_token' field."
+      - type: "null"
+  target:
+    oneOf: # Use oneOf to allow either a string or null
+      - type: string
+        description: The target of the error (e.g., the name of the invalid parameter).
+        example: "refresh_token"
+      - type: "null"
+  errors: # Optional, for multiple validation errors
+    type: array
+    items:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Specific error message for this validation issue.
+          example: "Must be a valid UUID."
+        target:
+          type: string
+          description: The target of this specific error.
+          example: "useruser_idId"
+
+example:
+  code: 400
+  message: "Invalid input"
+  details: "The 'email' field is not a valid email address."
+  target: "email"
+  errors:
+    - message: "Must be a valid email address."
+      target: "email"
+    - message: "Must not be empty."
+      target: "password"

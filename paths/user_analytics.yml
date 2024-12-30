@@ -1,5 +1,8 @@
 get:
   summary: View overall analytics for the user.
+  operationId: get-user-analytics
+  tags:
+    - User
   security:
     - BearerAuth: []
   responses:
