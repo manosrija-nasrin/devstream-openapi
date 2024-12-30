@@ -3,18 +3,27 @@ outputDir: "./build/server/spring"
 apiPackage: in.devstream.openapi.api
 modelPackage: in.devstream.openapi.model
 modelNameSuffix: Dto
+configPackage: in.devstream.openapi.config
 groupId: in.devstream
 artifactId: openapi
 dateLibrary: java8
 serializableModel: true
+sortModelPropertiesByRequiredFlag: true
+skipDefaultInterface: true
+useSpringBoot3: true
+licenseName: GPL-2.0-only
+generateBuilders: true
 # artifactVersion: 0.0.4
 # openApiNullable: false
 # disallowAdditionalPropertiesIfNotPresent: false
 # hateoas: false
 interfaceOnly: true
-# licenseName: Unlicense
 # singleContentTypes: true
-unhandledException: true
-# useTags: true
+unhandledException: false
 useOptional: true
-  
+developerEmail: "aditya.mayukh.som@devstream.in"
+developerOrganization: "devstream"
+developerOrganizationUrl: "https://www.devstream.in"
+# apiFirst: true
+# useTags: true
+# delegatePattern: true
