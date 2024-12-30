@@ -14,7 +14,11 @@
     "openapi:generate-client": "openapi-generator-cli generate -g typescript-fetch -c ./config/config-client.yml --additional-properties=npmVersion=%npm_package_version%",
     "openapi:docs": "openapi-generator-cli generate -g openapi -i ./build/devstream.yml -o ./docs",
     "openapi:go": "openapi-generator-cli generate -g go-server -i ./build/devstream.yml -o ./build/server/go",
-    "openapi:python": "openapi-generator-cli generate -g python-fastapi -i ./build/devstream.yml -o ./build/server/python",
+    "openapi:go-echo": "openapi-generator-cli generate -g go-echo-server -i ./build/devstream.yml -o ./build/server/echo",
+    "openapi:go-gin": "openapi-generator-cli generate -g go-gin-server -i ./build/devstream.yml -o ./build/server/gin",
+    "openapi:python-fastapi": "openapi-generator-cli generate -g python-fastapi -i ./build/devstream.yml -o ./build/server/fastapi",
+    "openapi:python-flask": "openapi-generator-cli generate -g python-flask -i ./build/devstream.yml -o ./build/server/flask",
+    "openapi:node-express": "openapi-generator-cli generate -g nodejs-express-server -i ./build/devstream.yml -o ./build/server/express",
     "openapi:stubs": "npm run openapi:generate-server && npm run openapi:generate-client",
     "openapi:rebuild-stubs": "npm run openapi:mint && npm run openapi:stubs",
     "openapi:rebuild-docs": "npm run openapi:mint && npm run openapi:docs"
@@ -24,9 +28,12 @@
     "url": "git+https://github.com/AdityaMayukhSom/devstream-openapi.git"
   },
   "keywords": [
-    "openapi"
+    "openapi",
+    "devstream"
   ],
   "author": "Aditya Mayukh Som",
+  "email": "aditya.mayukh.som@devstream.in",
+  "url": "https://www.devstream.in",
   "license": "GPL-2.0-only",
   "bugs": {
     "url": "https://github.com/AdityaMayukhSom/devstream-openapi/issues"
