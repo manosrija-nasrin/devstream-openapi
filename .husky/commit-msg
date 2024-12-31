@@ -1,0 +1,41 @@
+echo "Commit-Msg Hook Executing"
+
+if ! head -1 "$1" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert|add|clean|release|break|patch)(\(.+?\))?: .{1,}$"; then
+    echo "Aborting commit. Your commit message is invalid." >&2
+    exit 1
+fi
+if ! head -1 "$1" | grep -qE "^.{1,88}$"; then
+    echo "Aborting commit. Your commit message is too long." >&2
+    exit 1
+fi
+
+# Determine version bump based on commit message
+COMMIT_MSG=$(head -1 "$1")
+VERSION_BUMP=""
+
+if echo "$COMMIT_MSG" | grep -q "^(break)(\(.+?\))?: .{1,}$"; then
+    VERSION_BUMP="major"
+elif echo "$COMMIT_MSG" | grep -q "^(feat)(\(.+?\))?: .{1,}$"; then
+    VERSION_BUMP="minor"
+elif echo "$COMMIT_MSG" | grep -qE "^(patch|chore)(\(.+?\))?: .{1,}$"; then
+    VERSION_BUMP="patch"
+fi
+
+# Only bump version if VERSION_BUMP is not empty
+if [ -n "$VERSION_BUMP" ]; then
+    echo "Bumping version: $VERSION_BUMP"
+    npm version "$VERSION_BUMP" --no-git-tag-version || {
+        echo "Error bumping version. Check your package.json and npm configuration." >&2
+        exit 1
+    }
+
+    # Add package.json and package-lock.json to the commit
+    git add package.json package-lock.json || {
+        echo "Error adding package.json and package-lock.json to commit" >&2
+        exit 1
+    }
+else
+    echo "No relevant commit type found for version bumping. Skipping version bump."
+fi
+
+exit 0

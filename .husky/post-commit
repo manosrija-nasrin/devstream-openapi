@@ -1,0 +1,14 @@
+# Check if package.json or package-lock.json are staged
+if git diff --staged --name-only | grep -qE "(package\.json|package-lock\.json)"; then
+    echo "Amending commit with version changes..."
+
+    # Amend the previous commit
+    git commit --amend --no-edit --no-verify || {
+        echo "Error amending commit." >&2
+        exit 1
+    }
+else
+    echo "No version changes to commit. Skipping amend."
+fi
+
+exit 0
