@@ -1,13 +1,19 @@
 inputSpec: "./build/devstream.yml"
 outputDir: "./build/client/typescript"
 
+apiPackage: api
+modelPackage: model
 withoutRuntimeChecks: false
 enumPropertyNaming: PascalCase
-fileNaming: kebab-case
+fileNaming: PascalCase
 nullSafeAdditionalProps: true
 supportsES6: true
 validationAttributes: true
-withInterfaces: true
+withInterfaces: false
+# prefixParameterInterfaces: true
+sagasAndRecords: true
+withSeparateModelsAndApi: true
+enumPropertyNamingReplaceSpecialChar: true
 
 npmName: "@adityamayukhsom/client-typescript"
 # npmVersion: 0.0.4
