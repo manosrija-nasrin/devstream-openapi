@@ -1,0 +1,8 @@
+# -i ./build/devstream.yml -o ./build/server/aspnetcore
+inputSpec: "./build/devstream.yml"
+outputDir: "./build/server/aspnetcore"
+packageName: In.Devstream.OpenAPI
+packageTitle: Devstream OpenAPI CSharp Library
+generateBody: false
+isLibrary: true
+licenseName: GPL-2.0-only
