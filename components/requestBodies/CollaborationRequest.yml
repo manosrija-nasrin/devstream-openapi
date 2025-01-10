@@ -11,9 +11,9 @@ properties:
           type: string
         accessType:
           $ref: "../schemas/AccessType.yml"
-    required:
-      - user_id
-      - accessType
+      required:
+        - user_id
+        - accessType
 required:
   - content_id
   - users
