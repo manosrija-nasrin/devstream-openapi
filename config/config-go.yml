@@ -1,0 +1,11 @@
+inputSpec: "./build/devstream.yml"
+outputDir: "./build/server/go"
+packageName: openapi
+featureCORS: true
+addResponseHeaders: true
+onlyInterfaces: true
+outputAsLibrary: true
+enumClassPrefix: true
+sourceFolder: src
+router: chi
+hideGenerationTimestamp: true
