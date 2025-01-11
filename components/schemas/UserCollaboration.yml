@@ -1,0 +1,9 @@
+type: object
+properties:
+  userID:
+    type: string
+  accessType:
+    $ref: "../schemas/AccessType.yml"
+required:
+  - userID
+  - accessType

@@ -1,11 +1,11 @@
 type: object
 required:
-  - user_id
+  - userID
   - username
   - email
   - avatarURL
 properties:
-  user_id:
+  userID:
     type: string
     format: uuid
   username:

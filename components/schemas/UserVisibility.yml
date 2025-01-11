@@ -1,0 +1,5 @@
+type: string
+description: Whom to show user profile.
+enum:
+  - Public
+  - Private
