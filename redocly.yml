@@ -1,0 +1,19 @@
+extends:
+  - recommended
+
+apis:
+  public-yaml@v1:
+    root: ./openapi.yml
+    output: ./build/devstream.yml
+
+  public-json@v1:
+    root: ./openapi.yml
+    output: ./build/devstream.json
+
+theme:
+  openapi:
+    schemaExpansionLevel: 2
+    generateCodeSamples:
+      languages:
+        - lang: curl
+        - lang: Python
