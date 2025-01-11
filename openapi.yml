@@ -1,27 +1,26 @@
 openapi: 3.1.0
 info:
   title: Devstream OpenAPI Specification
-  # For dynamically update the API version in future
-  # https://redocly.com/docs/cli/guides/replace-servers-url
-  version: 0.3.1
+  version: 0.3.0
   description: API reference for Devstream platform built with Spring Boot.
   termsOfService: https://www.devstream.in/terms-and-conditions
   license:
     name: GPL-2.0-only
     url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html#SEC1
-
 tags:
   - name: Auth
-    description: Endpoints related to user authentication (login, register, refresh token, forgot password, reset password).
+    description: Endpoints related to user authentication (login, register, refresh
+      token, forgot password, reset password).
   - name: Content
-    description: Endpoints for managing content (creating, retrieving, updating, deleting content, analytics).
+    description: Endpoints for managing content (creating, retrieving, updating,
+      deleting content, analytics).
   - name: Health
     description: Endpoint for checking the health of the API service.
   - name: Platforms
-    description: Endpoints for interacting with external platforms (syncing data, retrieving platform information).
+    description: Endpoints for interacting with external platforms (syncing data,
+      retrieving platform information).
   - name: User
     description: Endpoints for managing user information (profile, settings, analytics).
-
 servers:
   - url: "{protocol}://{environment}.devstream.in/v1"
     variables:
@@ -33,46 +32,45 @@ servers:
       environment:
         default: api
         enum:
-          - api # Production server
-          - api.dev # Development server
-          - api.staging # Staging server
-          - api.test # Test server
+          - api
+          - api.dev
+          - api.staging
+          - api.test
 paths:
   /health:
-    $ref: "./paths/health.yml"
+    $ref: ./paths/health.yml
   /user/profile:
-    $ref: "./paths/user_profile.yml"
+    $ref: ./paths/user_profile.yml
   /user/settings:
-    $ref: "./paths/user_settings.yml"
+    $ref: ./paths/user_settings.yml
   /user/analytics:
-    $ref: "./paths/user_analytics.yml"
+    $ref: ./paths/user_analytics.yml
   /user/{user_id}:
-    $ref: "./paths/user_{id}.yml"
+    $ref: ./paths/user_{id}.yml
   /auth/login:
-    $ref: "./paths/auth_login.yml"
+    $ref: ./paths/auth_login.yml
   /auth/register:
-    $ref: "./paths/auth_register.yml"
+    $ref: ./paths/auth_register.yml
   /auth/refresh-token:
-    $ref: "./paths/auth_refresh-token.yml"
+    $ref: ./paths/auth_refresh-token.yml
   /auth/forgot-password:
-    $ref: "./paths/auth_forgot-password.yml"
+    $ref: ./paths/auth_forgot-password.yml
   /auth/reset-password:
-    $ref: "./paths/auth_reset-password.yml"
+    $ref: ./paths/auth_reset-password.yml
   /content:
-    $ref: "./paths/content.yml"
+    $ref: ./paths/content.yml
   /content/{content_id}:
-    $ref: "./paths/content_{id}.yml"
+    $ref: ./paths/content_{id}.yml
   /content/status/{content_id}:
-    $ref: "./paths/content_status_{id}.yml"
+    $ref: ./paths/content_status_{id}.yml
   /content/invite/{content_id}:
-    $ref: "./paths/content_invite_{id}.yml"
+    $ref: ./paths/content_invite_{id}.yml
   /content/analytics/{content_id}:
-    $ref: "./paths/content_analytics_{id}.yml"
+    $ref: ./paths/content_analytics_{id}.yml
   /platforms/{platform_id}:
-    $ref: "./paths/platforms_{id}.yml"
+    $ref: ./paths/platforms_{id}.yml
   /platforms/sync:
-    $ref: "./paths/platforms_sync.yml"
-
+    $ref: ./paths/platforms_sync.yml
 components:
   securitySchemes:
     BearerAuth:

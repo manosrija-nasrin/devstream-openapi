@@ -1,16 +1,16 @@
 {
   "name": "devstream-openapi-spec",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "Devstream OpenAPI Specifications",
   "main": "index.js",
   "scripts": {
     "get-version": "node -e \"console.log(require('./package.json').version)\"",
     "openapi:lint": "redocly lint --format=codeframe",
-    "openapi:build": "redocly bundle public-yaml@v1",
-    "openapi:build-json": "redocly bundle public-json@v1 --ext json",
+    "openapi:bump-spec-version": "node ./scripts/update-spec-version.js %npm_package_version%",
+    "openapi:build": "redocly bundle public-yaml@v1 && redocly bundle public-json@v1 --ext json",
     "openapi:preview": "redocly preview-docs ./build/devstream.yml",
     "openapi:validate": "openapi-generator-cli validate --recommend -i ./build/devstream.yml",
-    "openapi:mint": "npm run openapi:lint && npm run openapi:build && npm run openapi:build-json && npm run openapi:validate",
+    "openapi:mint": "npm run openapi:lint && npm run openapi:build && npm run openapi:validate",
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml --additional-properties=artifactVersion=%npm_package_version%",
     "openapi:generate-client": "openapi-generator-cli generate -g typescript-axios -c ./config/config-client.yml --additional-properties=npmVersion=%npm_package_version%",
     "openapi:client-dist": "cd ./build/client/typescript && npm install && npm run build",
@@ -45,7 +45,8 @@
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.15.3",
     "@redocly/cli": "^1.27.1",
-    "fast-xml-parser": "^4.5.1"
+    "fast-xml-parser": "^4.5.1",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "husky": "^9.1.7"

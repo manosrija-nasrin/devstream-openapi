@@ -1,6 +1,6 @@
 echo "Commit-Msg Hook Executing"
 
-if ! head -1 "$1" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert|add|clean|release|break|patch)(\(.+?\))?: .{1,}$"; then
+if ! head -1 "$1" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert|add|clean|release|break|patch|minor|major)(\(.+?\))?: .{1,}$"; then
     echo "Aborting commit. Your commit message is invalid." >&2
     exit 1
 fi
@@ -13,9 +13,9 @@ fi
 COMMIT_MSG=$(head -1 "$1")
 VERSION_BUMP=""
 
-if echo "$COMMIT_MSG" | grep -q "^(break)(\(.+?\))?: .{1,}$"; then
+if echo "$COMMIT_MSG" | grep -qE "^(break|major)(\(.+?\))?: .{1,}$"; then
     VERSION_BUMP="major"
-elif echo "$COMMIT_MSG" | grep -q "^(feat)(\(.+?\))?: .{1,}$"; then
+elif echo "$COMMIT_MSG" | grep -qE "^(feat|minor)(\(.+?\))?: .{1,}$"; then
     VERSION_BUMP="minor"
 elif echo "$COMMIT_MSG" | grep -qE "^(patch|chore)(\(.+?\))?: .{1,}$"; then
     VERSION_BUMP="patch"
@@ -34,6 +34,20 @@ if [ -n "$VERSION_BUMP" ]; then
         echo "Error adding package.json and package-lock.json to commit" >&2
         exit 1
     }
+
+    if [ -f "package.json" ]; then
+        if npm run openapi:bump-spec-version > /dev/null 2>&1; then # Redirect output to suppress it
+            echo "Running openapi:bump-spec-version"
+            git add openapi.yml || {
+                echo "Error adding openapi.yml to commit" >&2
+                exit 1
+            }
+        else
+          echo "openapi:bump-spec-version script not found. Skipping."
+        fi
+    fi
+
+    
 else
     echo "No relevant commit type found for version bumping. Skipping version bump."
 fi

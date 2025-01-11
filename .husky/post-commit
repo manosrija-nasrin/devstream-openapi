@@ -1,5 +1,5 @@
 # Check if package.json or package-lock.json are staged
-if git diff --staged --name-only | grep -qE "(package\.json|package-lock\.json)"; then
+if git diff --staged --name-only | grep -qE "(package\.json|package-lock\.json|openapi\.yml)"; then
     echo "Amending commit with version changes..."
 
     # Amend the previous commit
