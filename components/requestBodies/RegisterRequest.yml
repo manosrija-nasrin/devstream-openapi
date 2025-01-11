@@ -4,9 +4,7 @@ properties:
     type: string
     minLength: 1
   middlename:
-    oneOf:
-      - type: "string"
-      - type: "null"
+    type: string
   lastname:
     type: string
     minLength: 1
