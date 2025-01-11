@@ -1,25 +1,40 @@
-const YAML = require('yaml')
-const fs = require('fs')
-const OpenAPIBasePath = './openapi.yml'
+const YAML = require('yaml');
+const fs = require('fs');
+const path = require('path');
 
-if(process.argv.length < 3) {
-    console.error('Error: Missing required argument - new version number.');
-    process.exit(1); // Exit with an error code
+let OpenAPIBasePath = './openapi.yml'; // Default path
+let newVersion;
+
+switch(process.argv.length) {
+    case 3:
+        newVersion = process.argv[2];
+        break;
+    case 4:
+        OpenAPIBasePath = process.argv[2];
+        newVersion = process.argv[3];
+        break;
+    default:
+        console.error('Error:');
+        console.error('Usage: node script.js <new_version> # uses default file as openapi.yml');
+        console.error('Usage: node script.js <openapi_file> <new_version>');
+        process.exit(1);
 }
 
 try {
-    const file = fs.readFileSync(OpenAPIBasePath, 'utf-8');
-    const parsed = YAML.parse(file);
+    // Resolve the path to handle relative paths correctly
+    const resolvedPath = path.resolve(OpenAPIBasePath);
+    const file = fs.readFileSync(resolvedPath, 'utf-8');
+    const doc = YAML.parseDocument(file);
+    const infoNode = doc.get('info');
 
-    if(parsed?.info?.version) {
-        parsed.info.version = process.argv[2];
-        const modified = YAML.stringify(parsed);
-        fs.writeFileSync(OpenAPIBasePath, modified);
-        console.log(`Successfully updated version to ${parsed.info.version}`);
+    if(infoNode && infoNode instanceof YAML.YAMLMap && infoNode.has('version')) {
+        infoNode.set('version', newVersion);
+        fs.writeFileSync(resolvedPath, doc.toString({}));
+        console.log(`Successfully updated version in ${resolvedPath} to ${newVersion}`);
     } else {
-        console.warn('Warning: "info.version" property not found in OpenAPI specification.');
+        console.warn(`Warning: "info.version" property not found in OpenAPI specification at ${resolvedPath}.`);
     }
 } catch(error) {
     console.error('Error:', error.message);
-    process.exit(1); // Exit with an error code
+    process.exit(1);
 }
