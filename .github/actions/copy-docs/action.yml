@@ -6,25 +6,21 @@ inputs:
     type: string
     description: message to be used for committing the files into remote repository
     required: true
-  remote-repository:
-    type: stirng
-    description: repository in which to put the copied files, for example 'adityamayukhsom/devstream'
-    required: true
   source-directory:
     type: string
     description: path in local directory from which to copy files into the remote repository
     required: true
-  source-branch:
-    type: string
-    description: source repository branch from which to copy files
-    required: true
-  target-directory:
-    type: string
-    description: directory path in the remote repository in which to put the copied files
+  target-repository:
+    type: stirng
+    description: repository in which to put the copied files, for example 'adityamayukhsom/devstream'
     required: true
   target-branch:
     type: string
     description: target repository branch in which to put the copied files
+    required: true
+  target-directory:
+    type: string
+    description: directory path in the remote repository in which to put the copied files
     required: true
   bot-token:
     type: string
@@ -34,18 +30,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: checkout source repository code
-      uses: actions/checkout@v4
-      with:
-        path: gh-copy-source
-        ref: ${{ inputs.source-branch }}
-        persist-credentials: false
-
     - name: checkout target repository code
       uses: actions/checkout@v4
       with:
-        path: gh-copy-target
-        repository: ${{ inputs.remote-repository }}
+        path: github-target-repository
+        repository: ${{ inputs.target-repository }}
         ref: ${{ inputs.target-branch }}
         token: ${{ inputs.bot-token }}
         fetch-depth: 0
@@ -54,13 +43,13 @@ runs:
     - name: copy common files to new repo
       shell: bash
       run: |
-        mkdir -p gh-copy-target/${{ inputs.target-directory }}
-        cp -rvT gh-copy-source/${{ inputs.source-directory }} gh-copy-target/${{ inputs.target-directory }}
+        mkdir -p github-target-repository/${{ inputs.target-directory }}
+        cp -rvT ${{ inputs.source-directory }} github-target-repository/${{ inputs.target-directory }}
 
     - name: check for new files
       shell: bash
       id: CheckNewFiles
-      working-directory: gh-copy-target
+      working-directory: github-target-repository
       run: |
         git add -A
         git status --porcelain | wc -l
@@ -73,7 +62,7 @@ runs:
     - name: Setup Node
       shell: bash
       if: ${{ steps.CheckNewFiles.outputs.TargetHasNewFiles == 'true' }}
-      working-directory: gh-copy-target
+      working-directory: github-target-repository
       run: |
         git config --global user.name "R2-D2 [bot]"
         git config --global user.email "artoo-detoo@devstream.in"
