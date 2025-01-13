@@ -2,6 +2,10 @@ name: push files into a remote repository
 description: copies files from a build system into another github repository, used to publish docs from one
 
 inputs:
+  commit-version:
+    type: string
+    description: the version of package for which the push is going to happen
+    required: true
   commit-message:
     type: string
     description: message to be used for committing the files into remote repository
@@ -70,7 +74,7 @@ runs:
         if ! git remote get-url target > /dev/null 2>&1; then
             git remote add target https://${{ inputs.bot-token }}@github.com/${{ inputs.target-repository }}.git > /dev/null
         fi
-        git commit -m "ci-docs (bot): ${{ inputs.commit-message }}"
+        git commit -m "ci-docs [bot]: ${{ inputs.commit-message }} (${{ inputs.commit-version }})"
         if ! git push target ${{ inputs.target-branch }} > /dev/null; then
           echo "push failed. attempting to pull with fast-forward..."
           git pull target ${{ inputs.target-branch }} --ff-only
