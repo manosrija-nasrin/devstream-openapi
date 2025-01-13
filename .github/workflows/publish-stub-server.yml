@@ -61,7 +61,8 @@ jobs:
           bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
 
       - name: Publish to GitHub Packages
+        shell: pwsh
         working-directory: ./build/server/spring
-        run: mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi -Dmaven.javadoc.skip=true
+        run: mvn deploy -D altDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi -Darguments="-Dmaven.javadoc.skip=true"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
