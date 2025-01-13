@@ -24,7 +24,8 @@ jobs:
 
       - name: Get Package Version
         id: GetPackageVersion
-        run: echo "PackageVersion=$(npm run -s get-version)" >> "$GITHUB_OUTPUT"
+        shell: pwsh
+        run: echo "PackageVersion=$(npm run --silent get-version)" >> $GITHUB_ENV
 
       - name: Hash Dependencies
         run: |
@@ -43,7 +44,7 @@ jobs:
       - name: Push Server Stub Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: ${{ steps.GetPackageVersion.outputs.PackageVersion }}
+          commit-version: "$PackageVersion"
           commit-message: updated server stub docs version
           source-directory: ./build/server/spring/target/site/apidocs
           target-repository: adityamayukhsom/devstream-docs
@@ -57,7 +58,7 @@ jobs:
       - name: Push API Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: ${{ steps.GetPackageVersion.outputs.PackageVersion }}
+          commit-version: "$PackageVersion"
           commit-message: updated swagger api docs version
           source-directory: ./build/docs
           target-repository: adityamayukhsom/devstream-docs

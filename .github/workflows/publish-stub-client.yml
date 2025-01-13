@@ -24,7 +24,11 @@ jobs:
 
       - name: Get Package Version
         id: GetPackageVersion
-        run: echo "PackageVersion=$(npm run --silent get-version)" >> $GITHUB_OUTPUT
+        shell: pwsh
+        run: echo "PackageVersion=$(npm run --silent get-version)" >> $GITHUB_ENV
+
+      - name: Echo Package Version
+        run: echo "$PackageVersion"
 
       - name: Hash Dependencies
         run: |
@@ -43,13 +47,10 @@ jobs:
       - name: Generate Client Stub Docs
         run: npm run openapi:client-docs
 
-      - name: Echo Package Version
-        run: echo "${{ steps.GetPackageVersion.outputs.PackageVersion }}"
-
       - name: Push Client Stub Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: ${{ steps.GetPackageVersion.outputs.PackageVersion }}
+          commit-version: "$PackageVersion"
           commit-message: updated client stub docs version
           source-directory: ./build/client/typescript/docs/.vitepress/dist
           target-repository: adityamayukhsom/devstream-docs
