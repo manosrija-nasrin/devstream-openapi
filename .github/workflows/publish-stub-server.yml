@@ -22,9 +22,12 @@ jobs:
       - name: Generate Server Stub
         run: npm run openapi:generate-server
 
+      - name: Get Package Version
+        id: get-version
+        run: echo "PACKAGE_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
+
       - name: Hash Dependencies
         run: |
-          echo "PACKAGE_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
           echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> $GITHUB_ENV
 
       - name: Cache Maven Dependencies

@@ -22,9 +22,12 @@ jobs:
       - name: Generate Client Stub
         run: npm run openapi:generate-client
 
+      - name: Get Package Version
+        id: get-version
+        run: echo "PACKAGE_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
+
       - name: Hash Dependencies
         run: |
-          echo "PACKAGE_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
           echo "CLIENT_NODE_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./build/client/typescript/package.json)" >> $GITHUB_ENV
 
       - name: Cache TypeScript Client Dependencies
