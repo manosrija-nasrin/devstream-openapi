@@ -4,6 +4,7 @@ description: copies files from a build system into another github repository, us
 inputs:
   commit-message:
     type: string
+    description: message to be used for committing the files into remote repository
     required: true
   remote-repository:
     type: stirng
@@ -37,24 +38,24 @@ runs:
       uses: actions/checkout@v4
       with:
         path: source
-        ref: ${{ github.event.inputs.source-branch }}
+        ref: ${{ inputs.source-branch }}
         persist-credentials: false
 
     - name: checkout target repository code
       uses: actions/checkout@v4
       with:
         path: target
-        repository: ${{ github.event.inputs.remote-repository }}
-        ref: ${{ github.event.inputs.target-branch }}
-        token: ${{ github.event.inputs.bot-token }}
+        repository: ${{ inputs.remote-repository }}
+        ref: ${{ inputs.target-branch }}
+        token: ${{ inputs.bot-token }}
         fetch-depth: 0
         persist-credentials: true
 
     - name: copy common files to new repo
       shell: bash
       run: |
-        mkdir -p target/${{ github.event.inputs.target-directory }}
-        cp -rvT source/${{ github.event.inputs.source-directory }} target/${{ github.event.inputs.target-directory }}
+        mkdir -p target/${{ inputs.target-directory }}
+        cp -rvT source/${{ inputs.source-directory }} target/${{ inputs.target-directory }}
 
     - name: check for new files
       shell: bash
@@ -76,5 +77,5 @@ runs:
       run: |
         git config --global user.name "R2-D2 [bot]"
         git config --global user.email "artoo-detoo@devstream.in"
-        git commit -m "docs (bot): ${{ github.event.inputs.commit-message }}"
+        git commit -m "docs (bot): ${{ inputs.commit-message }}"
         git push
