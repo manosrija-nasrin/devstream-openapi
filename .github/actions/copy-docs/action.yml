@@ -66,5 +66,7 @@ runs:
       run: |
         git config --global user.name "R2-D2 [bot]"
         git config --global user.email "artoo-detoo@devstream.in"
+        git remote add target https://${{ inputs.bot-token }}@github.com/${{ inputs.target-repository }}.git > /dev/null
         git commit -m "docs (bot): ${{ inputs.commit-message }}"
-        git push
+        git push target ${{ inputs.target-branch }} > /dev/null
+        echo "pushed to remote repository ${{ inputs.target-repository }}"
