@@ -48,3 +48,7 @@ The following npm scripts are available for working with the OpenAPI specificati
 ## Scripts:
 
 1. `ogen.ps1` is used to generate the golang server stub with [ogen](https://github.com/ogen-go/ogen). This uses podman to run the build step inside a container. Generated outputs are mapped to host computer using volumes. The configuration can be found in `./config/ogen.yml`.
+
+## Note:
+
+1. [https://github.com/vuejs/vitepress/issues/3057](https://github.com/vuejs/vitepress/issues/3057): the vitepress base url is set to `/client` in the `package.json` file to serve static assets, in case in future, we plan to serve the client document from some other route via changing the folder to which the generated docs are uploaded in the `devstream-docs` repository, we will also need to change the base route for vitepress.

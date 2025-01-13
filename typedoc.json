@@ -10,5 +10,6 @@
     "readme": "none",
     "indexFormat": "table",
     "useCodeBlocks": true,
-    "disableSources": true
+    "disableSources": true,
+    "suppressCommentWarningsInDeclarationFiles": true
 }
