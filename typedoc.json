@@ -1,0 +1,14 @@
+{
+    "entryPoints": [
+        "./build/client/typescript/index.ts",
+    ],
+    "out": "./build/client/typescript/docs",
+    "plugin": [
+        "typedoc-plugin-markdown",
+        "typedoc-vitepress-theme"
+    ],
+    "readme": "none",
+    "indexFormat": "table",
+    "useCodeBlocks": true,
+    "disableSources": true
+}

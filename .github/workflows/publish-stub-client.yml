@@ -36,6 +36,19 @@ jobs:
         working-directory: ./build/client/typescript
         run: npm install
 
+      - name: Generate Client Stub Docs
+        run: npm run openapi:client-docs
+
+      - name: Push API Docs To Repository
+        uses: ./.github/actions/copy-docs
+        with:
+          commit-message: "updated api docs version to ${{ env.SERVER_STUB_VERSION }}"
+          source-directory: ./build/client/typescript/docs/.vitepress/dist
+          target-repository: adityamayukhsom/devstream-docs
+          target-directory: client
+          target-branch: main
+          bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+
       # Publish the package to GitHub Packages
       - name: Publish to GitHub Packages
         working-directory: ./build/client/typescript

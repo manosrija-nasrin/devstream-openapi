@@ -1,6 +1,6 @@
 {
   "name": "devstream-openapi-spec",
-  "version": "0.3.22",
+  "version": "0.3.23",
   "description": "Devstream OpenAPI Specifications",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml --additional-properties=artifactVersion=%npm_package_version% && npm run openapi:add-javadoc-plugin",
     "openapi:generate-client": "openapi-generator-cli generate -g typescript-axios -c ./config/config-client.yml --additional-properties=npmVersion=%npm_package_version%",
     "openapi:client-dist": "cd ./build/client/typescript && npm install && npm run build",
+    "openapi:client-docs": "npx typedoc && vitepress build ./build/client/typescript/docs",
     "openapi:docs": "openapi-generator-cli generate -g openapi -i ./build/devstream.yml -o ./build/docs/",
     "openapi:cpp-pistache-server": "openapi-generator-cli generate -g cpp-pistache-server -i ./build/devstream.yml -o ./build/server/pistache",
     "openapi:go": "openapi-generator-cli generate -g go-server -c ./config/config-go.yml --additional-properties=packageVersion=%npm_package_version%",
@@ -46,7 +47,12 @@
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.15.3",
     "@redocly/cli": "^1.27.1",
+    "@types/node": "^22.10.5",
     "fast-xml-parser": "^4.5.1",
+    "typedoc": "^0.27.6",
+    "typedoc-plugin-markdown": "^4.4.1",
+    "typedoc-vitepress-theme": "^1.1.2",
+    "vitepress": "^1.5.0",
     "yaml": "^2.7.0"
   },
   "devDependencies": {
