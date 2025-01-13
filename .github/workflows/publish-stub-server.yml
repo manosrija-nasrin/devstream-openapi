@@ -41,7 +41,7 @@ jobs:
         with:
           commit-message: updated server stub documentation
           remote-repository: adityamayukhsom/devstream-docs
-          source-directory: ./build/server/spring/target/site/apidocs
+          source-directory: build/server/spring/target/site/apidocs
           source-branch: release
           target-directory: server
           target-branch: main

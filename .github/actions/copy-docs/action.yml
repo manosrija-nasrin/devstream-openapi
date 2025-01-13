@@ -37,14 +37,14 @@ runs:
     - name: checkout source repository code
       uses: actions/checkout@v4
       with:
-        path: source
+        path: gh-copy-source
         ref: ${{ inputs.source-branch }}
         persist-credentials: false
 
     - name: checkout target repository code
       uses: actions/checkout@v4
       with:
-        path: target
+        path: gh-copy-target
         repository: ${{ inputs.remote-repository }}
         ref: ${{ inputs.target-branch }}
         token: ${{ inputs.bot-token }}
@@ -54,13 +54,13 @@ runs:
     - name: copy common files to new repo
       shell: bash
       run: |
-        mkdir -p target/${{ inputs.target-directory }}
-        cp -rvT source/${{ inputs.source-directory }} target/${{ inputs.target-directory }}
+        mkdir -p gh-copy-target/${{ inputs.target-directory }}
+        cp -rvT gh-copy-source/${{ inputs.source-directory }} gh-copy-target/${{ inputs.target-directory }}
 
     - name: check for new files
       shell: bash
       id: CheckNewFiles
-      working-directory: target
+      working-directory: gh-copy-target
       run: |
         git add -A
         git status --porcelain | wc -l
@@ -73,7 +73,7 @@ runs:
     - name: Setup Node
       shell: bash
       if: ${{ steps.CheckNewFiles.outputs.TargetHasNewFiles == 'true' }}
-      working-directory: target
+      working-directory: gh-copy-target
       run: |
         git config --global user.name "R2-D2 [bot]"
         git config --global user.email "artoo-detoo@devstream.in"
