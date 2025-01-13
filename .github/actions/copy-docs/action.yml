@@ -67,7 +67,9 @@ runs:
         git config --global user.name "R2-D2 [bot]"
         git config --global user.email "artoo-detoo@devstream.in"
         git config --unset-all http.https://github.com/.extraheader
-        git remote add target https://${{ inputs.bot-token }}@github.com/${{ inputs.target-repository }}.git > /dev/null
+        if ! git remote get-url target > /dev/null 2>&1; then
+            git remote add target https://${{ inputs.bot-token }}@github.com/${{ inputs.target-repository }}.git > /dev/null
+        fi
         git commit -m "ci-docs (bot): ${{ inputs.commit-message }}"
         if ! git push target ${{ inputs.target-branch }} > /dev/null; then
           echo "push failed. attempting to pull with fast-forward..."
