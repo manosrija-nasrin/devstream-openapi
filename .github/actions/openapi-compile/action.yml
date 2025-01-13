@@ -22,7 +22,7 @@ runs:
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version: "22.x"
+        node-version: ${{ github.event.inputs.node-version }}
         registry-url: "https://npm.pkg.github.com"
         scope: "@adityamayukhsom"
 
@@ -30,7 +30,7 @@ runs:
       uses: actions/setup-java@v4
       with:
         distribution: "corretto"
-        java-version: "21"
+        java-version: ${{ github.event.inputs.java-version }}
 
     - name: Cache Node.js Dependencies
       uses: actions/cache@v3
