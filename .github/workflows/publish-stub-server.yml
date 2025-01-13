@@ -4,6 +4,10 @@ on:
   workflow_call:
   workflow_dispatch:
 
+env:
+  DS_PKG_VER:
+  SERVER_MAVEN_DEPS_HASH:
+
 jobs:
   publish-server-stub:
     runs-on: windows-latest
@@ -25,7 +29,7 @@ jobs:
       - name: Get Package Version
         id: GetPackageVersion
         shell: pwsh
-        run: echo "PackageVersion=$(npm run --silent get-version)" >> $GITHUB_ENV
+        run: echo "DS_PKG_VER=$(npm run --silent get-version)" >> $GITHUB_ENV
 
       - name: Hash Dependencies
         run: |
@@ -44,7 +48,7 @@ jobs:
       - name: Push Server Stub Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: "$PackageVersion"
+          commit-version: "$DS_PKG_VER"
           commit-message: updated server stub docs version
           source-directory: ./build/server/spring/target/site/apidocs
           target-repository: adityamayukhsom/devstream-docs
@@ -58,7 +62,7 @@ jobs:
       - name: Push API Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: "$PackageVersion"
+          commit-version: "$DS_PKG_VER"
           commit-message: updated swagger api docs version
           source-directory: ./build/docs
           target-repository: adityamayukhsom/devstream-docs

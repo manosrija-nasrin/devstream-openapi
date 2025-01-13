@@ -4,6 +4,10 @@ on:
   workflow_call:
   workflow_dispatch:
 
+env:
+  DS_PKG_VER:
+  CLIENT_NODE_DEPS_HASH:
+
 jobs:
   publish-client-stub:
     runs-on: windows-latest
@@ -25,10 +29,10 @@ jobs:
       - name: Get Package Version
         id: GetPackageVersion
         shell: pwsh
-        run: echo "PackageVersion=$(npm run --silent get-version)" >> $GITHUB_ENV
+        run: echo "DS_PKG_VER=$(npm run --silent get-version)" >> $GITHUB_ENV
 
       - name: Echo Package Version
-        run: echo "$PackageVersion"
+        run: echo "$DS_PKG_VER"
 
       - name: Hash Dependencies
         run: |
@@ -50,7 +54,7 @@ jobs:
       - name: Push Client Stub Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: "$PackageVersion"
+          commit-version: "$DS_PKG_VER"
           commit-message: updated client stub docs version
           source-directory: ./build/client/typescript/docs/.vitepress/dist
           target-repository: adityamayukhsom/devstream-docs
