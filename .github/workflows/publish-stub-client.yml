@@ -24,6 +24,7 @@ jobs:
 
       - name: Hash Dependencies
         run: |
+          echo "PACKAGE_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
           echo "CLIENT_NODE_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./build/client/typescript/package.json)" >> $GITHUB_ENV
 
       - name: Cache TypeScript Client Dependencies
@@ -39,10 +40,10 @@ jobs:
       - name: Generate Client Stub Docs
         run: npm run openapi:client-docs
 
-      - name: Push API Docs To Repository
+      - name: Push Client Stub Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-message: "updated api docs version to ${{ env.SERVER_STUB_VERSION }}"
+          commit-message: "updated client stub docs version to ${{ env.PACKAGE_VERSION }}"
           source-directory: ./build/client/typescript/docs/.vitepress/dist
           target-repository: adityamayukhsom/devstream-docs
           target-directory: client

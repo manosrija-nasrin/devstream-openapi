@@ -24,7 +24,7 @@ jobs:
 
       - name: Hash Dependencies
         run: |
-          echo "SERVER_STUB_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
+          echo "PACKAGE_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
           echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> $GITHUB_ENV
 
       - name: Cache Maven Dependencies
@@ -40,7 +40,7 @@ jobs:
       - name: Push Server Stub Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-message: "updated server stub docs version to ${{ env.SERVER_STUB_VERSION }}"
+          commit-message: "updated server stub docs version to ${{ env.PACKAGE_VERSION }}"
           source-directory: ./build/server/spring/target/site/apidocs
           target-repository: adityamayukhsom/devstream-docs
           target-directory: server
@@ -53,7 +53,7 @@ jobs:
       - name: Push API Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-message: "updated api docs version to ${{ env.SERVER_STUB_VERSION }}"
+          commit-message: "updated api docs version to ${{ env.PACKAGE_VERSION }}"
           source-directory: ./build/docs
           target-repository: adityamayukhsom/devstream-docs
           target-directory: swagger
