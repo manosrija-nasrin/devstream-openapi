@@ -20,20 +20,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Get Package Version
+        id: GetPackageVersion
+        shell: bash
+        run: echo "DS_PKG_VER=$(npm run --silent get-version)" >> "$GITHUB_ENV"
+
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
 
       - name: Generate Server Stub
+        shell: bash
         run: npm run openapi:generate-server
 
-      - name: Get Package Version
-        id: GetPackageVersion
-        shell: pwsh
-        run: echo "DS_PKG_VER=$(npm run --silent get-version)" >> $GITHUB_ENV
-
       - name: Hash Dependencies
+        shell: bash
         run: |
-          echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> $GITHUB_ENV
+          echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> "$GITHUB_ENV"
 
       - name: Cache Maven Dependencies
         uses: actions/cache@v3
@@ -43,6 +45,7 @@ jobs:
 
       - name: Generate Server Documentation
         working-directory: ./build/server/spring
+        shell: pwsh
         run: mvn javadoc:javadoc
 
       - name: Push Server Stub Docs To Repository

@@ -16,8 +16,8 @@ runs:
       uses: actions/checkout@v4
 
     - name: Hash Dependencies
-      shell: pwsh
-      run: echo "ROOT_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./package.json)" >> $GITHUB_ENV
+      shell: bash
+      run: echo "ROOT_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./package.json)" >> "$GITHUB_ENV"
 
     - name: Setup Node
       uses: actions/setup-node@v4

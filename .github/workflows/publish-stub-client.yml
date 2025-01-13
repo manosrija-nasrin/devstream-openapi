@@ -4,10 +4,6 @@ on:
   workflow_call:
   workflow_dispatch:
 
-env:
-  DS_PKG_VER:
-  CLIENT_NODE_DEPS_HASH:
-
 jobs:
   publish-client-stub:
     runs-on: windows-latest
@@ -15,10 +11,25 @@ jobs:
       contents: read
       packages: write
 
+    env:
+      DS_PKG_VER:
+      CLIENT_NODE_DEPS_HASH:
+
     # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Get Package Version
+        id: GetPackageVersion
+        shell: bash
+        run: |
+          npm run --silent get-version
+          echo "DS_PKG_VER=$(npm run --silent get-version)" >> "$GITHUB_ENV"
+
+      - name: Echo Package Version
+        shell: bash
+        run: echo "$DS_PKG_VER"
 
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
@@ -26,17 +37,10 @@ jobs:
       - name: Generate Client Stub
         run: npm run openapi:generate-client
 
-      - name: Get Package Version
-        id: GetPackageVersion
-        shell: pwsh
-        run: echo "DS_PKG_VER=$(npm run --silent get-version)" >> $GITHUB_ENV
-
-      - name: Echo Package Version
-        run: echo "$DS_PKG_VER"
-
       - name: Hash Dependencies
+        shell: bash
         run: |
-          echo "CLIENT_NODE_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./build/client/typescript/package.json)" >> $GITHUB_ENV
+          echo "CLIENT_NODE_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./build/client/typescript/package.json)" >> "$GITHUB_ENV"
 
       - name: Cache TypeScript Client Dependencies
         uses: actions/cache@v3
