@@ -2,6 +2,9 @@ name: Publish Server Stub (Spring) to GitHub Packages
 
 on:
   workflow_call:
+    secrets:
+      DEVSTREAM_DOCS_PAT:
+        required: true
   workflow_dispatch:
 
 jobs:
