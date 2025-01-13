@@ -1,10 +1,10 @@
 {
   "name": "devstream-openapi-spec",
-  "version": "0.3.27",
+  "version": "0.3.28",
   "description": "Devstream OpenAPI Specifications",
   "main": "index.js",
   "scripts": {
-    "get-version": "node -e \"console.log(require('./package.json').version)\"",
+    "get-version": "echo %npm_package_version%",
     "openapi:lint": "redocly lint --format=codeframe",
     "openapi:bump-spec-version": "node ./scripts/update-spec-version.js %npm_package_version%",
     "openapi:add-javadoc-plugin": "node ./scripts/add-javadoc-deps.js ./build/server/spring/pom.xml",
