@@ -59,14 +59,15 @@ runs:
           echo "TargetHasNewFiles=false" >> "$GITHUB_OUTPUT"
         fi
 
-    - name: Setup Node
+    - name: push changed to remote repository
       shell: bash
       if: ${{ steps.CheckNewFiles.outputs.TargetHasNewFiles == 'true' }}
       working-directory: github-target-repository
       run: |
         git config --global user.name "R2-D2 [bot]"
         git config --global user.email "artoo-detoo@devstream.in"
+        git config --unset-all http.https://github.com/.extraheader
         git remote add target https://${{ inputs.bot-token }}@github.com/${{ inputs.target-repository }}.git > /dev/null
-        git commit -m "docs (bot): ${{ inputs.commit-message }}"
+        git commit -m "ci-docs (bot): ${{ inputs.commit-message }}"
         git push target ${{ inputs.target-branch }} > /dev/null
         echo "pushed to remote repository ${{ inputs.target-repository }}"
