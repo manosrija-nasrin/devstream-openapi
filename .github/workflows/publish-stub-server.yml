@@ -44,7 +44,7 @@ jobs:
           target-repository: adityamayukhsom/devstream-docs
           target-directory: server
           target-branch: main
-          bot-token: ${{ secrets.GITHUB_TOKEN }}
+          bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
 
       - name: Publish to GitHub Packages
         working-directory: ./build/server/spring
