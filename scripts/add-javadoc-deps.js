@@ -69,6 +69,13 @@ function addJavadocPlugin(pomPath) {
           },
         },
       },
+      configuration: {
+        doctitle: "Devstream OpenAPI Specification Server Stubs - v${project.version}",
+        windowtitle: "Devstream",
+        additionalJOptions: {
+          additionalJOption: ["-notimestamp", "-Xdoclint:none", "-encoding", "UTF-8"],
+        },
+      },
     };
 
     // Check if the plugin already exists

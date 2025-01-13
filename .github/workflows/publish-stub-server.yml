@@ -4,16 +4,16 @@ on:
   workflow_call:
   workflow_dispatch:
 
-env:
-  DS_PKG_VER:
-  SERVER_MAVEN_DEPS_HASH:
-
 jobs:
   publish-server-stub:
     runs-on: windows-latest
     permissions:
       contents: read
       packages: write
+
+    env:
+      DS_PKG_VER:
+      SERVER_MAVEN_DEPS_HASH:
 
     # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
