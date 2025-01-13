@@ -32,6 +32,21 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ env.SERVER_MAVEN_DEPS_HASH }}
 
+      - name: Generate Server Documentation
+        working-directory: ./build/server/spring
+        run: mvn javadoc:javadoc
+
+      - name: Publish Code To Docs Repository
+        uses: ./.github/actions/copy-docs
+        with:
+          commit-message: updated server stub documentation
+          remote-repository: adityamayukhsom/devstream-docs
+          source-directory: ./build/server/spring/target/site/apidocs
+          source-branch: release
+          target-directory: server
+          target-branch: main
+          bot-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish to GitHub Packages
         working-directory: ./build/server/spring
         run: mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi
