@@ -1,0 +1,80 @@
+name: push files into a remote repository
+description: copies files from a build system into another github repository, used to publish docs from one
+
+inputs:
+  commit-message:
+    type: string
+    required: true
+  remote-repository:
+    type: stirng
+    description: repository in which to put the copied files, for example 'adityamayukhsom/devstream'
+    required: true
+  source-directory:
+    type: string
+    description: path in local directory from which to copy files into the remote repository
+    required: true
+  source-branch:
+    type: string
+    description: source repository branch from which to copy files
+    required: true
+  target-directory:
+    type: string
+    description: directory path in the remote repository in which to put the copied files
+    required: true
+  target-branch:
+    type: string
+    description: target repository branch in which to put the copied files
+    required: true
+  bot-token:
+    type: string
+    description: authentication token required to checkout and publish code to remote repository
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: checkout source repository code
+      uses: actions/checkout@v4
+      with:
+        path: source
+        ref: ${{ github.event.inputs.source-branch }}
+        persist-credentials: false
+
+    - name: checkout target repository code
+      uses: actions/checkout@v4
+      with:
+        path: target
+        repository: ${{ github.event.inputs.remote-repository }}
+        ref: ${{ github.event.inputs.target-branch }}
+        token: ${{ github.event.inputs.bot-token }}
+        fetch-depth: 0
+        persist-credentials: true
+
+    - name: copy common files to new repo
+      shell: bash
+      run: |
+        mkdir -p target/${{ github.event.inputs.target-directory }}
+        cp -rvT source/${{ github.event.inputs.source-directory }} target/${{ github.event.inputs.target-directory }}
+
+    - name: check for new files
+      shell: bash
+      id: CheckNewFiles
+      working-directory: target
+      run: |
+        git add -A
+        git status --porcelain | wc -l
+        if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
+          echo "TargetHasNewFiles=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "TargetHasNewFiles=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Setup Node
+      shell: bash
+      if: ${{ steps.CheckNewFiles.outputs.TargetHasNewFiles == 'true' }}
+      working-directory: target
+      run: |
+        git config --global user.name "R2-D2 [bot]"
+        git config --global user.email "artoo-detoo@devstream.in"
+        git commit -m "docs (bot): ${{ github.event.inputs.commit-message }}"
+        git push
