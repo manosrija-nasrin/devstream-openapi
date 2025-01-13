@@ -1,6 +1,6 @@
 {
   "name": "devstream-openapi-spec",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "description": "Devstream OpenAPI Specifications",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml --additional-properties=artifactVersion=%npm_package_version% && npm run openapi:add-javadoc-plugin",
     "openapi:generate-client": "openapi-generator-cli generate -g typescript-axios -c ./config/config-client.yml --additional-properties=npmVersion=%npm_package_version%",
     "openapi:client-dist": "cd ./build/client/typescript && npm install && npm run build",
-    "openapi:docs": "openapi-generator-cli generate -g openapi -i ./build/devstream.yml -o ./docs",
+    "openapi:docs": "openapi-generator-cli generate -g openapi -i ./build/devstream.yml -o ./build/docs/",
     "openapi:cpp-pistache-server": "openapi-generator-cli generate -g cpp-pistache-server -i ./build/devstream.yml -o ./build/server/pistache",
     "openapi:go": "openapi-generator-cli generate -g go-server -c ./config/config-go.yml --additional-properties=packageVersion=%npm_package_version%",
     "openapi:python-fastapi": "openapi-generator-cli generate -g python-fastapi -i ./build/devstream.yml -o ./build/server/fastapi",

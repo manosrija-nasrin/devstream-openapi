@@ -1,4 +1,4 @@
-name: Publish Server Stub (Spring) to GitHub Packages
+name: Publish Server Stub (Spring) to GitHub Packages And Put Docs to Remote Repository
 
 on:
   workflow_call:
@@ -24,6 +24,7 @@ jobs:
 
       - name: Hash Dependencies
         run: |
+          echo "SERVER_STUB_VERSION=$(npm run -s get-version)" >> $GITHUB_ENV
           echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> $GITHUB_ENV
 
       - name: Cache Maven Dependencies
@@ -36,18 +37,31 @@ jobs:
         working-directory: ./build/server/spring
         run: mvn javadoc:javadoc
 
-      - name: Publish Code To Docs Repository
+      - name: Push Server Stub Docs To Repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-message: updated server stub documentation
+          commit-message: "updated server stub docs version to ${{ env.SERVER_STUB_VERSION }}"
           source-directory: ./build/server/spring/target/site/apidocs
           target-repository: adityamayukhsom/devstream-docs
           target-directory: server
           target-branch: main
           bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
 
+      - name: Generate OpenAPI Docs
+        run: npm run openapi:docs
+
+      - name: Push API Docs To Repository
+        uses: ./.github/actions/copy-docs
+        with:
+          commit-message: "updated api docs version to ${{ env.SERVER_STUB_VERSION }}"
+          source-directory: ./build/docs
+          target-repository: adityamayukhsom/devstream-docs
+          target-directory: swagger
+          target-branch: main
+          bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+
       - name: Publish to GitHub Packages
         working-directory: ./build/server/spring
-        run: mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi
+        run: mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi -Dmaven.javadoc.skip=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

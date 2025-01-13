@@ -69,5 +69,9 @@ runs:
         git config --unset-all http.https://github.com/.extraheader
         git remote add target https://${{ inputs.bot-token }}@github.com/${{ inputs.target-repository }}.git > /dev/null
         git commit -m "ci-docs (bot): ${{ inputs.commit-message }}"
-        git push target ${{ inputs.target-branch }} > /dev/null
+        if ! git push target ${{ inputs.target-branch }} > /dev/null; then
+          echo "push failed. attempting to pull with fast-forward..."
+          git pull target ${{ inputs.target-branch }} --ff-only
+          git push target ${{ inputs.target-branch }}
+        fi
         echo "pushed to remote repository ${{ inputs.target-repository }}"
