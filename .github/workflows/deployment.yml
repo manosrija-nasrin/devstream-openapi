@@ -9,9 +9,12 @@ on:
 jobs:
   publish-docs:
     uses: ./.github/workflows/publish-docs.yml
+    secrets: inherit
 
   publish-stub-client:
     uses: ./.github/workflows/publish-stub-client.yml
+    secrets: inherit
 
   publish-stub-server:
     uses: ./.github/workflows/publish-stub-server.yml
+    secrets: inherit
