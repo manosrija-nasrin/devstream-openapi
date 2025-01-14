@@ -1,6 +1,6 @@
 {
   "name": "devstream-openapi-spec",
-  "version": "0.3.32",
+  "version": "0.3.33",
   "description": "Devstream OpenAPI Specifications",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "openapi:generate-server": "openapi-generator-cli generate -g spring -c ./config/config-server.yml --additional-properties=artifactVersion=%npm_package_version% && npm run openapi:add-javadoc-plugin",
     "openapi:generate-client": "openapi-generator-cli generate -g typescript-axios -c ./config/config-client.yml --additional-properties=npmVersion=%npm_package_version%",
     "openapi:client-dist": "cd ./build/client/typescript && npm install && npm run build",
-    "openapi:client-docs": "typedoc && node ./scripts/vitepress-config.js && vitepress build ./build/client/typescript/docs --base \"/client/\"",
+    "openapi:client-docs": "node ./scripts/generate-client-docs.js",
     "openapi:docs": "openapi-generator-cli generate -g openapi -i ./build/devstream.yml -o ./build/docs/",
     "openapi:cpp-pistache-server": "openapi-generator-cli generate -g cpp-pistache-server -i ./build/devstream.yml -o ./build/server/pistache",
     "openapi:go": "openapi-generator-cli generate -g go-server -c ./config/config-go.yml --additional-properties=packageVersion=%npm_package_version%",
@@ -53,6 +53,7 @@
     "typedoc-plugin-markdown": "^4.4.1",
     "typedoc-vitepress-theme": "^1.1.2",
     "vitepress": "^1.5.0",
+    "vitepress-sidebar": "^1.30.2",
     "yaml": "^2.7.0"
   },
   "devDependencies": {
