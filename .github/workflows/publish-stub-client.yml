@@ -59,7 +59,7 @@ jobs:
         uses: ./.github/actions/copy-docs
         with:
           commit-version: "$DS_PKG_VER"
-          commit-message: updated client stub docs version
+          commit-message: typescript client stub docs
           source-directory: ./build/client/typescript/docs/.vitepress/dist
           target-repository: adityamayukhsom/devstream-docs
           target-directory: client

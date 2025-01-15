@@ -52,7 +52,7 @@ jobs:
         uses: ./.github/actions/copy-docs
         with:
           commit-version: "$DS_PKG_VER"
-          commit-message: updated server stub docs version
+          commit-message: spring server stub docs
           source-directory: ./build/server/spring/target/site/apidocs
           target-repository: adityamayukhsom/devstream-docs
           target-directory: server
@@ -66,7 +66,7 @@ jobs:
         uses: ./.github/actions/copy-docs
         with:
           commit-version: "$DS_PKG_VER"
-          commit-message: updated swagger api docs version
+          commit-message: swagger api json
           source-directory: ./build/docs
           target-repository: adityamayukhsom/devstream-docs
           target-directory: swagger
