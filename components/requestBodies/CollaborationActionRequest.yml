@@ -1,9 +1,12 @@
 type: object
 properties:
-  invitationId:
+  invitationID:
     type: string
   action:
     type: string
     enum:
       - Accept
       - Decline
+required:
+  - invitationID
+  - action

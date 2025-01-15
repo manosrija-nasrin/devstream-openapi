@@ -2,7 +2,7 @@ inputSpec: "./build/devstream.yml"
 outputDir: "./build/server/spring"
 apiPackage: in.devstream.openapi.api
 modelPackage: in.devstream.openapi.model
-modelNameSuffix: Dto
+modelNameSuffix: ""
 configPackage: in.devstream.openapi.config
 groupId: in.devstream
 artifactId: openapi
@@ -10,7 +10,6 @@ dateLibrary: java8
 serializableModel: true
 sortModelPropertiesByRequiredFlag: true
 skipDefaultInterface: true
-useSpringBoot3: true
 licenseName: GPL-2.0-only
 generateBuilders: true
 generateConstructorWithAllArgs: true
@@ -20,7 +19,10 @@ hideGenerationTimestamp: true
 # disallowAdditionalPropertiesIfNotPresent: false
 # hateoas: false
 interfaceOnly: true
+async: true
 # singleContentTypes: true
+enumPropertyNaming: "MACRO_CASE"
+useJakartaEe: true
 useSpringBoot3: true
 useSpringController: true
 unhandledException: false

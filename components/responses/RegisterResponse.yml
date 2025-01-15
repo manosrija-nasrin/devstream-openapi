@@ -1,4 +1,6 @@
 type: object
 properties:
   status:
-    $ref: '../schemas/Status.yml'
+    $ref: "../schemas/Status.yml"
+required:
+  - status

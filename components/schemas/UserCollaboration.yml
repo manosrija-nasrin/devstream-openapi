@@ -1,4 +1,8 @@
 type: object
+description: This can be used to grant a particular access to a particular user provided it is used
+  with the content identifier. This object does not include the content identifier because it is designed
+  to be used in a list of user collaboration objects to grant access to one content, as the owner user can
+  at one time change access of only one content.
 properties:
   userID:
     type: string

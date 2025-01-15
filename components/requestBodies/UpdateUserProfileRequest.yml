@@ -2,5 +2,8 @@ type: object
 properties:
   username:
     type: string
-  avatarUrl:
+  avatarURL:
     type: string
+required:
+  - username
+  - avatarURL

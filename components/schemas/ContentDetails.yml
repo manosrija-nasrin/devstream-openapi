@@ -1,6 +1,6 @@
 type: object
 properties:
-  content_id:
+  contentID:
     $ref: "./ContentID.yml"
   title:
     type: string
@@ -8,5 +8,11 @@ properties:
     type: string
   platforms:
     type: array
+    description: List of platforms on which the content is published.
     items:
       $ref: "./Platform.yml"
+required:
+  - contentID
+  - title
+  - description
+  - platforms

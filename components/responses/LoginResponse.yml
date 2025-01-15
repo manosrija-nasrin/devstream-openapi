@@ -4,3 +4,6 @@ properties:
     type: string
   refreshToken:
     type: string
+required:
+  - accessToken
+  - refreshToken

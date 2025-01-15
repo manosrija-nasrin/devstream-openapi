@@ -1,9 +1,4 @@
 type: object
-required:
-  - userID
-  - username
-  - email
-  - avatarURL
 properties:
   userID:
     type: string
@@ -16,3 +11,8 @@ properties:
   avatarURL:
     type: string
     format: uri
+required:
+  - userID
+  - username
+  - email
+  - avatarURL

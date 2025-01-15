@@ -2,3 +2,5 @@ type: object
 properties:
   refreshToken:
     type: string
+required:
+  - refreshToken

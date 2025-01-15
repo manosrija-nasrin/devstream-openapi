@@ -8,4 +8,8 @@ properties:
     description: Server uptime in milliseconds in UNIX format
   status:
     type: string
-    description: Status message, e.g. for describing errors
+    description: Status message, e.g. for describing errors or any other health related message
+required:
+  - timestamp
+  - uptime
+  - status

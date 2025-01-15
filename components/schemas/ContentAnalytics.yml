@@ -4,3 +4,6 @@ properties:
     type: integer
   engagement:
     type: integer
+required:
+  - views
+  - engagement

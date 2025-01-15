@@ -6,3 +6,6 @@ packageTitle: Devstream OpenAPI CSharp Library
 generateBody: false
 isLibrary: true
 licenseName: GPL-2.0-only
+buildTarget: library
+classModifier: abstract
+operationModifier: abstract

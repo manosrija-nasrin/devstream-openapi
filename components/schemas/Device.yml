@@ -1,6 +1,9 @@
 type: string
 description: Currently used device
-enum: 
+enum:
   - Web
   - Android
   - iOS
+  - DesktopWindows
+  - DesktopLinux
+  - DesktopMacOS

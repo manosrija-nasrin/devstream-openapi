@@ -11,7 +11,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../components/schemas/Health.yml"
+            $ref: "../components/responses/HealthResponse.yml"
     400:
       description: Bad request. Invalid input or parameters provided.
     503:

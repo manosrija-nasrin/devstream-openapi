@@ -1,9 +1,9 @@
 type: object
 properties:
-  content_id:
+  contentID:
     $ref: "../schemas/ContentID.yml"
   status:
     $ref: "../schemas/ContentStatus.yml"
 required:
-  - content_id
+  - contentID
   - status

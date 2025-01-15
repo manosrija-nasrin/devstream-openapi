@@ -1,4 +1,6 @@
 type: string
-enum: 
+description: Status of a job or a long running task.
+enum:
   - Success
+  - Pending
   - Error
