@@ -11,15 +11,9 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../components/schemas/UserSettings.yml"
-    400:
-      description: Bad request. Invalid request format or parameters.
+            $ref: "../components/responses/GetUserSettingsResponse.yml"
     401:
       description: Unauthorized. Authentication required to view settings.
-    404:
-      description: Not found. User settings do not exist.
-    500:
-      description: Internal server error. Something went wrong on the server.
 
 patch:
   summary: Update user-specific settings.
@@ -41,7 +35,3 @@ patch:
       description: Bad request. Invalid request format or missing required fields.
     401:
       description: Unauthorized. Authentication required to update settings.
-    404:
-      description: Not found. User settings do not exist.
-    500:
-      description: Internal server error. Something went wrong on the server.

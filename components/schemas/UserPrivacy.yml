@@ -1,8 +1,0 @@
-type: string
-description: Whether a particular user setting or content is available for public viewing or private access.
-  This is again subject to implementation details as without being a social media, only some users can find
-  other users profile. Hence probably it is only for controlling the views of user profile rather than the
-  content user posts.
-enum:
-  - Public
-  - Private

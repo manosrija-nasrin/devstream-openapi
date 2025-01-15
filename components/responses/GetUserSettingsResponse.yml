@@ -2,8 +2,8 @@ type: object
 properties:
   notifications:
     type: boolean
-  privacy:
-    $ref: "./UserPrivacy.yml"
+  visibility:
+    $ref: "../schemas/UserVisibility.yml"
 required:
   - notifications
-  - privacy
+  - visibility
