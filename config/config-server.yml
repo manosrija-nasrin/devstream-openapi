@@ -19,7 +19,7 @@ hideGenerationTimestamp: true
 # disallowAdditionalPropertiesIfNotPresent: false
 # hateoas: false
 interfaceOnly: true
-async: true
+async: false
 # singleContentTypes: true
 enumPropertyNaming: "MACRO_CASE"
 useJakartaEe: true
