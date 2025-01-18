@@ -10,9 +10,14 @@ properties:
     minLength: 1
   gender:
     $ref: "../schemas/Gender.yml"
+  dateOfBirth:
+    type: string
+    format: date
   username:
     type: string
     readOnly: true
+    minLength: 4
+    maxLength: 24
   email:
     type: string
     format: email
@@ -22,10 +27,19 @@ properties:
     minLength: 8
     maxLength: 24
     writeOnly: true
+  twoFactorAuthentication:
+    type: boolean
+    description: Whether two factor authentication hould be used or not.
+    default: true
+  mobileNumber:
+    type: string
+    pattern: ^[+]{1}(?:[0-9\-\(\)\/\.]\s?){6, 15}[0-9]{1}$
 required:
   - firstname
   - lastname
   - gender
+  - dateOfBirth
   - username
   - email
   - password
+  - mobileNumber

@@ -1,5 +1,5 @@
 post:
-  summary: Registers a new user.
+  summary: Registers a new user into the system.
   operationId: register-user
   tags:
     - Auth
@@ -19,7 +19,13 @@ post:
             $ref: "../components/responses/RegisterResponse.yml"
     400:
       description: Bad request. The input is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/errors/ErrorResponse.yml
     409:
       description: Conflict. A user with the provided details already exists.
-    429:
-      description: Too many requests. Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/errors/ErrorResponse.yml
