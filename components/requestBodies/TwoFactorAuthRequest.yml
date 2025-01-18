@@ -1,0 +1,7 @@
+type: object
+description: Contains a pair of login attempt ID and it's corresponding OTP.
+properties:
+  loginAttemptID:
+    type: string
+  oneTimePassword:
+    type: integer

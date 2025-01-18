@@ -49,6 +49,8 @@ paths:
     $ref: ./paths/user_{id}.yml
   /auth/login:
     $ref: ./paths/auth_login.yml
+  /auth/two-factor-auth:
+    $ref: ./paths/auth_two-factor-auth.yml
   /auth/register:
     $ref: ./paths/auth_register.yml
   /auth/refresh-token:

@@ -1,0 +1,36 @@
+post:
+  operationId: two-factor-auth
+  summary: Endpoint to validate OTP for two factor authentication.
+  description: This is to validate the OTP generated if two factor
+    authentication is enabled. The login ID must be tagged along with the OTP
+    to map which login attempt this OTP belongs to.
+  tags:
+    - Auth
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/requestBodies/TwofactorAuthRequest.yml
+  responses:
+    200:
+      description: OTP is valid for the given login ID. Hence user is
+        authenticated and both access and refresh tokens are granted.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/LoginResponse.yml
+    400:
+      description: Bad request. Either OTP or login ID or both are missing.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/errors/ErrorResponse.yml
+    401:
+      description: Unauthorized. The OTP does not match with the one generated
+        for this login ID or invalid OTP is provided.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/errors/ErrorResponse.yml

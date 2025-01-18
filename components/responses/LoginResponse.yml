@@ -1,9 +1,31 @@
 type: object
+description: Check if requiresTwoFactorAuth is true, then use ID and generated
+  OTP to send another request to get authentication tokens. If two factor
+  authentication is set to false, directly access the tokens from the object.
 properties:
+  requiresTwoFactorAuth:
+    type: boolean
+    description: Whether two factor authentication is on or off.
+      If true, accessToken and refreshToken needs to be set empty string.
+      If false, only then the tokens contain meaningful information.
+  loginAttemptID:
+    description: This is to keep track of which login attempt will be validated
+      using the two factor authentication OTP.
+    type: string
+  loginAttemptTimeStamp:
+    type: string
+    format: date-time
   accessToken:
     type: string
+    format: byte
+    default: ""
   refreshToken:
     type: string
+    format: byte
+    default: ""
 required:
+  - requiresTwoFactorAuth
+  - loginAttemptID
+  - loginAttemptTimeStamp
   - accessToken
   - refreshToken

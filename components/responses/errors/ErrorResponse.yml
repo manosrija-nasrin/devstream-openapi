@@ -1,18 +1,12 @@
 type: object
 properties:
-  code:
-    type: integer
-    description: HTTP status code or a custom error code.
-    example: 400
   errors:
     type: array
     items:
       $ref: "./ErrorDetails.yml"
 required:
-  - code
   - errors
 example:
-  code: 400
   errors:
     - message: "Must be a valid email address."
       target: "email"
