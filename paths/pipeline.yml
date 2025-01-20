@@ -1,6 +1,20 @@
 get:
-  summary: Get pipelines saved for a particular user. Todo is to decide whether
+  summary: Gets all the pipelines created by the user as well as predefined 
+    pipelines.
+  description: Get pipelines saved for a particular user. Todo is to decide whether
     prebuild pipelines are also send alongside user pipelines in this.
+  operationId: get-pipelines-for-user
+  tags:
+    - Preference
+  security:
+    - BearerAuth: []
+  responses:
+    200:
+      description: All pipelines defined by a particular user as well as predefined
+        common pipelines.
+    400:
+        description: No predefined or saved pipeline found.
+
 
 post:
   summary: Creates a new user specification for content processing pipeline.
