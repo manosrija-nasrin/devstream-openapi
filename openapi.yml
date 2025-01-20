@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Devstream Aurelia OpenAPI Specification
-  version: 0.3.39
+  version: 0.3.40
   description: API reference for Devstream platform built with Spring Boot.
   termsOfService: https://www.devstream.in/terms-and-conditions
   license:
@@ -40,45 +40,45 @@ servers:
           - api.test
 paths:
   /health:
-    $ref: ./paths/health.yml
+    $ref: ./src/paths/health.yml
   /user/profile:
-    $ref: ./paths/user_profile.yml
+    $ref: ./src/paths/user_profile.yml
   /user/settings:
-    $ref: ./paths/user_settings.yml
+    $ref: ./src/paths/user_settings.yml
   /user/analytics:
-    $ref: ./paths/user_analytics.yml
+    $ref: ./src/paths/user_analytics.yml
   /user/{UserID}:
-    $ref: ./paths/user_{id}.yml
+    $ref: ./src/paths/user_{id}.yml
   /auth/login:
-    $ref: ./paths/auth_login.yml
+    $ref: ./src/paths/auth_login.yml
   /auth/two-factor-auth:
-    $ref: ./paths/auth_two-factor-auth.yml
+    $ref: ./src/paths/auth_two-factor-auth.yml
   /auth/register:
-    $ref: ./paths/auth_register.yml
+    $ref: ./src/paths/auth_register.yml
   /auth/refresh-token:
-    $ref: ./paths/auth_refresh-token.yml
+    $ref: ./src/paths/auth_refresh-token.yml
   /auth/forgot-password:
-    $ref: ./paths/auth_forgot-password.yml
+    $ref: ./src/paths/auth_forgot-password.yml
   /auth/reset-password:
-    $ref: ./paths/auth_reset-password.yml
+    $ref: ./src/paths/auth_reset-password.yml
   /content:
-    $ref: ./paths/content.yml
+    $ref: ./src/paths/content.yml
   /content/{ContentID}:
-    $ref: ./paths/content_{id}.yml
+    $ref: ./src/paths/content_{id}.yml
   /content/status/{ContentID}:
-    $ref: ./paths/content_status_{id}.yml
+    $ref: ./src/paths/content_status_{id}.yml
   /content/invite/{ContentID}:
-    $ref: ./paths/content_invite_{id}.yml
+    $ref: ./src/paths/content_invite_{id}.yml
   /content/analytics/{ContentID}:
-    $ref: ./paths/content_analytics_{id}.yml
+    $ref: ./src/paths/content_analytics_{id}.yml
   /content/upload-finish/{ContentID}:
-    $ref: ./paths/content_upload-finish_{id}.yml
+    $ref: ./src/paths/content_upload-finish_{id}.yml
   /platforms/{PlatformID}:
-    $ref: ./paths/platforms_{id}.yml
+    $ref: ./src/paths/platforms_{id}.yml
   /platforms/sync:
-    $ref: ./paths/platforms_sync.yml
+    $ref: ./src/paths/platforms_sync.yml
   /pipeline:
-    $ref: ./paths/pipeline.yml
+    $ref: ./src/paths/pipeline.yml
 components:
   securitySchemes:
     BearerAuth:

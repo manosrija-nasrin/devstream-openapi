@@ -1,11 +1,11 @@
 get:
-  summary: Gets all the pipelines created by the user as well as predefined 
+  summary: Gets all the pipelines created by the user as well as predefined
     pipelines.
   description: Get pipelines saved for a particular user. Todo is to decide whether
     prebuild pipelines are also send alongside user pipelines in this.
   operationId: get-pipelines-for-user
   tags:
-    - Preference
+    - Pipeline
   security:
     - BearerAuth: []
   responses:
@@ -13,17 +13,16 @@ get:
       description: All pipelines defined by a particular user as well as predefined
         common pipelines.
     400:
-        description: No predefined or saved pipeline found.
-
+      description: No predefined or saved pipeline found.
 
 post:
   summary: Creates a new user specification for content processing pipeline.
   operationId: create-pipeline-specification
   tags:
-    - Preference
+    - Pipeline
   security:
     - BearerAuth: []
-  requestBody:  
+  requestBody:
     required: true
     content:
       application/json:
@@ -38,6 +37,3 @@ post:
             $ref: "../components/responses/CreatePipelineResponse.yml"
     400:
       description: Bad Request, invalid inputs.
-
-                
-        
