@@ -13,12 +13,35 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../components/responses/ContentStatusResponse.yml"
+            type: object
+            properties:
+              status:
+                $ref: "../components/schemas/ContentStatus.yml"
+            required:
+              - status
     400:
       description: Bad request. Invalid or missing parameters.
     404:
       description: Content not found. The specified content ID does not exist.
-    429:
-      description: Too many requests. Rate limit exceeded.
-    503:
-      description: Service unavailable. The system is under maintenance or overloaded.
+
+patch:
+  summary: Changes content status for a particular content.
+  operationId: change-content-status-for-id
+  tags:
+    - Content
+  security:
+    - BearerAuth: []
+  parameters:
+    - $ref: "../components/parameters/path/ContentIDParam.yml"
+  requestBody:
+    required: true
+    content: 
+      application/json:
+        schema: 
+          $ref: ../components/requestBodies/UpdateContentStatusRequest.yml
+  responses:
+    200:
+      description: Content status updated successfuly.
+    404:
+      description: Could not find content with specified ID.
+

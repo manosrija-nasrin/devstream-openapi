@@ -1,4 +1,4 @@
-name: platform_id
+name: PlatformID
 in: path
 required: true
 schema:

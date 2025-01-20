@@ -1,0 +1,13 @@
+type: object
+properties:
+  contentID:
+    $ref: ../schemas/ContentID.yml
+  preSignedURL:
+    description: Presigned URL to upload the content with specified ID into the 
+      object storage.
+    type: string
+    format: uri
+required:
+  - contentID
+  - preSignedURL
+

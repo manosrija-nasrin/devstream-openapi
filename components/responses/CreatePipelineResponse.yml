@@ -1,0 +1,11 @@
+type: object
+description: Response after a particular pipeline is saved in persisting storage.
+  The pipeline can either be saved under a particular user account or as a 
+  temporary pipeline specification for processing a single content.
+properties:
+  pipelineID:
+    description: ID to uniquely identify the saved pipeline.
+    type: string
+    format: uuid
+required:
+  - pipelineID

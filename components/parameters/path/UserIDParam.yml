@@ -1,4 +1,4 @@
-name: user_id
+name: UserID
 in: path
 required: true
 schema:

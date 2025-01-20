@@ -1,0 +1,14 @@
+type: integer
+enum: [0, 1, 2, 3, 4]
+x-enum-varnames:
+  - ClosedCaptionGeneration
+  - HashtagsGeneration
+  - DescriptionGeneration
+  - VoiceoverGeneration
+  - SoundTrackGeneration
+x-enum-descriptions:
+  - Description ClosedCaptionGeneration
+  - Description HashtagsGeneration
+  - Description DescriptionGeneration
+  - Description VoiceoverGeneration
+  - Description SoundTrackGeneration

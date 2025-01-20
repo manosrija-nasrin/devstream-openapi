@@ -1,0 +1,29 @@
+get:
+  summary: Get pipelines saved for a particular user. Todo is to decide whether
+    prebuild pipelines are also send alongside user pipelines in this.
+
+post:
+  summary: Creates a new user specification for content processing pipeline.
+  operationId: create-pipeline-specification
+  tags:
+    - Preference
+  security:
+    - BearerAuth: []
+  requestBody:  
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/requestBodies/CreatePipelineRequest.yml
+  responses:
+    200:
+      description: Pipeline specification created successfully.
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/CreatePipelineResponse.yml"
+    400:
+      description: Bad Request, invalid inputs.
+
+                
+        

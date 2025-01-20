@@ -1,4 +1,4 @@
-name: content_id
+name: ContentID
 in: path
 required: true
 schema:

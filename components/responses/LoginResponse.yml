@@ -18,11 +18,11 @@ properties:
   accessToken:
     type: string
     format: byte
-    default: ""
+    # default: ""
   refreshToken:
     type: string
     format: byte
-    default: ""
+    # default: ""
 required:
   - requiresTwoFactorAuth
   - loginAttemptID

@@ -22,7 +22,26 @@ get:
       description: Bad request. Invalid filter parameters.
     404:
       description: No content found for the given filters.
-    429:
-      description: Too many requests. Rate limit exceeded.
-    503:
-      description: Service unavailable. The system is under maintenance or overloaded.
+
+# TODO: finish endpoint for pre signed url generation
+post:
+  summary: Publish content for the user.
+  description: On successful completion of this request, the response contents
+    a pre signed url in which the user needs to upload the content. On successful
+    completion of document update, it's responsibility of the document uploading
+    server to notify the application server that the content has been uploaded.
+  operationId: publish-content
+  tags:
+    - Content
+  security:
+    - BearerAuth: []
+  responses:
+    200:
+      description: Contents the generated pre signed URL, on which the client
+        has to upload the content.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/PreSignedURLResponse.yml
+    400:
+      description: Invalid parameters for getting presigned URL.

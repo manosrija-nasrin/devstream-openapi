@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Devstream Aurelia OpenAPI Specification
-  version: 0.3.37
+  version: 0.3.38
   description: API reference for Devstream platform built with Spring Boot.
   termsOfService: https://www.devstream.in/terms-and-conditions
   license:
@@ -21,6 +21,8 @@ tags:
       retrieving platform information).
   - name: User
     description: Endpoints for managing user information (profile, settings, analytics).
+  - name: Pipeline
+    description: Endpoints to deal with user content publishing pipeline.
 servers:
   - url: "{protocol}://{environment}.devstream.in/v1"
     variables:
@@ -45,7 +47,7 @@ paths:
     $ref: ./paths/user_settings.yml
   /user/analytics:
     $ref: ./paths/user_analytics.yml
-  /user/{user_id}:
+  /user/{UserID}:
     $ref: ./paths/user_{id}.yml
   /auth/login:
     $ref: ./paths/auth_login.yml
@@ -61,25 +63,29 @@ paths:
     $ref: ./paths/auth_reset-password.yml
   /content:
     $ref: ./paths/content.yml
-  /content/{content_id}:
+  /content/{ContentID}:
     $ref: ./paths/content_{id}.yml
-  /content/status/{content_id}:
+  /content/status/{ContentID}:
     $ref: ./paths/content_status_{id}.yml
-  /content/invite/{content_id}:
+  /content/invite/{ContentID}:
     $ref: ./paths/content_invite_{id}.yml
-  /content/analytics/{content_id}:
+  /content/analytics/{ContentID}:
     $ref: ./paths/content_analytics_{id}.yml
-  /platforms/{platform_id}:
+  /content/upload-finish/{ContentID}:
+    $ref: ./paths/content_upload-finish_{id}.yml
+  /platforms/{PlatformID}:
     $ref: ./paths/platforms_{id}.yml
   /platforms/sync:
     $ref: ./paths/platforms_sync.yml
+  /pipeline:
+    $ref: ./paths/pipeline.yml
 components:
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-    APIKey:
-      name: APIKey
+    ApiKeyAuth:
       type: apiKey
       in: header
+      name: x-api-key

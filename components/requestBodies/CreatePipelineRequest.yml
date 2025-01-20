@@ -1,0 +1,18 @@
+type: object
+properties:
+  isTemporary:
+    type: boolean
+    description: Whether to store the pipeline under user account. 
+    default: true
+  pipelineName:
+    description: Name with which the pipeline will be saved under user account.
+      If not provided, a random name will be generated.
+    type: string
+    minLength: 1
+  pipeline:
+    type: array
+    items:
+      $ref: ../schemas/ContentPipeline.yml
+required:
+  - isTemporary
+  - pipeline
