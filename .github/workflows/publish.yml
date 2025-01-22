@@ -1,4 +1,6 @@
-name: Publish Server Stub (Spring) to GitHub Packages And Put Docs to Remote Repository
+# publish openapi auto-generated client and server stubs to github packages
+# and all documentations to the remote docs repository.
+name: Publish OpenAPI Stubs and Documentation to GitHub
 
 on:
   workflow_call:
@@ -12,16 +14,21 @@ jobs:
       packages: write
 
     env:
-      DS_PKG_VER:
+      # current package version as mentioned in the package.json file
+      API_SPECIFICATION_VERSION:
+      # hash for only the packages the generated server depends on. this is used
+      # rather than using hash of pom.xml because every version bump in package.json
+      # bumps the version in pom.xml file too, which changes its hash and the cache
+      # is no longer valid. hence only dependencies are hashed to generate cache key.
       SERVER_MAVEN_DEPS_HASH:
       CLIENT_NODE_DEPS_HASH:
 
     # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
     steps:
-      - name: Checkout code
+      - name: checkout repository code
         uses: actions/checkout@v4
 
-      - name: Setup OpenAPI
+      - name: generate openapi specification
         uses: ./.github/actions/openapi-compile
 
       - name: generate client stub
@@ -32,10 +39,11 @@ jobs:
         shell: pwsh
         run: npm run openapi:generate-server
 
-      - name: Hash Dependencies
+      - name: generate node and maven dependency hash and figure out current
+          api specification version
         shell: bash
         run: |
-          echo "DS_PKG_VER=$(npm pkg get version | xargs)" >> "$GITHUB_ENV"
+          echo "API_SPECIFICATION_VERSION=$(npm pkg get version | xargs)" >> "$GITHUB_ENV"
           echo "CLIENT_NODE_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./build/client/typescript/package.json)" >> "$GITHUB_ENV"
           echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> "$GITHUB_ENV"
 
@@ -58,11 +66,13 @@ jobs:
       # generate and publish client stub and documentation
       # --------------------------------------------------
 
-      - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
+      # ignore scripts is done to not setup husky in production
+      - name: installs node dependencies required for client stub compiling
         working-directory: ./build/client/typescript
         run: npm install --ignore-scripts
 
-      - name: Generate Client Stub Docs
+      - name: generate client stub markdown documentation first and then
+          transpiles it into html with vitepress
         shell: pwsh
         run: npm run openapi:client-docs
 
@@ -76,7 +86,7 @@ jobs:
       - name: push client side documentation to remote repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: "$DS_PKG_VER"
+          commit-version: "$API_SPECIFICATION_VERSION"
           commit-message: typescript client stub docs
           source-directory: ./build/client/typescript/docs/.vitepress/dist
           target-repository: adityamayukhsom/devstream-docs
@@ -88,7 +98,7 @@ jobs:
       # generate and publish server stub and documentation
       # --------------------------------------------------
 
-      - name: Generate Server Documentation
+      - name: generate server stub javadoc documentation
         working-directory: ./build/server/spring
         shell: pwsh
         run: mvn javadoc:javadoc
@@ -104,7 +114,7 @@ jobs:
       - name: push server side documentation to remote repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: "$DS_PKG_VER"
+          commit-version: "$API_SPECIFICATION_VERSION"
           commit-message: spring server stub docs
           source-directory: ./build/server/spring/target/site/apidocs
           target-repository: adityamayukhsom/devstream-docs
@@ -123,7 +133,7 @@ jobs:
       - name: push swagger api documentation to remote repository
         uses: ./.github/actions/copy-docs
         with:
-          commit-version: "$DS_PKG_VER"
+          commit-version: "$API_SPECIFICATION_VERSION"
           commit-message: swagger api json
           source-directory: ./build/docs
           target-repository: adityamayukhsom/devstream-docs
