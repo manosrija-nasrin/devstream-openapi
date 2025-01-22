@@ -65,6 +65,7 @@ jobs:
           target-directory: client
           target-branch: main
           bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+          cleanup-target-path: true
 
       # Publish the package to GitHub Packages
       - name: Publish to GitHub Packages

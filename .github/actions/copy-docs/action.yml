@@ -31,9 +31,10 @@ inputs:
     description: authentication token required to checkout and publish code to remote repository
     required: true
   cleanup-target-path:
+    # https://stackoverflow.com/questions/76292948/github-action-boolean-input-with-default-value
     type: boolean
     description: Whether to delete old files present in the target directory before copying.
-    default: true
+    required: true
 
 runs:
   using: "composite"

@@ -73,6 +73,7 @@ jobs:
           target-directory: swagger
           target-branch: main
           bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+          cleanup-target-path: true
 
       - name: Publish to GitHub Packages
         shell: pwsh
