@@ -51,7 +51,7 @@ runs:
 
     - name: cleanup target directory before copying, doesn't throw error if not present
       shell: bash
-      if: ${{ inputs.cleanup-target-path }}
+      if: ${{ inputs.cleanup-target-path == 'true' }}
       run: |
         echo "target path cleanup at github-target-repository/${{ inputs.target-directory }}"
         rm -rf github-target-repository/${{ inputs.target-directory }}
