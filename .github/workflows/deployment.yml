@@ -7,10 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish-stub-client:
-    uses: ./.github/workflows/publish-stub-client.yml
-    secrets: inherit
-
-  publish-stub-server:
-    uses: ./.github/workflows/publish-stub-server.yml
+  publish:
+    uses: ./.github/workflows/publish.yml
     secrets: inherit

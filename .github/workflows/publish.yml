@@ -1,0 +1,133 @@
+name: Publish Server Stub (Spring) to GitHub Packages And Put Docs to Remote Repository
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  publish-server-stub:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
+
+    env:
+      DS_PKG_VER:
+      SERVER_MAVEN_DEPS_HASH:
+      CLIENT_NODE_DEPS_HASH:
+
+    # Run GitHub Actions locally using Act - https://nektosact.com/introduction.html
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OpenAPI
+        uses: ./.github/actions/openapi-compile
+
+      - name: generate client stub
+        shell: pwsh
+        run: npm run openapi:generate-client
+
+      - name: generate server stub
+        shell: pwsh
+        run: npm run openapi:generate-server
+
+      - name: Hash Dependencies
+        shell: bash
+        run: |
+          echo "DS_PKG_VER=$(npm pkg get version | xargs)" >> "$GITHUB_ENV"
+          echo "CLIENT_NODE_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./build/client/typescript/package.json)" >> "$GITHUB_ENV"
+          echo "SERVER_MAVEN_DEPS_HASH=$(node ./scripts/hash-server-maven-deps.js ./build/server/spring/pom.xml)" >> "$GITHUB_ENV"
+
+      # setup cache for client and server stub generation
+      # note: this is not the cache setup for openapi documentation generation
+      # ----------------------------------------------------------------------
+
+      - name: cache client stub node modules as typescript dependency
+        uses: actions/cache@v3
+        with:
+          path: ./build/client/typescript/node_modules
+          key: ${{ runner.os }}-tsclient-${{ env.CLIENT_NODE_DEPS_HASH }}
+
+      - name: cache server stub maven dependency
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ env.SERVER_MAVEN_DEPS_HASH }}
+
+      # generate and publish client stub and documentation
+      # --------------------------------------------------
+
+      - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
+        working-directory: ./build/client/typescript
+        run: npm install --ignore-scripts
+
+      - name: Generate Client Stub Docs
+        shell: pwsh
+        run: npm run openapi:client-docs
+
+      # publish client stub package to github packages
+      - name: public client side stub to github npm package registry
+        working-directory: ./build/client/typescript
+        run: npm publish --force
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: push client side documentation to remote repository
+        uses: ./.github/actions/copy-docs
+        with:
+          commit-version: "$DS_PKG_VER"
+          commit-message: typescript client stub docs
+          source-directory: ./build/client/typescript/docs/.vitepress/dist
+          target-repository: adityamayukhsom/devstream-docs
+          target-directory: client
+          target-branch: main
+          bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+          cleanup-target-path: true
+
+      # generate and publish server stub and documentation
+      # --------------------------------------------------
+
+      - name: Generate Server Documentation
+        working-directory: ./build/server/spring
+        shell: pwsh
+        run: mvn javadoc:javadoc
+
+      - name: publish server side stub to github maven package registry
+        shell: pwsh
+        working-directory: ./build/server/spring
+        run: mvn deploy -D altDeploymentRepository=github::default::https://maven.pkg.github.com/AdityaMayukhSom/devstream-openapi -Darguments="-Dmaven.javadoc.skip=true"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # push server documentation to remote repository
+      - name: push server side documentation to remote repository
+        uses: ./.github/actions/copy-docs
+        with:
+          commit-version: "$DS_PKG_VER"
+          commit-message: spring server stub docs
+          source-directory: ./build/server/spring/target/site/apidocs
+          target-repository: adityamayukhsom/devstream-docs
+          target-directory: server
+          target-branch: main
+          bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+          cleanup-target-path: true
+
+      # generate and publish api documentation
+      # --------------------------------------
+
+      - name: generate openapi json file to be used with swagger documentation
+        shell: pwsh
+        run: npm run openapi:docs
+
+      - name: push swagger api documentation to remote repository
+        uses: ./.github/actions/copy-docs
+        with:
+          commit-version: "$DS_PKG_VER"
+          commit-message: swagger api json
+          source-directory: ./build/docs
+          target-repository: adityamayukhsom/devstream-docs
+          target-directory: swagger
+          target-branch: main
+          bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+          cleanup-target-path: false
