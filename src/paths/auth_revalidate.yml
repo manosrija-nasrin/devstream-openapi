@@ -4,7 +4,7 @@ post:
     given the refresh token of the user. This endpoint returns a new valid
     authentication token. Without refresh token, this endpoint will not create
     a new authentication token. For getting an authentication token without
-    refresh token, try [logging in](/auth/login).
+    refresh token, try logging in instead.
   operationId: auth-revalidate
   tags:
     - Auth
