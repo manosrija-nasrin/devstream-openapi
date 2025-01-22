@@ -45,7 +45,7 @@ jobs:
 
       - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
         working-directory: ./build/client/typescript
-        run: npm install --omit=optional --omit=dev --ignore-scripts
+        run: npm install --ignore-scripts
 
       - name: Generate Client Stub Docs
         run: npm run openapi:client-docs
