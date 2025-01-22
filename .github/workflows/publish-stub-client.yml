@@ -24,8 +24,7 @@ jobs:
         id: GetPackageVersion
         shell: bash
         run: |
-          npm run --silent get-version
-          echo "DS_PKG_VER=$(npm run --silent get-version)" >> "$GITHUB_ENV"
+          echo "DS_PKG_VER=$(npm pkg get version | xargs)" >> "$GITHUB_ENV"
 
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
@@ -46,7 +45,7 @@ jobs:
 
       - name: Install TypeScript as devDependency & Compiles TS stubs into JS as mentioned in prepare script
         working-directory: ./build/client/typescript
-        run: npm install
+        run: npm install --omit=optional --omit=dev --ignore-scripts
 
       - name: Generate Client Stub Docs
         run: npm run openapi:client-docs

@@ -23,7 +23,7 @@ jobs:
       - name: Get Package Version
         id: GetPackageVersion
         shell: bash
-        run: echo "DS_PKG_VER=$(npm run --silent get-version)" >> "$GITHUB_ENV"
+        run: echo "DS_PKG_VER=$(npm pkg get version | xargs)" >> "$GITHUB_ENV"
 
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
