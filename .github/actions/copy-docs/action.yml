@@ -32,7 +32,7 @@ inputs:
     required: true
   cleanup-target-path:
     # https://stackoverflow.com/questions/76292948/github-action-boolean-input-with-default-value
-    type: boolean
+    type: string
     description: Whether to delete old files present in the target directory before copying.
     required: true
 

@@ -1,6 +1,6 @@
 {
   "name": "devstream-openapi-spec",
-  "version": "0.3.47",
+  "version": "0.3.48",
   "description": "Devstream OpenAPI Specifications",
   "main": "index.js",
   "scripts": {
