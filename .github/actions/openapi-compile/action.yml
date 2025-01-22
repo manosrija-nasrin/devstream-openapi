@@ -1,5 +1,7 @@
-name: Compile OpenAPI Specification
-description: Sets up OpenAPI by caching dependencies and running initial commands.
+name: build openapi specification
+description: bundles up up openapi by setting up node and java environments,
+  caching dependencies and running commands. also sets caches in the process
+  for faster successive build.
 
 inputs:
   node-version:
@@ -12,51 +14,42 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout code
+    - name: checkout code
       uses: actions/checkout@v4
 
-    - name: Hash Dependencies
+    - name: save openapi generator dependency hash and npm cache path as environment variable
       shell: bash
-      run: echo "ROOT_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./package.json)" >> "$GITHUB_ENV"
+      run: |
+        echo "ROOT_DEPS_HASH=$(node ./scripts/hash-node-deps.js ./package.json)" >> "$GITHUB_ENV"
+        echo "NPM_CACHE_PATH=$(npm config get cache)" >> "$GITHUB_ENV"
 
-    - name: Setup Node
+    - name: cache java executable and node modules
+      uses: actions/cache@v3
+      with:
+        path: |
+          ${{ env.NPM_CACHE_PATH }}
+          ./node_modules
+          C:\hostedtoolcache\windows\Java_Corretto_jdk
+          C:\Users\runneradmin\.m2
+        key: ${{ runner.os }}-node-${{ env.ROOT_DEPS_HASH }}-java-corretto-${{ inputs.java-version }}
+
+    - name: setup nodejs
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
         registry-url: "https://npm.pkg.github.com"
         scope: "@adityamayukhsom"
 
-    - name: Cache Java Installation
-      uses: actions/cache@v3
-      with:
-        path: |
-          C:\hostedtoolcache\windows\Java_Corretto_jdk
-          C:\Users\runneradmin\.m2
-        key: java-corretto-${{ inputs.java-version }}
-
-    - name: Setup JDK
+    - name: setup jdk and jre
       uses: actions/setup-java@v4
       with:
         distribution: "corretto"
         java-version: ${{ inputs.java-version }}
 
-    - name: Get NPM cache path
-      shell: bash
-      id: set-npm-cache-path
-      run: echo "NPM_CACHE_PATH=$(npm config get cache)" >> "$GITHUB_ENV"
-
-    - name: Cache Node.js Dependencies
-      uses: actions/cache@v3
-      with:
-        path: |
-          ${{ env.NPM_CACHE_PATH }}
-          ./node_modules
-        key: ${{ runner.os }}-node-${{ env.ROOT_DEPS_HASH }}
-
-    - name: Install Dependencies
+    - name: install npm dependencies (not ci, so to use node_modules from cache)
       shell: pwsh
       run: npm install --ignore-scripts
 
-    - name: Bundle OpenAPI Specification
+    - name: bundle openapi specification
       shell: pwsh
       run: npm run openapi:mint
