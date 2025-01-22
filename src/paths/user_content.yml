@@ -2,7 +2,7 @@ get:
   summary: List all user content with optional filters.
   operationId: get-user-content
   tags:
-    - Content
+    - User
   security:
     - BearerAuth: []
   parameters:
@@ -32,7 +32,7 @@ post:
     server to notify the application server that the content has been uploaded.
   operationId: create-user-content
   tags:
-    - Content
+    - User
   security:
     - BearerAuth: []
   responses:
