@@ -27,10 +27,6 @@ jobs:
           npm run --silent get-version
           echo "DS_PKG_VER=$(npm run --silent get-version)" >> "$GITHUB_ENV"
 
-      - name: Echo Package Version
-        shell: bash
-        run: echo "$DS_PKG_VER"
-
       - name: Setup OpenAPI
         uses: ./.github/actions/openapi-compile
 
