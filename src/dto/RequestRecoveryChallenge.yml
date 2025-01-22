@@ -1,0 +1,14 @@
+type: object
+description: Contains the recoveryID for which the challenge is being conducted,
+  the token signed by the server and the challenge sent via seperate medium.
+properties:
+  recoveryID:
+    $ref: ../schemas/TypeRecoveryID.yml
+  recoveryToken:
+    $ref: ../schemas/TypeRecoveryToken.yml
+  challenge:
+    type: string
+required:
+  - recoveryToken
+  - recoveryID
+  - challenge

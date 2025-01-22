@@ -1,0 +1,31 @@
+post:
+  summary: Revalidates an authentication token.
+  description: This endpoint is used to revalidate the authentication token
+    given the refresh token of the user. This endpoint returns a new valid
+    authentication token. Without refresh token, this endpoint will not create
+    a new authentication token. For getting an authentication token without
+    refresh token, try [logging in](/auth/login).
+  operationId: auth-revalidate
+  tags:
+    - Auth
+  security:
+    - BearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../dto/RequestAuthRevalidate.yml
+  responses:
+    200:
+      description: Token refreshed successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../dto/ResponseAuthRevalidate.yml
+    400:
+      description: The refresh token is missing or invalid.
+    401:
+      description: The provided refresh token is expired or revoked.
+    403:
+      description: The request is not authorized (e.g., due to account restrictions).

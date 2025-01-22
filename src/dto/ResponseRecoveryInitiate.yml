@@ -1,0 +1,20 @@
+type: object
+properties:
+  recoveryID:
+    $ref: ../schemas/TypeRecoveryID.yml
+  recoveryToken:
+    $ref: ../schemas/TypeRecoveryToken.yml
+  recoveryInitiationTime:
+    description: Server timestamp as which the recovery initialization
+      request started processing.
+    type: string
+    format: date-time
+  challengeValidTill:
+    description: Server timestamp till which the challenge sent will be valid.
+    type: string
+    format: date-time
+required:
+  - recoveryID
+  - recoveryToken
+  - recoveryInitiationTime
+  - challengeValidTill

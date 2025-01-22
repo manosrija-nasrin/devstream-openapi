@@ -1,0 +1,5 @@
+description: A token signed by the server for validating recovery process.
+  This token is required to be sent at each of the succeeding step to verify
+  the authenticity of the recovery process.
+type: string
+format: base64

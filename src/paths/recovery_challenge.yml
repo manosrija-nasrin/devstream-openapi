@@ -1,0 +1,45 @@
+post:
+  summary: Verifies the recovery challenge code and token from the recovery
+    initiation step.
+  description: >
+    When a user initiates a password recovery, they are sent a unique challenge 
+    code (via email, SMS, or another medium) and a signed token in the response. 
+    The client must submit this code along with the signed token to confirm 
+    their identity.
+
+    Upon successful verification, the server responds with another signed token 
+    and its validity period (in seconds) in response. The user can reset their 
+    password by submitting the new password along with the signed token within 
+    the specified expiration time. 
+
+    If the provided code is invalid, expired, or does not match the expected
+    challenge, the server will respond with an appropriate error message.
+
+    The token should be kept secure by client to prevent unauthorized access.
+  operationId: recovery-challenge
+  tags:
+    - Recovery
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../dto/RequestRecoveryChallenge.yml
+      application/json:
+        schema:
+          $ref: ../dto/RequestRecoveryChallenge.yml
+  responses:
+    200:
+      description: Recovery challenge verified successfully. A signed token and
+        its validity period are returned for resetting the password.
+      content:
+        application/json:
+          schema:
+            $ref: ../dto/ResponseRecoveryChallenge.yml
+    400:
+      description: The input is invalid or missing required fields.
+      content:
+        $ref: ../errors/Content4xx.yml
+    403:
+      description: The user does not have permission to perform this action.

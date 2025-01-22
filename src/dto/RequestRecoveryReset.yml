@@ -1,0 +1,14 @@
+type: object
+properties:
+  recoveryID:
+    $ref: ../schemas/TypeRecoveryID.yml
+  recoveryToken:
+    $ref: ../schemas/TypeRecoveryToken.yml
+  newPassword:
+    type: string
+    format: password
+    writeOnly: true
+required:
+  - recoveryID
+  - recoveryToken
+  - newPassword

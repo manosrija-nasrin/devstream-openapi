@@ -1,5 +1,7 @@
 type: object
 properties:
+  honorifics:
+    $ref: ../schemas/TypeHonorifics.yml
   firstname:
     type: string
     minLength: 1

@@ -1,0 +1,38 @@
+post:
+  summary: Generates a password reset OTP and sends it via email or other channels.
+  description: >
+    This route generates a password reset OTP and sends it via either email, 
+    mobile number, or a seperate medium. A signed token is also generated and 
+    sent in the response of this request. The user must submit both the OTP (sent
+    via a seperate medium) and the signed token (sent as a response to this) to 
+    verify the request and proceed with account recovery.
+  operationId: recovery-initiate
+  tags:
+    - Recovery
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../dto/RequestRecoveryInitiate.yml
+      application/json:
+        schema:
+          $ref: ../dto/RequestRecoveryInitiate.yml
+  responses:
+    200:
+      description: Recovery OTP generated and queued to be sent via a seperate
+        medium. A signed token is sent as a response which is required to be
+        sent while resetting the password.
+      content:
+        application/json:
+          schema:
+            $ref: ../dto/ResponseRecoveryInitiate.yml
+    400:
+      description: The input provided is invalid or missing required fields.
+    401:
+      description: Authentication is invalid or missing.
+    404:
+      description: The user does not exist in the system.
+      content:
+        $ref: ../errors/Content4xx.yml

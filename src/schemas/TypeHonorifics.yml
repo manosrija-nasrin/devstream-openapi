@@ -1,0 +1,23 @@
+type: string
+enum:
+  - Mr
+  - Mrs
+  - Miss
+  - Ms
+  - Mx
+  - Sir
+  - Dr
+  - Prof
+  - Rev
+  - Capt
+  - Col
+  - Maj
+  - Judge
+  - Shri
+  - Smt
+  - Kumari
+  - Pandit
+  - Swami
+  - Begum
+  - Sahib
+  - Janab

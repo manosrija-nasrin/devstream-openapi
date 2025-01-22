@@ -1,0 +1,9 @@
+type: object
+properties:
+  recoveryID:
+    $ref: ../schemas/TypeRecoveryID.yml
+  recoveryToken:
+    $ref: ../schemas/TypeRecoveryToken.yml
+required:
+  - recoveryID
+  - recoveryToken

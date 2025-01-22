@@ -1,18 +1,47 @@
 type: object
 properties:
-  userID:
+  honorifics:
+    $ref: ../schemas/TypeHonorifics.yml
+  firstname:
     type: string
-    format: uuid
+    minLength: 1
+  middlename:
+    type: string
+  lastname:
+    type: string
+    minLength: 1
+  gender:
+    $ref: "../schemas/TypeUserGender.yml"
+  dateOfBirth:
+    type: string
+    format: date
   username:
     type: string
+    readOnly: true
+    minLength: 4
+    maxLength: 24
   email:
     type: string
     format: email
-  avatarURL:
+  isEmailVerified:
+    type: boolean
+    default: false
+  mobileNumber:
     type: string
-    format: uri
+    pattern: ^[+]{1}(?:[0-9\-\(\)\/\.]\s?){6, 15}[0-9]{1}$
+  isMobileVerified:
+    type: boolean
+    default: false
+  twoFactorAuthentication:
+    type: boolean
+    description: Whether two factor authentication hould be used or not.
+    default: true
 required:
-  - userID
+  - firstname
+  - lastname
+  - gender
+  - dateOfBirth
   - username
   - email
-  - avatarURL
+  - password
+  - mobileNumber

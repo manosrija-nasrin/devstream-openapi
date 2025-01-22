@@ -1,0 +1,43 @@
+post:
+  summary: Resets the user's password using the recovery challenge token and new password.
+  description: >
+    This route allows the user to reset their password by submitting the new password
+    along with the signed token received during the recovery challenge step. The token 
+    must be submitted within the specified expiration time. The server will validate 
+    the token and the new password before resetting it. If the token is invalid, expired, 
+    or incorrect, an appropriate error message will be returned.
+
+    Upon successful password reset, the server responds with a success message. 
+    The user can now log in with their new password.
+  operationId: recovery-reset
+  tags:
+    - Recovery
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../dto/RequestRecoveryReset.yml
+      application/json:
+        schema:
+          $ref: ../dto/RequestRecoveryReset.yml
+  responses:
+    200:
+      description: Password reset successful. The user can now log in with the new password.
+      content:
+        application/json:
+          schema:
+            $ref: ../dto/ResponseRecoveryReset.yml
+    400:
+      description: The input is invalid or missing required fields.
+      content:
+        $ref: ../errors/Content4xx.yml
+    401:
+      description: Invalid or expired token.
+    403:
+      description: The token is incorrect or has been tampered with.
+    404:
+      description: The user does not exist in the system or the token is invalid.
+      content:
+        $ref: ../errors/Content4xx.yml

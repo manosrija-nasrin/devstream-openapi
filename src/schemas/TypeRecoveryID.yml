@@ -1,0 +1,3 @@
+description: An unique ID to identify the recovery process for a user.
+type: string
+format: uuid
