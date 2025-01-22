@@ -1,6 +1,6 @@
 get:
   summary: Check the status of a specific piece of content.
-  operationId: get-content-status
+  operationId: get-content-status-by-id
   tags:
     - Content
   security:
@@ -13,7 +13,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../dto/ResponseContentStatus.yml
+            $ref: ../dto/ResponseGetContentStatusByID.yml
     400:
       description: Bad request. Invalid or missing parameters.
     404:
@@ -21,7 +21,7 @@ get:
 
 patch:
   summary: Changes content status for a particular content.
-  operationId: change-content-status-for-id
+  operationId: update-content-status-by-id
   tags:
     - Content
   security:
@@ -33,7 +33,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: ../dto/RequestUpdateContentStatus.yml
+          $ref: ../dto/RequestUpdateContentStatusByID.yml
   responses:
     200:
       description: Content status updated successfuly.
