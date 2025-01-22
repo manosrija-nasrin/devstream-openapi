@@ -1,5 +1,7 @@
 type: object
 properties:
+  userID:
+    type: string
   totalContent:
     type: integer
     description: Total number of content the user has uploaded.
@@ -9,5 +11,6 @@ properties:
       This is subjected to change in favour of an array of with eacch social media and their
       respective measurement of engagement or interaction.
 required:
+  - userID
   - totalContent
   - totalViews

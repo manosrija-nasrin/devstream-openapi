@@ -1,9 +1,12 @@
 type: object
 properties:
+  platform:
+    $ref: ../schemas/TypeSupportedPlatform.yml
   views:
     type: integer
   engagement:
     type: integer
 required:
+  - platform
   - views
   - engagement

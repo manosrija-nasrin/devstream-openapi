@@ -1,0 +1,13 @@
+type: object
+description: Contents an array with the analytics of all the platform the
+  content is published on.
+properties:
+  contentID:
+    $ref: ../schemas/TypeContentID.yml
+  analytics:
+    type: array
+    items:
+      $ref: ../schemas/TypeContentAnalytics.yml
+required:
+  - contentID
+  - analytics

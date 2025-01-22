@@ -1,0 +1,14 @@
+type: object
+description: This can be used to grant a particular access to a
+  particular user when used with the content identifier.
+properties:
+  contentID:
+    $ref: "../schemas/TypeContentID.yml"
+  userID:
+    type: string
+  permission:
+    $ref: "../schemas/TypeContentPermission.yml"
+required:
+  - userID
+  - contentID
+  - permission

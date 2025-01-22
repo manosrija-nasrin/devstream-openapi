@@ -17,7 +17,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../components/responses/ContentListResponse.yml"
+            $ref: ../dto/ResponseContentList.yml
     400:
       description: Bad request. Invalid filter parameters.
     404:
@@ -42,6 +42,6 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/responses/PreSignedURLResponse.yml
+            $ref: ../dto/ResponsePreSignedURL.yml
     400:
       description: Invalid parameters for getting presigned URL.

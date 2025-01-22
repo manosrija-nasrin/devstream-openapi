@@ -27,13 +27,13 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/requestBodies/CreatePipelineRequest.yml
+          $ref: ../dto/RequestCreatePipeline.yml
   responses:
     200:
       description: Pipeline specification created successfully.
       content:
         application/json:
           schema:
-            $ref: "../components/responses/CreatePipelineResponse.yml"
+            $ref: ../dto/ResponseCreatePipeline.yml
     400:
       description: Bad Request, invalid inputs.

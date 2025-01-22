@@ -11,7 +11,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../components/responses/GetUserSettingsResponse.yml"
+            $ref: ../dto/ResponseGetUserSettings.yml
     401:
       description: Unauthorized. Authentication required to view settings.
 
@@ -27,7 +27,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: "../components/requestBodies/UpdateUserSettingsRequest.yml"
+          $ref: ../dto/RequestUpdateUserSettings.yml
   responses:
     200:
       description: Settings updated successfully.

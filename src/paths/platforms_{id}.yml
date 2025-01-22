@@ -6,7 +6,7 @@ post:
   security:
     - BearerAuth: []
   parameters:
-    - $ref: "../components/parameters/path/PlatformIDParam.yml"
+    - $ref: ../parameters/path/PlatformIDParam.yml
   # requestBody:
   #   required: true
   #   content:
@@ -21,9 +21,8 @@ post:
     404:
       description: Not found. The platform does not exist.
     403:
-      description: Forbidden. The user does not have permission to connect the platform.
-    500:
-      description: Internal server error. Something went wrong on the server.
+      description: Forbidden. The user does not have permission to connect
+        the platform.
 
 delete:
   summary: Disconnect an existing platform.
@@ -33,7 +32,7 @@ delete:
   security:
     - BearerAuth: []
   parameters:
-    - $ref: "../components/parameters/path/PlatformIDParam.yml"
+    - $ref: ../parameters/path/PlatformIDParam.yml
   responses:
     200:
       description: Platform disconnected successfully.
@@ -42,6 +41,5 @@ delete:
     404:
       description: Not found. The platform does not exist.
     403:
-      description: Forbidden. The user does not have permission to disconnect the platform.
-    500:
-      description: Internal server error. Something went wrong on the server.
+      description: Forbidden. The user does not have permission to disconnect
+        the platform.

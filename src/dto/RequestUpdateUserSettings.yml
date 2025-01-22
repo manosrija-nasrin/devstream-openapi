@@ -3,7 +3,7 @@ properties:
   notifications:
     type: boolean
   visibility:
-    $ref: "../schemas/UserVisibility.yml"
+    $ref: "../schemas/TypeUserVisibility.yml"
 required:
   - notifications
   - visibility

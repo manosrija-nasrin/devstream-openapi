@@ -8,37 +8,40 @@ post:
   requestBody:
     required: true
     content:
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../dto/RequestRefreshToken.yml
       application/json:
         schema:
-          $ref: "../components/requestBodies/RefreshTokenRequest.yml"
+          $ref: ../dto/RequestRefreshToken.yml
   responses:
     200:
       description: Token refreshed successfully.
       content:
         application/json:
           schema:
-            $ref: "../components/responses/RefreshTokenResponse.yml"
+            $ref: ../dto/ResponseRefreshToken.yml
     400:
       description: Bad Request. The refresh token is missing or invalid.
       content:
         application/json:
           schema:
-            $ref: "../components/responses/errors/ErrorResponse.yml"
+            $ref: ../dto/ResponseProblem.yml
     401:
       description: Unauthorized. The provided refresh token is expired or revoked.
       content:
         application/json:
           schema:
-            $ref: "../components/responses/errors/ErrorResponse.yml"
+            $ref: ../dto/ResponseProblem.yml
     403:
       description: Forbidden. The request is not authorized (e.g., due to account restrictions).
       content:
         application/json:
           schema:
-            $ref: "../components/responses/errors/ErrorResponse.yml"
+            $ref: ../dto/ResponseProblem.yml
     404:
       description: Not Found. The resource associated with the refresh token could not be found (unlikely, but possible).
       content:
         application/json:
           schema:
-            $ref: "../components/responses/errors/ErrorResponse.yml"
+            $ref: ../dto/ResponseProblem.yml

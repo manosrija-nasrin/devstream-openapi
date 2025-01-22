@@ -3,10 +3,7 @@ properties:
   invitationID:
     type: string
   action:
-    type: string
-    enum:
-      - Accept
-      - Decline
+    $ref: ../schemas/TypeAcceptDecline.yml
 required:
   - invitationID
   - action

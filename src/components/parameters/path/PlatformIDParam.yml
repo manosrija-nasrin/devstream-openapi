@@ -1,5 +1,0 @@
-name: PlatformID
-in: path
-required: true
-schema:
-  $ref: "../../schemas/Platform.yml"

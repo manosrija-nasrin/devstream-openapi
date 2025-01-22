@@ -2,4 +2,4 @@ name: ContentID
 in: path
 required: true
 schema:
-  $ref: "../../schemas/ContentID.yml"
+  $ref: "../../schemas/TypeContentID.yml"

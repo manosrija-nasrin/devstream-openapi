@@ -9,7 +9,7 @@ properties:
     type: string
     minLength: 1
   gender:
-    $ref: "../schemas/Gender.yml"
+    $ref: "../schemas/TypeUserGender.yml"
   dateOfBirth:
     type: string
     format: date

@@ -2,7 +2,7 @@ type: object
 properties:
   isTemporary:
     type: boolean
-    description: Whether to store the pipeline under user account. 
+    description: Whether to store the pipeline under user account.
     default: true
   pipelineName:
     description: Name with which the pipeline will be saved under user account.
@@ -12,7 +12,7 @@ properties:
   pipeline:
     type: array
     items:
-      $ref: ../schemas/ContentPipeline.yml
+      $ref: ../schemas/TypeContentPipeline.yml
 required:
   - isTemporary
   - pipeline

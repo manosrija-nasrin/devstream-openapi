@@ -1,11 +1,11 @@
 type: object
 properties:
   platform:
-    $ref: ./Platform.yml
+    $ref: ./TypeSupportedPlatform.yml
   steps:
     type: array
     items:
-      $ref: ./PipelineStep.yml
+      $ref: ./TypePipelineStep.yml
 required:
   - platform
   - steps

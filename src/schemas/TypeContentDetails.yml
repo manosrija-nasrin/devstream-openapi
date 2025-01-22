@@ -1,7 +1,9 @@
 type: object
 properties:
   contentID:
-    $ref: "./ContentID.yml"
+    $ref: ./TypeContentID.yml
+  pipelineID:
+    $ref: ./TypePipelineID.yml
   title:
     type: string
   description:
@@ -10,9 +12,10 @@ properties:
     type: array
     description: List of platforms on which the content is published.
     items:
-      $ref: "./Platform.yml"
+      $ref: ./TypeSupportedPlatform.yml
 required:
   - contentID
+  - pipelineID
   - title
   - description
   - platforms

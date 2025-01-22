@@ -1,0 +1,9 @@
+type: object
+properties:
+  contentID:
+    $ref: ../schemas/TypeContentID.yml
+  status:
+    $ref: ../schemas/TypeContentStatus.yml
+required:
+  - contentID
+  - status

@@ -1,8 +1,0 @@
-type: object
-properties:
-  platform:
-    type: array
-    items:
-      $ref: "../schemas/Platform.yml"
-required:
-  - platform

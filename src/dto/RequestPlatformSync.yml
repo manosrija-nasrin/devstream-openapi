@@ -1,0 +1,9 @@
+type: object
+description: Used to sync data with the provided platforms.
+properties:
+  platform:
+    type: array
+    items:
+      $ref: ../schemas/TypeSupportedPlatform.yml
+required:
+  - platform

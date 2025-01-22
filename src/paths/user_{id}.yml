@@ -6,7 +6,7 @@ delete:
   security:
     - BearerAuth: []
   parameters:
-    - $ref: "../components/parameters/path/UserIDParam.yml"
+    - $ref: ../parameters/path/UserIDParam.yml
   responses:
     200:
       description: User deleted successfully.

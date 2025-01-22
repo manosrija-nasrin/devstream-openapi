@@ -3,6 +3,6 @@ properties:
   contents:
     type: array
     items:
-      $ref: "../schemas/ContentDetails.yml"
+      $ref: ../schemas/TypeContentDetails.yml
 required:
   - contents

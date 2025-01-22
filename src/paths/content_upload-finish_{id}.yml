@@ -1,9 +1,9 @@
 get:
   summary: Handle content processing after upload finishes.
-  description: After the upload has been finished in the object storage, the 
-    storage server will ping this endpoint with the content id. This endpoint 
+  description: After the upload has been finished in the object storage, the
+    storage server will ping this endpoint with the content id. This endpoint
     will change the status of the content from uploading to processing and then
-    further process the content stored in the object store. 
+    further process the content stored in the object store.
 
     Note that this endpoint also changes the status of the content.
   operationId: content-upload-finished
@@ -12,13 +12,13 @@ get:
   security:
     - ApiKeyAuth: []
   parameters:
-    - $ref: "../components/parameters/path/ContentIDParam.yml"
+    - $ref: ../parameters/path/ContentIDParam.yml
   responses:
     200:
       description: Content status successfully changed.
     400:
       description: In case the previous status of the content is not uploading,
-        this endpoint will not change the status to processing and will not 
-        do any task on the content. 
+        this endpoint will not change the status to processing and will not
+        do any task on the content.
     404:
       description: The specified content ID does not exist.

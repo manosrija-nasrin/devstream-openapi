@@ -2,6 +2,6 @@ type: object
 description: Changes the status of the content with given ID.
 properties:
   updatedStatus:
-    $ref: ../schemas/ContentStatus.yml
+    $ref: ../schemas/TypeContentStatus.yml
 required:
   - updatedStatus

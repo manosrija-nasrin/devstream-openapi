@@ -7,16 +7,27 @@ post:
   requestBody:
     required: true
     content:
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../dto/RequestLogin.yml
       application/json:
         schema:
-          $ref: "../components/requestBodies/LoginRequest.yml"
+          $ref: ../dto/RequestLogin.yml
   responses:
     200:
       description: Login successful.
       content:
         application/json:
           schema:
-            $ref: "../components/responses/LoginResponse.yml"
+            $ref: ../dto/ResponseLogin.yml
+    302:
+      description: Found. User is already authenticated and redirected.
+      headers:
+        x-redirection-location:
+          description: URL where the user is redirected.
+          schema:
+            type: string
+            format: uri
     400:
       description: Bad request. The input is invalid or missing required fields.
     401:

@@ -1,0 +1,8 @@
+type: object
+properties:
+  permissions:
+    type: array
+    items:
+      $ref: ../schemas/TypeUserContentAccessControl.yml
+required:
+  - permissions

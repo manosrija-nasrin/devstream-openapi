@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Devstream Aurelia OpenAPI Specification
-  version: 0.3.40
+  version: 0.3.41
   description: API reference for Devstream platform built with Spring Boot.
   termsOfService: https://www.devstream.in/terms-and-conditions
   license:
@@ -67,8 +67,8 @@ paths:
     $ref: ./src/paths/content_{id}.yml
   /content/status/{ContentID}:
     $ref: ./src/paths/content_status_{id}.yml
-  /content/invite/{ContentID}:
-    $ref: ./src/paths/content_invite_{id}.yml
+  /content/collaboration/{ContentID}:
+    $ref: ./src/paths/content_collaboration_{id}.yml
   /content/analytics/{ContentID}:
     $ref: ./src/paths/content_analytics_{id}.yml
   /content/upload-finish/{ContentID}:

@@ -1,6 +1,0 @@
-type: object
-properties:
-  status:
-    $ref: "../schemas/Status.yml"
-required:
-  - status

@@ -10,7 +10,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../components/requestBodies/PlatformSyncRequest.yml"
+          $ref: ../dto/RequestPlatformSync.yml
   responses:
     200:
       description: Platform sync initiated successfully.
@@ -22,5 +22,3 @@ post:
       description: Forbidden. The user does not have permission to sync content.
     404:
       description: Not found. The specified platform could not be found.
-    500:
-      description: Internal server error. Something went wrong on the server.

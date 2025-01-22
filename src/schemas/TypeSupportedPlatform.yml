@@ -1,6 +1,6 @@
 type: string
-description: Currently used device
-enum: 
+description: List of supported platforms.
+enum:
   - Facebook
   - LinkedIn
   - Twitter

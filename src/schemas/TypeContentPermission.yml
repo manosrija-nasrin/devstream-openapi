@@ -1,5 +1,5 @@
 type: string
-description: Access type for the corresponding content
+description: Access permission for the corresponding content.
 enum:
   - Viewer
   - Commenter

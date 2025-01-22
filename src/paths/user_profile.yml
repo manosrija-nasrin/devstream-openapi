@@ -4,6 +4,7 @@ get:
   tags:
     - User
   security:
+    - ApiKeyAuth: []
     - BearerAuth: []
   responses:
     200:
@@ -11,15 +12,13 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../components/schemas/UserProfile.yml"
+            $ref: ../dto/ResponseGetUserProfile.yml
     400:
       description: Bad request. Invalid request format or parameters.
     401:
       description: Unauthorized. Authentication required to view the profile.
     404:
       description: Not found. User profile does not exist.
-    500:
-      description: Internal server error. Something went wrong on the server.
 
 patch:
   summary: Update user profile details.
@@ -33,7 +32,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: "../components/schemas/UserProfile.yml"
+          $ref: ../dto/RequestUpdateUserProfile.yml
   responses:
     200:
       description: User profile updated successfully.

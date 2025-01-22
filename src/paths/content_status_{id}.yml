@@ -6,19 +6,14 @@ get:
   security:
     - BearerAuth: []
   parameters:
-    - $ref: "../components/parameters/path/ContentIDParam.yml"
+    - $ref: ../parameters/path/ContentIDParam.yml
   responses:
     200:
       description: Content status retrieved successfully.
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              status:
-                $ref: "../components/schemas/ContentStatus.yml"
-            required:
-              - status
+            $ref: ../dto/ResponseContentStatus.yml
     400:
       description: Bad request. Invalid or missing parameters.
     404:
@@ -32,16 +27,15 @@ patch:
   security:
     - BearerAuth: []
   parameters:
-    - $ref: "../components/parameters/path/ContentIDParam.yml"
+    - $ref: ../parameters/path/ContentIDParam.yml
   requestBody:
     required: true
-    content: 
+    content:
       application/json:
-        schema: 
-          $ref: ../components/requestBodies/UpdateContentStatusRequest.yml
+        schema:
+          $ref: ../dto/RequestUpdateContentStatus.yml
   responses:
     200:
       description: Content status updated successfuly.
     404:
       description: Could not find content with specified ID.
-
