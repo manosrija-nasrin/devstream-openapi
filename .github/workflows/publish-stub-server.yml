@@ -58,7 +58,7 @@ jobs:
           target-directory: server
           target-branch: main
           bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
-          cleanup-target-path: false
+          cleanup-target-path: true
 
       - name: Generate OpenAPI Docs
         run: npm run openapi:docs
@@ -73,7 +73,7 @@ jobs:
           target-directory: swagger
           target-branch: main
           bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
-          cleanup-target-path: true
+          cleanup-target-path: false
 
       - name: Publish to GitHub Packages
         shell: pwsh

@@ -32,7 +32,7 @@ inputs:
     required: true
   cleanup-target-path:
     # https://stackoverflow.com/questions/76292948/github-action-boolean-input-with-default-value
-    type: string
+    type: boolean
     description: Whether to delete old files present in the target directory before copying.
     required: true
 
@@ -51,7 +51,7 @@ runs:
 
     - name: cleanup target directory before copying, doesn't throw error if not present
       shell: bash
-      if: ${{ inputs.cleanup-target-path == 'true' }}
+      if: ${{ inputs.cleanup-target-path }}
       run: |
         echo "target path cleanup at github-target-repository/${{ inputs.target-directory }}"
         rm -rf github-target-repository/${{ inputs.target-directory }}
