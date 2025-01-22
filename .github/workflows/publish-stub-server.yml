@@ -58,6 +58,7 @@ jobs:
           target-directory: server
           target-branch: main
           bot-token: ${{ secrets.DEVSTREAM_DOCS_PAT }}
+          cleanup-target-path: false
 
       - name: Generate OpenAPI Docs
         run: npm run openapi:docs
