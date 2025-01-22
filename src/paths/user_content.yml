@@ -1,6 +1,6 @@
 get:
   summary: List all user content with optional filters.
-  operationId: get-all-content-by-user-id
+  operationId: get-user-content
   tags:
     - Content
   security:
@@ -17,7 +17,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../dto/ResponseContentList.yml
+            $ref: ../dto/ResponseGetUserContent.yml
     400:
       description: Bad request. Invalid filter parameters.
     404:
@@ -30,7 +30,7 @@ post:
     a pre signed url in which the user needs to upload the content. On successful
     completion of document update, it's responsibility of the document uploading
     server to notify the application server that the content has been uploaded.
-  operationId: publish-content
+  operationId: create-user-content
   tags:
     - Content
   security:

@@ -1,0 +1,8 @@
+type: string
+description: Status of collaboration request, the collaborator could have
+  accepted the request, rejected the request, or haven't decided yet, in which
+  case the request status is still pending.
+enum:
+  - Pending
+  - Accepted
+  - Declined

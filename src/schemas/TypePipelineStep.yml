@@ -7,8 +7,8 @@ x-enum-varnames:
   - VoiceoverGeneration
   - SoundTrackGeneration
 x-enum-descriptions:
-  - Description ClosedCaptionGeneration
-  - Description HashtagsGeneration
-  - Description DescriptionGeneration
-  - Description VoiceoverGeneration
-  - Description SoundTrackGeneration
+  - Generate Closed Caption
+  - Generate Hashtags
+  - Generate Description
+  - Generate Voiceover
+  - Generate SoundTrack

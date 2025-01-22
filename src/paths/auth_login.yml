@@ -1,6 +1,6 @@
 post:
-  summary: Log in to the system.
-  operationId: authenticate-user
+  summary: Let's the user login to the system with given credentials.
+  operationId: auth-login
   tags:
     - Auth
   security: []

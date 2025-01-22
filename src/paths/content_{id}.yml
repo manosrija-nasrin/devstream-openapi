@@ -1,6 +1,6 @@
 get:
   summary: Retrieve details for a specific piece of content.
-  operationId: get-content-details
+  operationId: get-content-by-id
   tags:
     - Content
   security:
@@ -13,7 +13,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../dto/ResponseContent.yml
+            $ref: ../dto/ResponseGetContentByID.yml
     400:
       description: Bad request. Invalid or missing parameters.
     401:
@@ -25,7 +25,7 @@ get:
 
 delete:
   summary: Delete a specific piece of content.
-  operationId: delete-content
+  operationId: delete-content-by-id
   tags:
     - Content
   security:

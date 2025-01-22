@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Devstream Aurelia OpenAPI Specification
-  version: 0.3.41
+  version: 0.3.42
   description: API reference for Devstream platform built with Spring Boot.
   termsOfService: https://www.devstream.in/terms-and-conditions
   license:
@@ -47,22 +47,26 @@ paths:
     $ref: ./src/paths/user_settings.yml
   /user/analytics:
     $ref: ./src/paths/user_analytics.yml
-  /user/{UserID}:
-    $ref: ./src/paths/user_{id}.yml
+  /user/deactivate:
+    $ref: ./src/paths/user_deactivate.yml
+  /user/content:
+    $ref: ./src/paths/user_content.yml
+  /user/password:
+    $ref: ./src/paths/user_password.yml
   /auth/login:
     $ref: ./src/paths/auth_login.yml
   /auth/two-factor-auth:
     $ref: ./src/paths/auth_two-factor-auth.yml
   /auth/register:
     $ref: ./src/paths/auth_register.yml
-  /auth/refresh-token:
-    $ref: ./src/paths/auth_refresh-token.yml
-  /auth/forgot-password:
-    $ref: ./src/paths/auth_forgot-password.yml
-  /auth/reset-password:
-    $ref: ./src/paths/auth_reset-password.yml
-  /content:
-    $ref: ./src/paths/content.yml
+  /auth/token:
+    $ref: ./src/paths/auth_token.yml
+  /recovery/initiate:
+    $ref: ./src/paths/recovery_initiate.yml
+  /recovery/token:
+    $ref: ./src/paths/recovery_token.yml
+  /recovery/reset:
+    $ref: ./src/paths/recovery_reset.yml
   /content/{ContentID}:
     $ref: ./src/paths/content_{id}.yml
   /content/status/{ContentID}:

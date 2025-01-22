@@ -1,12 +1,10 @@
 delete:
-  summary: Deletes user profile.
-  operationId: delete-user-profile
+  summary: Deactivates the current user account.
+  operationId: deactivate-user-account
   tags:
     - User
   security:
     - BearerAuth: []
-  parameters:
-    - $ref: ../parameters/path/UserIDParam.yml
   responses:
     200:
       description: User deleted successfully.

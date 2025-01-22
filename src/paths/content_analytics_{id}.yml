@@ -13,7 +13,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../dto/ResponseContentAnalytics.yml
+            $ref: ../dto/ResponseGetContentAnalyticsByID.yml
     400:
       description: Bad request. Invalid or missing parameters.
     401:

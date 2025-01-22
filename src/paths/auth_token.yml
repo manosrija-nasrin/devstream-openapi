@@ -1,6 +1,10 @@
 post:
-  summary: Refresh the authentication token.
-  operationId: refresh-auth-token
+  summary: Creates an authentication token.
+  description: This endpoint is used to refresh the authentication token given
+    the refresh token of the user. Without refresh token, this endpoint will
+    not create a new authentication token. For getting an authentication token
+    without refresh token, try [logging in](/auth/login).
+  operationId: create-auth-token
   tags:
     - Auth
   security:
@@ -8,9 +12,6 @@ post:
   requestBody:
     required: true
     content:
-      application/x-www-form-urlencoded:
-        schema:
-          $ref: ../dto/RequestRefreshToken.yml
       application/json:
         schema:
           $ref: ../dto/RequestRefreshToken.yml

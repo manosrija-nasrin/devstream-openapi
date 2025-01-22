@@ -1,6 +1,6 @@
 post:
   summary: Registers a new user into the system.
-  operationId: register-user
+  operationId: auth-register
   tags:
     - Auth
   security: []

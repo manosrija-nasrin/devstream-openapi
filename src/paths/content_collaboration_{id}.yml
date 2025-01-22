@@ -1,12 +1,17 @@
 get:
-  summary: View pending collaboration invitations.
-  operationId: get-pending-invitations
+  summary: Get all collaboration requests for a particular content
+  operationId: get-content-collaboration-by-id
   tags:
     - Content
   security:
     - BearerAuth: []
   parameters:
     - $ref: ../parameters/path/ContentIDParam.yml
+    - in: query
+      name: status
+      description: The current status of the collaboration request.
+      schema:
+        $ref: ../schemas/TypeCollaborationStatus.yml
   responses:
     200:
       description: List of pending invitations.

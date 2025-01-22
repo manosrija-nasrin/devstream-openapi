@@ -3,7 +3,7 @@ properties:
   invitationID:
     type: string
   action:
-    $ref: ../schemas/TypeAcceptDecline.yml
+    $ref: ../schemas/TypeUserDecision.yml
 required:
   - invitationID
   - action

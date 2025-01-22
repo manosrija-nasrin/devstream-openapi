@@ -1,6 +1,6 @@
 get:
   summary: Health check for the API.
-  operationId: health-check
+  operationId: get-health
   tags:
     - Health
   security: []
@@ -11,7 +11,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../dto/ResponseHealth.yml
+            $ref: ../dto/ResponseGetHealth.yml
     400:
       description: Bad request. Invalid input or parameters provided.
     503:
