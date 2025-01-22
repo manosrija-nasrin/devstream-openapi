@@ -32,10 +32,15 @@ runs:
         distribution: "corretto"
         java-version: ${{ inputs.java-version }}
 
+    - name: Get NPM cache path
+      shell: bash
+      id: set-npm-cache-path
+      run: echo "NPM_CACHE_PATH=$(npm config get cache)" >> "$GITHUB_ENV"
+
     - name: Cache Node.js Dependencies
       uses: actions/cache@v3
       with:
-        path: ~/.npm
+        path: ${{ env.NPM_CACHE_PATH }}
         key: ${{ runner.os }}-node-${{ env.ROOT_DEPS_HASH }}
 
     - name: Install Dependencies
