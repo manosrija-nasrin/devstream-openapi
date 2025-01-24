@@ -1,0 +1,15 @@
+type: object
+description: Request to modify an existing pipeline specification.
+properties:
+  # TODO: Will using TypeContentPipelineWithID.yml be a better choice?
+  pipelineID:
+    description: ID of the pipeline to be modified.
+    type: string
+    format: uuid
+  pipeline:
+    description: New pipeline specification to replace the existing one.
+    type: array
+    items:
+      $ref: ../schemas/TypeContentPipeline.yml
+required:
+  - pipeline

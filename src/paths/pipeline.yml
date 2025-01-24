@@ -42,3 +42,26 @@ post:
             $ref: ../dto/ResponseCreatePipeline.yml
     400:
       description: Bad Request, invalid inputs.
+
+patch:
+  summary: Modify a new user specification for content processing pipeline.
+  operationId: modify-pipeline-specification
+  tags:
+    - Pipeline
+  security:
+    - BearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../dto/RequestModifyPipeline.yml
+  responses:
+    200:
+      description: Pipeline specification modified successfully.
+    400:
+      description: Bad Request, invalid inputs.
+    401:
+      description: Unauthorized. Authentication required to update pipeline.
+    404:
+      description: Not found. The pipeline does not exist.
