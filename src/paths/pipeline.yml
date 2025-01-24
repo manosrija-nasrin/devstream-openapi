@@ -12,7 +12,12 @@ get:
     200:
       description: All pipelines defined by a particular user as well as predefined
         common pipelines.
-    400:
+      content:
+        application/json:
+          schema:
+            $ref: ../dto/ResponseGetPipeline.yml
+    # TODO: Add a 400 Bad Request response.
+    400:    # TODO: Should this be 404?
       description: No predefined or saved pipeline found.
 
 post:
