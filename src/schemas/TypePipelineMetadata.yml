@@ -4,8 +4,6 @@ properties:
   pipelineID:
     $ref: ./TypePipelineID.yml
   pipelineName:
-    type: string
-    description: A name to identify the created pipeline for humans.
-    minLength: 1
+    $ref: ./TypePipelineName.yml
 required:
   - pipelineID

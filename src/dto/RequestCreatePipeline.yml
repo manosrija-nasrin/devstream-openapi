@@ -6,10 +6,7 @@ properties:
     default: true
   # TODO: Shall we make pipelineName mandatory in case the pipeline is not temporary?
   pipelineName:
-    description: Name with which the pipeline will be saved under user account.
-      If not provided, a random name will be generated.
-    type: string
-    minLength: 1
+    $ref: ../schemas/TypePipelineName.yml
   pipelineSpecification:
     $ref: ../schemas/TypePipelineSpecification.yml
 required:

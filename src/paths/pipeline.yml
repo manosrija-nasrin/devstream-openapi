@@ -34,7 +34,7 @@ post:
         schema:
           $ref: ../dto/RequestCreatePipeline.yml
   responses:
-    200:
+    201:
       description: Pipeline specification created successfully.
       content:
         application/json:
@@ -57,7 +57,7 @@ patch:
         schema:
           $ref: ../dto/RequestUpdatePipeline.yml
   responses:
-    200:
+    204:
       description: Pipeline specification modified successfully.
     400:
       description: Bad Request, invalid inputs.
