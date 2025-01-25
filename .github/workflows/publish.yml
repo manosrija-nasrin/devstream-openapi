@@ -128,13 +128,13 @@ jobs:
 
       - name: generate openapi json file to be used with swagger documentation
         shell: pwsh
-        run: npm run openapi:docs
+        run: npm run openapi:generate-swagger
 
       - name: push swagger api documentation to remote repository
         uses: ./.github/actions/copy-docs
         with:
           commit-version: "$API_SPECIFICATION_VERSION"
-          commit-message: swagger api json
+          commit-message: swagger json api specification
           source-directory: ./build/docs
           target-repository: adityamayukhsom/devstream-docs
           target-directory: swagger
