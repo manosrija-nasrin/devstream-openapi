@@ -1,0 +1,9 @@
+type: object
+properties:
+  pipelineID:
+    $ref: ../schemas/TypePipelineID.yml
+  pipelineName:
+    $ref: ../schemas/TypePipelineName.yml
+required:
+  - pipelineID
+  - pipelineName
