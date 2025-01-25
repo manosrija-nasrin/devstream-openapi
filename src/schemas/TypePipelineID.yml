@@ -1,2 +1,4 @@
 type: string
-description: Identifier to uniquely identify a pipeline.
+description: Identifier to uniquely identify a saved pipeline.
+format: uuid
+minLength: 1

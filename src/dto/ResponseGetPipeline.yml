@@ -1,5 +1,5 @@
 type: object
-description: Response to get the pipelines for a particular user. Decide whether 
+description: Response to get the pipelines for a particular user. Decide whether
   prebuild pipelines are also sent alongside user pipelines in this.
 properties:
   isPrebuildIncluded:
@@ -10,7 +10,7 @@ properties:
     description: List of pipelines created by the user as well as prebuild pipelines, if requested.
     type: array
     items:
-      $ref: ../schemas/TypeContentPipelineWithID.yml
+      $ref: ../schemas/TypePipeline.yml
 required:
   - isPrebuildIncluded
   - pipelines

@@ -1,0 +1,12 @@
+type: object
+description: Description of a pipeline, contains a list of objects describing
+  path or sequence of steps to execute for individual pipeline along with
+  pipeline metadata.
+properties:
+  pipelineMetadata:
+    $ref: ./TypePipelineMetadata.yml
+  pipelineSpecification:
+    $ref: ./TypePipelineSpecification.yml
+required:
+  - pipelineMetadata
+  - pipelineSpecification

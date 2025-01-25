@@ -1,0 +1,11 @@
+type: object
+description: A metadata object to store additional information about pipeline.
+properties:
+  pipelineID:
+    $ref: ./TypePipelineID.yml
+  pipelineName:
+    type: string
+    description: A name to identify the created pipeline for humans.
+    minLength: 1
+required:
+  - pipelineID

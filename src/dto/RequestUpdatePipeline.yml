@@ -1,0 +1,10 @@
+type: object
+description: Request to update an existing pipeline specification.
+properties:
+  pipelineMetadata:
+    $ref: ../schemas/TypePipelineMetadata.yml
+  pipelineSpecification:
+    $ref: ../schemas/TypePipelineSpecification.yml
+required:
+  - pipelineMetadata
+  - pipelineSpecification

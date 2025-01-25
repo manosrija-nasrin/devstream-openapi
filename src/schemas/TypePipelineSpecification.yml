@@ -1,0 +1,7 @@
+type: array
+description: An array containing multiple pipeline paths each for a different
+  supported platform. This array describes the complete pipeline for multiple
+  platforms as each pipeline path contains the description of the steps which
+  should be performed before publishing a content to the respective platform.
+items:
+  $ref: ./TypePipelinePath.yml

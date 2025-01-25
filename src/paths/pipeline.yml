@@ -3,7 +3,7 @@ get:
     pipelines.
   description: Get pipelines saved for a particular user. Todo is to decide whether
     prebuild pipelines are also send alongside user pipelines in this.
-  operationId: get-pipelines-for-user
+  operationId: get-pipelines
   tags:
     - Pipeline
   security:
@@ -17,12 +17,12 @@ get:
           schema:
             $ref: ../dto/ResponseGetPipeline.yml
     # TODO: Add a 400 Bad Request response.
-    400:    # TODO: Should this be 404?
+    404:
       description: No predefined or saved pipeline found.
 
 post:
   summary: Creates a new user specification for content processing pipeline.
-  operationId: create-pipeline-specification
+  operationId: create-pipeline
   tags:
     - Pipeline
   security:
@@ -45,7 +45,7 @@ post:
 
 patch:
   summary: Modify a new user specification for content processing pipeline.
-  operationId: modify-pipeline-specification
+  operationId: modify-pipeline
   tags:
     - Pipeline
   security:
@@ -55,7 +55,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: ../dto/RequestModifyPipeline.yml
+          $ref: ../dto/RequestUpdatePipeline.yml
   responses:
     200:
       description: Pipeline specification modified successfully.
