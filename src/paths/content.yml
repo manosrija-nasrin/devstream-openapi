@@ -1,16 +1,30 @@
 get:
-  summary: List all user content with optional filters.
-  operationId: get-user-content
+  summary: List all contents for the currently authenticated user.
+  operationId: get-all-content
   tags:
-    - User
+    - Content
   security:
     - BearerAuth: []
   parameters:
-    - name: filter
+    - name: platform
+      in: query
+      schema:
+        $ref: ../schemas/TypeSupportedPlatform.yml
+    - name: title
       in: query
       schema:
         type: string
-      description: Filter content (e.g., by date or platform).
+    - name: publishedOn
+      in: query
+      schema:
+        type: string
+        format: date
+    - name: hashtags
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
   responses:
     200:
       description: List of content retrieved successfully.
@@ -23,16 +37,15 @@ get:
     404:
       description: No content found for the given filters.
 
-# TODO: finish endpoint for pre signed url generation
 post:
-  summary: Publish content for the user.
+  summary: Publish content for the currently authenticated user.
   description: On successful completion of this request, the response contents
     a pre signed url in which the user needs to upload the content. On successful
     completion of document update, it's responsibility of the document uploading
     server to notify the application server that the content has been uploaded.
-  operationId: create-user-content
+  operationId: create-content
   tags:
-    - User
+    - Content
   security:
     - BearerAuth: []
   responses:

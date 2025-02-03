@@ -7,8 +7,8 @@ get:
     - BearerAuth: []
   parameters:
     - $ref: ../parameters/path/ContentIDParam.yml
-    - in: query
-      name: status
+    - name: status
+      in: query
       description: The current status of the collaboration request.
       schema:
         $ref: ../schemas/TypeCollaborationStatus.yml
