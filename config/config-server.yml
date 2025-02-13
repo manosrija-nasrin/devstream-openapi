@@ -11,8 +11,9 @@ serializableModel: true
 sortModelPropertiesByRequiredFlag: true
 skipDefaultInterface: true
 licenseName: GPL-2.0-only
-generateBuilders: true
+generateBuilders: false
 generateConstructorWithAllArgs: true
+generatedConstructorWithRequiredArgs: false
 hideGenerationTimestamp: true
 # artifactVersion: 0.0.4
 # openApiNullable: false
