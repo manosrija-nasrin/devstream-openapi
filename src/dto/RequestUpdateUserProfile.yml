@@ -1,9 +1,10 @@
 type: object
 properties:
   username:
-    type: string
+    $ref: ../schemas/TypeUsername.yml
   avatarURL:
     type: string
+    format: uri-reference
 required:
   - username
   - avatarURL

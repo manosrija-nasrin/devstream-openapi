@@ -5,6 +5,7 @@ properties:
     format: date-time
   uptime:
     type: integer
+    format: int64
     description: Server uptime in milliseconds in UNIX format
   status:
     type: string

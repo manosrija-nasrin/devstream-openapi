@@ -1,6 +1,7 @@
 type: object
 properties:
   notifications:
+    description: Whether notifications is on for the user or not.
     type: boolean
   visibility:
     $ref: "../schemas/TypeUserVisibility.yml"

@@ -12,6 +12,7 @@ properties:
     description: This is to keep track of which login attempt will be validated
       using the two factor authentication OTP.
     type: string
+    format: uuid
   loginAttemptTimeStamp:
     type: string
     format: date-time

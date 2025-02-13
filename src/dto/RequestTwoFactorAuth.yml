@@ -1,7 +1,10 @@
 type: object
-description: Contains a pair of login attempt ID and it's corresponding OTP.
+description: Contains a pair of login attempt ID and it's corresponding challenge.
 properties:
   loginAttemptID:
     type: string
+    format: uuid
   oneTimePassword:
-    type: integer
+    type: string
+    minLength: 4
+    maxLength: 8

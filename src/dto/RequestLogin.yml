@@ -6,6 +6,7 @@ properties:
     writeOnly: true
   password:
     type: string
+    format: password
     writeOnly: true
 required:
   - email

@@ -5,21 +5,21 @@ properties:
   firstname:
     type: string
     minLength: 1
+    maxLength: 24
   middlename:
     type: string
+    maxLength: 24
   lastname:
     type: string
     minLength: 1
+    maxLength: 24
   gender:
     $ref: "../schemas/TypeUserGender.yml"
   dateOfBirth:
     type: string
     format: date
   username:
-    type: string
-    readOnly: true
-    minLength: 4
-    maxLength: 24
+    $ref: ../schemas/TypeUsername.yml
   email:
     type: string
     format: email
@@ -27,7 +27,7 @@ properties:
     type: string
     format: password
     minLength: 8
-    maxLength: 24
+    maxLength: 32
     writeOnly: true
   twoFactorAuthentication:
     type: boolean

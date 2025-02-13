@@ -1,7 +1,7 @@
 type: object
 properties:
   userID:
-    type: string
+    $ref: ../schemas/TypeUserID.yml
   totalContent:
     type: integer
     description: Total number of content the user has uploaded.

@@ -2,6 +2,7 @@ type: object
 properties:
   invitationID:
     type: string
+    format: uuid
   action:
     $ref: ../schemas/TypeUserDecision.yml
 required:

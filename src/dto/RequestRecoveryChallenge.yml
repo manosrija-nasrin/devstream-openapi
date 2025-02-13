@@ -8,6 +8,8 @@ properties:
     $ref: ../schemas/TypeRecoveryToken.yml
   challenge:
     type: string
+    minLength: 4
+    maxLength: 8
 required:
   - recoveryToken
   - recoveryID

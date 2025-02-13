@@ -3,7 +3,7 @@ properties:
   errors:
     type: array
     items:
-      $ref: "../schemas/TypeProblemDetails.yml"
+      $ref: ../schemas/TypeProblemDetails.yml
 required:
   - errors
 example:
